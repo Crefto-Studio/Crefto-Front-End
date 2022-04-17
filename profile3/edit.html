@@ -1,0 +1,151 @@
+<html>
+<head>
+	<link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQvq4Q0qwwAIhiWUfQFS8Mqh7E78xGIRVkfXlayDAe5Ge9QSoETQJLGMtW1f4j2p7HQ3U&usqp=CAU">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<link rel="stylesheet" href="edit.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+	<!---<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">-->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<!--<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>-->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+    <body>
+        <div class="container">
+<div class="row gutters">
+<div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+<div class="card h-100">
+	<div class="card-body">
+		<div class="account-settings">
+			<div class="user-profile">
+				<div class="user-avatar" >
+					<img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin" id="user">
+				</div>
+				
+				<div class="mt-4 upload" style="position:absolute">
+					<button class="btn btn-primary" type="button" style="position:absolute">
+						<i class="fa fa-fw fa-camera"></i>
+						<span>Change Photo</span>
+					</button>
+					<input type="file" id="file_input" style="position:relative" />
+				</div>
+			</div>
+			<div class="about mt-4">
+				<h5>BIO</h5>
+				<textarea id="id" cols="25" rows="3" placeholder="I'm interested in drawing, loved GauGan alot">I'm interested in drawing, loved GauGan alot
+                </textarea>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+<div class="card h-100">
+	<div class="card-body">
+		<div class="row gutters">
+			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+				<h6 class="mb-2 text-primary">INFO</h6>
+			</div>
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+				<div class="form-group">
+					<label for="fullName">Full Name*</label>
+					<input type="text" class="form-control" id="fullName" placeholder="John Doe">
+				</div>
+			</div>
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+				<div class="form-group">
+					<label for="eMail">Birth Of Date*</label>
+					<input type="date" class="form-control" id="eMail" value="1989-11-04" placeholder="November 4, 1989">
+				</div>
+			</div>
+
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+				<div class="form-group">
+					<label for="passwors">Password*</label>
+					<input type="password" class="form-control" id="password" placeholder="********">
+				</div>
+			</div>
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+				<div class="form-group">
+					<label for="eMail">Interested in</label>
+					<input type="email" class="form-control" id="eMail" placeholder="GauGan">
+				</div>
+			</div>
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+				<div class="form-group">
+					<label for="eMail">Email*</label>
+					<input type="email" class="form-control" id="eMail" placeholder="admin@infinite.com">
+				</div>
+			</div>
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+				<div class="form-group">
+					<label for="eMail">Facebook URL</label>
+					<input type="email" class="form-control" id="eMail" placeholder="http://facebook.com/infinite.admin">
+				</div>
+			</div>
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+				<div class="form-group">
+					<label for="phone">Mobile Phones*</label>
+					<input type="text" class="form-control" id="phone" placeholder="+44 7700 900860">
+				</div>
+			</div>
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+				<div class="form-group">
+					<label for="website">Website URL</label>
+					<input type="url" class="form-control" id="website" placeholder="http://seantheme.com">
+				</div>
+			</div>
+		</div>
+		<div class="row gutters">
+			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+				<h6 class="mt-3 mb-2 text-primary">Address</h6>
+			</div>
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+				<div class="form-group">
+					<label for="Street">Street</label>
+					<input type="name" class="form-control" id="Street" placeholder="1355 Market Street">
+				</div>
+			</div>
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+				<div class="form-group">
+					<label for="ciTy">City</label>
+					<input type="name" class="form-control" id="ciTy" placeholder="San Francisco">
+				</div>
+			</div>
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+				<div class="form-group">
+					<label for="sTate">State/Governorate</label>
+					<input type="text" class="form-control" id="sTate" placeholder="CA">
+				</div>
+			</div>
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+				<div class="form-group">
+					<label for="zIp">Zip Code</label>
+					<input type="text" class="form-control" id="zIp" placeholder="94103">
+				</div>
+			</div>
+		</div>
+		<div class="row gutters" >
+			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+				<div class="text-right" style="height:400px;margin-top:30px;">
+					<button type="button" id="submit" name="submit" class="btn btn-primary">Update</button>
+					<button type="button" id="submit" name="submit" class="btn btn-secondary">Cancel</button>
+
+				</div>
+			</div>
+		</div>
+
+	
+
+	</div>
+</div>
+</div>
+</div>
+</div>
+		<script src="edit.js"></script>
+    </body>
+</html>

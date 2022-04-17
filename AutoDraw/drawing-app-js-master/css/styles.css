@@ -1,0 +1,223 @@
+* {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+
+body{
+	
+	overflow-y: hidden;
+	overflow-x:hidden;
+	background-color:#111111;
+	
+}
+.clear {
+	clear: both;
+}
+
+#canvasWrapper {
+	background-color: white;
+	/*background: url(../images/transparentbg.png) repeat;*/
+	width: 1020px;
+	height: 575px;
+	margin: 0 auto;
+	overflow: hidden;
+	margin-top: 10px;
+	position: relative;
+}
+
+#myCanvas {
+	/*border: 2px solid #000; */
+	margin: 0 auto;
+	display: block;
+	position: absolute;
+	/*z-index: 1;*/
+	/*width: 1020px;*/
+	/*height: 575px;*/
+	
+	
+}
+
+#myCanvas2 {
+	
+	margin: 0 auto;
+	display: block;
+	position: absolute;
+	/*z-index: 2;
+	background-color: aqua;
+	width: 1020px;
+	height: 575px;*/
+	
+	
+}
+
+
+#toolbar {
+	width: 1000%;
+	height: 80px;
+	padding: 10px;
+	
+	/*position:fixed;*/
+	background: #262626;
+	color: #fff;
+	font-family: sans-serif;
+}
+
+
+
+.fixed{
+	position: fixed;
+	margin-top: 3px;
+}
+
+
+#toolbar .radcontrol {
+	width: 30px;
+	height: 30px;
+	padding: 10px;
+	border-radius: 9px;
+	background-color: #4f4f4f;
+	display: inline-block;
+	text-align: center;
+	padding-top: 5px;
+	margin: 0 5px;
+	cursor: pointer;
+	
+}
+
+
+
+#colors {
+	border: 6px solid transparent;
+	border-radius: 20px;
+	margin-left:80px;
+	display:none;
+    margin-top:-33rem;
+}
+
+
+#raidus {
+	float: left;
+}
+
+.swatch {
+	cursor: pointer;
+	width: 30px;
+	height: 30px;
+	border-radius: 15px;
+	box-shadow: inset 0px 1px 0px rgba(255, 255, 255, .5), 0 2px 2px 2px rgba(0, 0, 0, 0.5);
+	margin-top:10px;
+	
+}
+
+.swatch.active {
+	border: 2px solid #fff;
+	box-shadow: inset 0px 1px 2px rgba(0, 0, 0, .5)
+}
+
+.swatch:hover {
+	border: 2px solid #fff;
+}
+
+#clearCanvas{
+	padding-right:25px;
+	margin-right:20px;
+	text-align:center;
+	margin-top:34px;
+	
+}
+.drawTool {
+	margin-top:8px;
+	cursor: pointer;
+	color: #fff;
+	height: 53px;
+	width: 53px;
+	display: block;
+	border-radius: 50px;
+	border: 2px solid transparent;
+}
+.drawTool i{
+	margin-left:10px;
+	margin-top:10px;
+}
+	.drawTool .tooltiptext {
+		visibility: hidden;
+		background-color:khaki;
+		position:relative;
+		margin-left:2.7rem;
+		margin-top:-1rem;
+	}
+	.drawTool#brush2 .tooltiptext{
+		position:absolute;
+		margin-top:1.5rem;
+		margin-left:-0.1rem;
+	}
+.drawTool:hover .tooltiptext {
+	visibility: visible;
+}
+
+#selectCanvas{
+	background-color:cadetblue;
+}
+ #clearCanvas {
+	background-color:#fe2500;
+ }
+#brush {
+	background-color: #ff8a00;
+}
+#brush2 {
+	background-color: #79b343;
+}
+#undo {
+	background-color: #00b6fd;
+}
+#restore {
+	background-color: #7417e2;
+}
+#save {
+	background-color: #ffbe0b;
+}
+#eraser {
+	background-color: #06766a;
+}
+#filldrip {
+	background-color: #508a33;
+}
+#button {
+	background-color: #fdd930;
+}
+.drawTool:hover,
+.drawTool.set {
+	border-color: #fff;
+	color:black;
+}
+
+#loading {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 100;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(192, 192, 192, 0.5);
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+#page {
+	display: none;
+}
+
+.tooloption{
+	display:flex;
+	flex-direction:row;
+overflow: auto;
+	white-space: nowrap;
+
+}
+#hide1{
+	display:none;
+}
+#hide2{
+	display:none;
+}
