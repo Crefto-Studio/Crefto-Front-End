@@ -35,6 +35,16 @@
 
     <!--log library-->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+
+    <!--cookie
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+    <script nomodule defer src="js-cookie/dist/js.cookie.js"></script>
+    <script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script> -->
+
+
 </head>
 
 <body>
@@ -119,7 +129,7 @@
                     <div class="modal-header">
                         <span class="close">&times;</span>
                     </div>
-                    <!--
+                    
                             <div id="mai">
                                 <div id="appear">
                                 </div>
@@ -134,7 +144,7 @@
                                 <p id="pi"></p>
                                 <p id="mi"></p>
                             </div>
-                        -->
+                        
                     <div class="container log" id="container">
                         <div class="form-container sign-up-container">
                             <form action="#" class="log">
@@ -151,9 +161,11 @@
                                 <input class="form log" id="name" type="text" placeholder=" Full Name" />
                                 <input class="form log" id="mail" type="email" placeholder="Email" />
                                 <input class="form log" id="pass" type="password" placeholder="Password" />
+                                <i class="fa fa-eye" id="eye1" aria-hidden="true" onclick="eye_func(this.id)"></i>
                                 <input class="form log" id="repass" type="password" placeholder="Repeat Password" />
-                                <input class="form log" id="phone" type="tel" placeholder="Phone Number">
-                                <input class="form log" id="date" type="date" />
+                                <i class="fa fa-eye" id="eye2" aria-hidden="true" onclick="eye_func(this.id)"></i>
+                                <!---<input class="form log" id="phone" type="tel" placeholder="Phone Number">
+    <input class="form log" id="date" type="date" />-->
 
                                 <button class="btn btn-secondary py-sm-3 px-sm-5 rounded-pill me-3" style="margin-top:15px" onclick="upapi()">Sign Up</button>
                             </form>
@@ -173,7 +185,8 @@
                                 <!-- <span>or use your account</span>-->
                                 <input class="log" id="logmail" type="email" placeholder="Email" />
                                 <input class="log" id="logpass" type="password" placeholder="Password" />
-                                <a href="testimonial.html" id="forget" style="font-style:normal;font-size:13px; margin-left:8rem">Forgot password?</a>
+                                <i class="fa fa-eye" id="eye3" aria-hidden="true" onclick="eye_func(this.id)"></i>
+                                <a href="#" id="forget" style="font-style:normal;font-size:13px; margin-left:8rem" onclick="forget_func()">Forgot password?</a>
                                 <button class="btn btn-secondary py-sm-3 px-sm-5 rounded-pill me-3" style="margin-top:30px" onclick="loginapi()">Sign In</button>
                             </form>
                         </div>
@@ -673,7 +686,7 @@
             <p class="section-title text-secondary justify-content-center"><span></span>Our Website<span></span></p>
             <h1 class="text-center mb-5">Watch Tour In Our Website.</h1>
         </div>
-        <video width="520" height="440" controls autoplay>
+        <video width="520" height="440" controls  >
             <source src="video/promo.mp4" />
 
         </video>
@@ -883,8 +896,9 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
-    <script src="js/curvetext.js"></script>
+   <!---<script src="js/curvetext.js"></script>-->
     <script src="js/fetch.js"></script>
+    <script src="forget.js"></script>
 
     <!--login js-->
     <script src="login&signup/js/login.js"></script>

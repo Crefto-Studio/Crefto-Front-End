@@ -1,3 +1,8 @@
+
+//document.cookie = "username=John Doe; expires=Thu, 18 Dec 2013 12:00:00 UTC";
+
+
+
 var logged = 0;
 //sign up
 function upapi() {
@@ -64,7 +69,13 @@ function loginapi() {
 		.then(response => response.json())
 
 		.then(json => {
-			console.log(json)
+			console.log(json);
+			document.cookie = "user_token="+json.token+";SameSite=Lax";
+			//var Cookies = window.Cookies;
+			//window.Cookies.set({ "mno": "munira"});
+			//var xxx = window.Cookies.get();
+			//console.log(xxx);
+			//Cookies.set('foo', 'bar')
 			if (json.status == "success") {
 					document.getElementById('logalert').innerHTML = '<div class="alert alert-success" role="alert"> Hello ' + json.data.user.name + '. Welcome at our website.</div >';
 					document.getElementById('username').innerHTML = ' ' + json.data.user.name;
@@ -115,6 +126,8 @@ document.getElementById('log_btn').addEventListener('click', function () {
 span.onclick = function () {
 	modal.style.display = "none";
 	console.log("mai");
+	document.getElementById('alert').innerHTML = "";
+	document.getElementById('logalert').innerHTML = "";
 }
 
 window.onclick = function (event) {
@@ -167,6 +180,8 @@ window.onload = images();
 
 
 window.onload = function () {
+	
+	
 	if (localStorage.getItem('user_id') != null) {
 		var user_id = localStorage.getItem('user_id');
 		var url = "http://www.api.crefto.studio/api/v1/users/" + user_id;
@@ -182,10 +197,7 @@ window.onload = function () {
 				}
 			})
 
-		document.getElementById('log_btn').addEventListener('click', function () {
-			window.location.href = "profile3/profileUser.html";
-			})
-
+		
 	}
 	else {
 		document.getElementById('username').innerHTML = "Sign Up / Sign In";
