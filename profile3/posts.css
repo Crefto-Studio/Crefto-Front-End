@@ -482,7 +482,7 @@ select.form-control:not([size]):not([multiple]) {
 .timeline>li {
     position: relative;
     min-height: 50px;
-    padding: 20px 0
+  /*  padding: 20px 0*/
 }
 
 .timeline .timeline-time {
@@ -755,5 +755,9 @@ body {
     justify-content: center;
     align-items: center;
     height: 100%;
+}
+
+li{
+    list-style:none;
 }
 

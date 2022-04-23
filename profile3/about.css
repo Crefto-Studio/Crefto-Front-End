@@ -280,3 +280,19 @@ body .fc-widget-header a {
 .row.row-space-2>[class*=col-] {
     padding: 0 1px;
 }
+
+#photos{
+    display:none;
+}
+
+#friends{
+    display:none;
+}
+
+#posts{
+    display:none;
+}
+
+.adv{
+    right:0;
+}
