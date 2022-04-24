@@ -70,7 +70,7 @@ function loginapi() {
 
 		.then(json => {
 			console.log(json);
-			document.cookie = "user_token="+json.token+";SameSite=Lax";
+			document.cookie = "AuthTokenCookie="+json.token+";SameSite=Lax";
 			//var Cookies = window.Cookies;
 			//window.Cookies.set({ "mno": "munira"});
 			//var xxx = window.Cookies.get();
@@ -115,7 +115,7 @@ var span = document.getElementsByClassName("close")[0];
 document.getElementById('log_btn').addEventListener('click', function () {
 	if (localStorage.getItem('user_id') != null) {
 		console.log("mm");
-		window.location.href = "profile3/profileUser.html";
+		window.location.href = "profile3/about.html";
 	}
 	else {
 		console.log("no");

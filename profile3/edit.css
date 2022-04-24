@@ -50,6 +50,9 @@ body {
     background: #ffffff;
     color: #2e323c;
 }
+#user_gender {
+    -webkit-appearance: button;
+}
 
 .card {
     background: white;
