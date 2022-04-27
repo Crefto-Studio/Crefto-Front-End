@@ -76,6 +76,7 @@ function loginapi() {
 			//var xxx = window.Cookies.get();
 			//console.log(xxx);
 			//Cookies.set('foo', 'bar')
+			
 			if (json.status == "success") {
 					document.getElementById('logalert').innerHTML = '<div class="alert alert-success" role="alert"> Hello ' + json.data.user.name + '. Welcome at our website.</div >';
 					document.getElementById('username').innerHTML = ' ' + json.data.user.name;

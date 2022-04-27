@@ -19,14 +19,14 @@
 <div class="row gutters">
 <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
 <div class="card h-100">
-	<div class="card-body">
+	<div class="card-body" >
 		<div class="account-settings">
 			<div class="user-profile">
 				<div class="user-avatar" >
-					<img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin" id="user_img">
+					<img src="" id="user_img">
 				</div>
 				
-				<div class="mt-4 upload" style="position:absolute">
+				<div class="mt-4 upload" style="position:absolute" id="hide">
 					<button class="btn btn-primary" type="button" style="position:absolute">
 						<i class="fa fa-fw fa-camera"></i>
 						<span>Change Photo</span>
@@ -36,7 +36,7 @@
 			</div>
 			<div class="about mt-4">
 				<h5>BIO</h5>
-				<textarea id="user_bio" cols="25" rows="3" placeholder="I'm interested in drawing, loved GauGan alot">I'm interested in drawing, loved GauGan alot
+				<textarea id="user_bio" cols="25" rows="3" placeholder="I'm interested in drawing, loved GauGan alot">
                 </textarea>
 			</div>
 		</div>
@@ -44,113 +44,132 @@
 </div>
 </div>
 <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
-<div class="card h-100">
-	<div class="card-body">
-		<div class="row gutters">
-			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-				<h6 class="mb-2 text-primary">INFO</h6>
-			</div>
-			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-				<div class="form-group">
-					<label for="fullName">Full Name*</label>
-					<input type="text" class="form-control" id="user_name" placeholder="John Doe">
+	<div class="card h-100">
+		<div class="card-body card-body2" id="all">
+			<div class="row gutters">
+				<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+					<h6 class="mb-2 text-primary">INFO</h6>
 				</div>
+				<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+					<div class="form-group">
+						<label for="fullName">Full Name*</label>
+						<input type="text" class="form-control" id="user_name" placeholder="John Doe">
+					</div>
+				</div>
+				<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+					<div class="form-group">
+						<label for="eMail">Birth Of Date</label>
+						<input type="date" class="form-control" id="user_date" value="1989-11-04" placeholder="November 4, 1989">
+					</div>
+				</div>
+
+				<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+					<div class="form-group">
+						<label for="passwors">Password*</label>
+						<input type="password" class="form-control" id="user_pass" placeholder="********" disabled>
+						<a href="#" id="change_pass">change password</a>
+					</div>
+				</div>
+				<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+					<div class="form-group">
+						<label for="website">Gender</label>
+						<!---<input type="url" class="form-control" id="website" placeholder="http://seantheme.com">-->
+						<select name="gender" class="form-control" id="user_gender">
+							<option value="PNTS" selected>Gender</option>
+							<option value="male">Male</option>
+							<option value="female">Female</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+					<div class="form-group">
+						<label for="eMail">Email*</label>
+						<input type="email" class="form-control" id="user_mail" placeholder="admin@infinite.com">
+					</div>
+				</div>
+				<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+					<div class="form-group">
+						<label for="eMail">Interested in</label>
+						<input type="email" class="form-control" id="user_interest" placeholder="GauGan">
+					</div>
+				</div>
+
+				<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+					<div class="form-group">
+						<label for="phone">Mobile Phones*</label>
+						<input type="text" class="form-control" id="user_phone" placeholder="+44 7700 900860">
+					</div>
+				</div>
+				<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+					<div class="form-group">
+						<label for="eMail">URL</label>
+						<input type="email" class="form-control" id="user_face" placeholder="http://facebook.com/infinite.admin">
+					</div>
+				</div>
+				<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+					<div class="form-group">
+						<label for="Street">Address</label>
+						<input type="text" class="form-control" id="user_street" placeholder="1355 Market Street">
+					</div>
+				</div>
+
+
 			</div>
-			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-				<div class="form-group">
-					<label for="eMail">Birth Of Date</label>
-					<input type="date" class="form-control" id="user_date" value="1989-11-04" placeholder="November 4, 1989">
+
+			<div class="row gutters">
+				<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+					<div class="text-right" style="height:400px;margin-top:30px;">
+						<button type="button" id="submit" name="submit" class="btn btn-primary">Update</button>
+						<button type="button" id="profile_cancel" name="submit" class="btn btn-secondary" onclick="cancel_func(this.id)">Cancel</button>
+
+					</div>
 				</div>
 			</div>
 
-			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-				<div class="form-group">
-					<label for="passwors">Password*</label>
-					<input type="password" class="form-control" id="user_pass" placeholder="********">
-				</div>
-			</div>
-			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-				<div class="form-group">
-					<label for="website">Gender</label>
-					<!---<input type="url" class="form-control" id="website" placeholder="http://seantheme.com">-->
-					<select name="gender" class="form-control" id="user_gender">
-						<option value="undefined" selected>Gender</option>
-						<option value="male">Male</option>
-						<option value="female">Female</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-				<div class="form-group">
-					<label for="eMail">Email*</label>
-					<input type="email" class="form-control" id="user_mail" placeholder="admin@infinite.com">
-				</div>
-			</div>
-			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-				<div class="form-group">
-					<label for="eMail">Interested in</label>
-					<input type="email" class="form-control" id="user_interest" placeholder="GauGan">
-				</div>
-			</div>
-
-			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-				<div class="form-group">
-					<label for="phone">Mobile Phones*</label>
-					<input type="text" class="form-control" id="user_phone" placeholder="+44 7700 900860">
-				</div>
-			</div>
-			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-				<div class="form-group">
-					<label for="eMail">Facebook URL</label>
-					<input type="email" class="form-control" id="user_face" placeholder="http://facebook.com/infinite.admin">
-				</div>
-			</div>
 
 
 		</div>
-		<div class="row gutters">
-			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-				<h6 class="mt-3 mb-2 text-primary">Address</h6>
-			</div>
-			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-				<div class="form-group">
-					<label for="Street">Street</label>
-					<input type="text" class="form-control" id="user_street" placeholder="1355 Market Street">
-				</div>
-			</div>
-			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-				<div class="form-group">
-					<label for="ciTy">City</label>
-					<input type="text" class="form-control" id="user_city" placeholder="San Francisco">
-				</div>
-			</div>
-			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-				<div class="form-group">
-					<label for="sTate">State/Governorate</label>
-					<input type="text" class="form-control" id="user_state" placeholder="CA">
-				</div>
-			</div>
-			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-				<div class="form-group">
-					<label for="zIp">Country</label>
-					<input type="text" class="form-control" id="user_country" placeholder="Egypt">
-				</div>
-			</div>
-		</div>
-		<div class="row gutters" >
-			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-				<div class="text-right" style="height:400px;margin-top:30px;">
-					<button type="button" id="submit" name="submit" class="btn btn-primary">Update</button>
-					<button type="button" id="submit" name="submit" class="btn btn-secondary">Cancel</button>
 
+		<div class="card-body" id="chg_pass">
+			<div class="row gutters">
+				<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+					<h6 class="mb-2 text-primary">CHANGE PASSWORD</h6>
+				</div>
+				<div class="col-lg-6 col-lg-6 col-md-6 col-sm-6 col-12">
+					<div class="form-group">
+						<label for="currentpass">Current Password</label>
+						<input type="password" class="form-control" id="current_pass" placeholder="">
+					</div>
+					<div class="form-group">
+						<label for="currentpass">New Password</label>
+						<input type="password" class="form-control" id="new_pass" placeholder="">
+					</div>
+					<div class="form-group">
+						<label for="currentpass">Confirm New Password</label>
+						<input type="password" class="form-control" id="confirm_pass" placeholder="">
+					</div>
+				</div>
+				
+				
+
+
+			</div>
+
+			<div class="row gutters">
+				<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+					<div class="text-right" style="height:400px;margin-top:30px;">
+						<button type="button" id="done_pass" name="submit" class="btn btn-primary" onclick="change_pass()">Update</button>
+						<button type="button" id="cancel_pass" name="submit" class="btn btn-secondary" onclick="cancel_func(this.id)">Cancel</button>
+
+					</div>
 				</div>
 			</div>
-		</div>
 
-	
+
+
+		</div>
 
 	</div>
-</div>
 </div>
 </div>
 </div>

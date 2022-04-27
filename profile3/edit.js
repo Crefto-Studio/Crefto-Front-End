@@ -20,6 +20,112 @@ document.getElementById('submit').addEventListener('click', function () {
 })
 
 
+var formdata = new FormData();
+document.getElementById("file_input").addEventListener('change', function () {
+	formdata.delete('photo');
+	formdata.append('photo', document.getElementById("file_input").files[0]);
+})
+
+document.getElementById("user_name").addEventListener('focusout', function () {
+	formdata.delete('name');
+	formdata.append("name", document.getElementById('user_name').value);
+});
+document.getElementById("user_bio").addEventListener('focusout', function () {
+	formdata.delete('bio');
+	formdata.append("bio", document.getElementById('user_bio').value);
+});
+document.getElementById('user_date').addEventListener('focusout', function () {
+	formdata.delete('birthday');
+	formdata.append('birthday', document.getElementById('user_date').value);
+});
+document.getElementById('user_pass').addEventListener('focusout', function () {
+	formdata.delete('password');
+	formdata.append('password', document.getElementById('user_pass').value);
+});
+document.getElementById('user_interest').addEventListener('focusout', function () {
+	formdata.delete('interest');
+	formdata.append('interest', document.getElementById('user_interest').value);
+});
+document.getElementById('user_mail').addEventListener('focusout', function () {
+	formdata.delete('email');
+	formdata.append('email', document.getElementById('user_mail').value);
+});
+document.getElementById('user_face').addEventListener('focusout', function () {
+	formdata.delete('facrbook');
+	formdata.append('facebook', document.getElementById('user_face').value);
+});
+document.getElementById('user_phone').addEventListener('focusout', function () {
+	formdata.delete('phone');
+	formdata.append('phone', document.getElementById('user_phone').value);
+});
+document.getElementById('user_gender').addEventListener('focusout', function () {
+	formdata.delete('gender');
+	formdata.append('gender', document.getElementById('user_gender').value);
+});
+document.getElementById('user_street').addEventListener('focusout', function () {
+	formdata.delete('address');
+	formdata.append('address', document.getElementById('user_street').value);
+});
+
+function post_info() {
+	let token = document.cookie;
+	token = token.split("=");
+	var myHeaders = new Headers();
+		
+	myHeaders.append("Authorization", `Bearer ${token[1]}`);
+
+	var requestOptions = {
+		method: 'PATCH',
+		headers: myHeaders,
+		body: formdata,
+		redirect: 'follow'
+	};
+
+	fetch("http://www.api.crefto.studio/api/v1/users/updateMe", requestOptions)
+		.then(response => response.json())
+
+		// Displaying results to console
+		.then(json => {
+			console.log(json);
+			for (var value of formdata.values()) {
+				console.log(value);
+			}
+			if (json.status == "success") {
+				swal("Your information updated successfully ", {
+					icon: "success",
+				}).then(function () {
+					window.location.href = "about.html";
+				})
+			}
+			else {
+				alert(json.message)
+			}
+		})
+		.catch((err) => {
+			alert("error! try again later")
+			console.error(err);
+		})
+}
+
+/*
+//update on change
+var zz=document.getElementById('user_bio').value
+const formdata = new FormData();
+document.getElementById('user_bio').addEventListener('change', function () {
+	formdata.append('bio', document.getElementById('user_bio').value);
+});
+document.getElementById('user_name').addEventListener('change', function () {
+	formdata.append("name", "Mohamed Fathi NEWW");
+});
+document.getElementById('user_date').addEventListener('change', function () {
+	formdata.append('birthday', document.getElementById('user_date').value);
+});
+document.getElementById('user_interest').addEventListener('change', function () {
+	formdata.append('interest', document.getElementById('user_interest').value);
+});
+document.getElementById('user_phone').addEventListener('change', function () {
+	formdata.append('phone', document.getElementById('user_phone').value);
+});
 //post info
 function post_info() {
 	let token = document.cookie;
@@ -27,27 +133,31 @@ function post_info() {
 	console.log("mmmmmm", token[1]);
 	fetch("http://www.api.crefto.studio/api/v1/users/updateMe", {
 
+
 		method: "PATCH",
-
-		body: JSON.stringify({
-			"photo": "http://www.api.crefto.studio/img/users/"+document.getElementById('user_img').src,
-			"bio": document.getElementById('user_bio').value,
-			"name": document.getElementById('user_name').value,
-			"birthday": document.getElementById('user_date').value,
-			"password": document.getElementById('user_pass').value,
-			"interest": document.getElementById('user_interest').value,
-			"email": document.getElementById('user_mail').value,
-			"facebook": document.getElementById('user_face').value,
-			"phone": document.getElementById('user_phone').value,
-			"gender": document.getElementById('user_gender').value,
-			"address": (document.getElementById('user_street').value + "," + document.getElementById('user_city').value + "," + document.getElementById('user_state').value + "," + document.getElementById('user_country').value),
-		}),
-
 		// Adding headers to the request
 		headers: {
 			"Content-type": "application/json; charset=UTF-8",
 			Authorization: `Bearer ${token[1]}`,
-		}
+		},
+
+		body: formdata,
+		redirect: 'follow'
+			//"photo": "http://www.api.crefto.studio/img/users/" + document.getElementById('user_img').src,
+			
+			//	"bio": document.getElementById('user_bio').value,
+			
+			//"name": document.getElementById('user_name').value,
+			//"birthday": document.getElementById('user_date').value,
+			//"password": document.getElementById('user_pass').value,
+			//"interest": document.getElementById('user_interest').value,
+			//"email": document.getElementById('user_mail').value,
+			//"facebook": document.getElementById('user_face').value,
+			//"phone": document.getElementById('user_phone').value,
+			//"gender": document.getElementById('user_gender').value,
+			//"address": (document.getElementById('user_street').value + "," + document.getElementById('user_city').value + "," + document.getElementById('user_state').value + "," + document.getElementById('user_country').value),
+
+		
 	})
 
 		// Converting to JSON
@@ -55,7 +165,8 @@ function post_info() {
 
 		// Displaying results to console
 		.then(json => {
-			console.log(json)
+			console.log(json);
+			console.log("form", formdata);
 			if (json.status == "success") {
 				swal("Your information updated successfully ", {
 					icon: "success",
@@ -72,7 +183,7 @@ function post_info() {
 			console.error(err);
 		})
 };
-
+*/
 
 //show info 
 window.onload = info();
@@ -101,18 +212,92 @@ function info() {
 				document.getElementById('user_face').value = json.data.user.facebook;
 				document.getElementById('user_phone').value = json.data.user.phone;
 				document.getElementById('user_gender').value = json.data.user.gender;
-				var add = json.data.user.address;
-				add = add.split(",");
-				document.getElementById('user_street').value = add[0];
-				document.getElementById('user_city').value = add[1];
-				document.getElementById('user_state').value = add[2];
-				document.getElementById('user_country').value = add[3];
+				//var add = json.data.user.address;
+				//add = add.split(",");
+				document.getElementById('user_street').value = json.data.user.address;
+				//document.getElementById('user_city').value = add[1];
+				//document.getElementById('user_state').value = add[2];
+				//document.getElementById('user_country').value = add[3];
 
 			}
 			else {
 				alert(json.message);
 			}
 		})
+
+	document.getElementById("chg_pass").style.display = "none";
+}
+
+
+//change password display
+document.getElementById("change_pass").addEventListener('click', function () {
+	var arr = [];
+	 arr = document.querySelectorAll(".card-body2");
+	for (let element of arr) {
+		element.style.display = "none";
+	}
+	document.getElementById("chg_pass").style.display = "block";
+	document.getElementById("hide").style.display = "none";
+	document.getElementById("user_bio").disabled = true;
+
+})
+
+
+//change pass api
+function change_pass() {
+	var formpass = new FormData();
+	let token = document.cookie;
+	token = token.split("=");
+
+	fetch("http://www.api.crefto.studio/api/v1/users/updateMyPassword", {
+
+
+		method: "PATCH",
+		// Adding headers to the request
+		headers: {
+			"Content-type": "application/json; charset=UTF-8",
+			Authorization: `Bearer ${token[1]}`,
+		},
+
+		body: JSON.stringify({
+			"passwordCurrent": document.getElementById("current_pass").value,
+			"password": document.getElementById("new_pass").value,
+			"passwordConfirm": document.getElementById("confirm_pass").value
+		}),
+		
+	})
+
+		// Converting to JSON
+		.then(response => response.json())
+
+		// Displaying results to console
+		.then(json => {
+			console.log(json);
+			console.log("form", formdata);
+			if (json.status == "success") {
+				swal("Your information updated successfully ", {
+					icon: "success",
+				}).then(function () {
+					window.location.href = "edit.html";
+				})
+			}
+			else {
+				alert(json.message)
+			}
+		})
+		.catch((err) => {
+			alert("error! try again later")
+			console.error(err);
+		})	
+}
+
+
+//cancel button
+function cancel_func(id){
+	if (id == "profile_cancel")
+		location.href = "about.html";
+	else
+		location.href = "edit.html";
 }
 
 
