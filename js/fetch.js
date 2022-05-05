@@ -2,7 +2,6 @@
 //document.cookie = "username=John Doe; expires=Thu, 18 Dec 2013 12:00:00 UTC";
 
 
-
 var logged = 0;
 //sign up
 function upapi() {
@@ -54,23 +53,50 @@ function loginapi() {
 	fetch("http://www.api.crefto.studio/api/v1/users/login", {
 
 		method: "POST",
+		credentials: "same-origin",
+		//credentials: "include",
+		
+		
+		
 
 		body: JSON.stringify({
+			
 			"email": document.getElementById('logmail').value,
 			"password": document.getElementById('logpass').value,
 		}),
 
 		// Adding headers to the request
 		headers: {
-			"Content-type": "application/json; charset=UTF-8"
+			Accept: 'application/json',
+			"Content-type": "application/json; charset=UTF-8",
+			AllowAutoRedirect: false,
+			//exposedHeaders: ["Set-Cookie"],
+			//redirect: 'follow'
+			
+			
+				
 		}
 	})
 
-		.then(response => response.json())
+		.then(res => {
+			
+			
+			//console.log(res.headers);
+		//	var headers = res.getResponseHeaders('Set-Cookie');
+			//alert(headers);
+           //  console.log(res.headers);
+				//console.log(res.headers.get('AuthTokenCookie'));
+			//console.log(res.headers.Authorization); // undefined
+			//console.log(res.getResponse().headers['X-Frame-Options']);
+			//console.log(document.cookie); // nope
+			return res.json();
+		})
 
 		.then(json => {
 			console.log(json);
-			document.cookie = "AuthTokenCookie="+json.token+";SameSite=Lax";
+			
+			document.cookie = "AuthTokenCookie=" + json.token + ";SameSite=Lax";
+			
 			//var Cookies = window.Cookies;
 			//window.Cookies.set({ "mno": "munira"});
 			//var xxx = window.Cookies.get();
@@ -84,7 +110,7 @@ function loginapi() {
 					//document.getElementById('log_btn').classList.remove('rounded-pill');
 					document.getElementById('logout_btn').style.display = 'block';
 					logged = 1;
-				    localStorage.setItem('user_id', json.data.user._id);
+				   // localStorage.setItem('user_id', json.data.user._id);
 			}
 			else {
 				document.getElementById('logalert').innerHTML = '<div class="alert alert-warning" role="alert">' + json.message + '</div >';
@@ -101,12 +127,16 @@ function logout() {
 		.then(json => {
 			console.log(json)
 			if (json.status == "success") {
+				document.cookie = "AuthTokenCookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
 				document.getElementById('username').innerHTML = ' Sign UP / Log IN';
 				document.getElementById('logout_btn').style.display = 'none';
 				//document.getElementById('log_btn').classList.add('rounded-pill');
 				logged = 0;
-				localStorage.removeItem('user_id')
+				//localStorage.removeItem('user_id')
+				//localStorage.setItem("user_id", null);
+				
 			}
+			
 			})
 }
 
@@ -114,7 +144,7 @@ var modal = document.getElementById("myModal");
 var btn = document.getElementById("log_btn");
 var span = document.getElementsByClassName("close")[0];
 document.getElementById('log_btn').addEventListener('click', function () {
-	if (localStorage.getItem('user_id') != null) {
+	if (document.cookie.indexOf('AuthTokenCookie=')!=-1) {
 		console.log("mm");
 		window.location.href = "profile3/about.html";
 	}
@@ -183,10 +213,16 @@ window.onload = images();
 window.onload = function () {
 	
 	
-	if (localStorage.getItem('user_id') != null) {
-		var user_id = localStorage.getItem('user_id');
-		var url = "http://www.api.crefto.studio/api/v1/users/" + user_id;
-		fetch(url)
+	if (document.cookie.indexOf('AuthTokenCookie=') != -1) {
+		//var user_id = localStorage.getItem('user_id');
+		let token = document.cookie;
+		token = token.split("=");
+		console.log("mmmmmm", token[1]);
+		fetch("http://www.api.crefto.studio/api/v1/users/me", {
+			headers: {
+				Authorization: `Bearer ${token[1]}`
+			}
+		})
 
 			.then(response => response.json())
 
@@ -201,8 +237,10 @@ window.onload = function () {
 		
 	}
 	else {
+	
 		document.getElementById('username').innerHTML = "Sign Up / Sign In";
-    }
+	}
+	
 }
 
 

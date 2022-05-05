@@ -52,27 +52,73 @@ function info() {
 function display_photos() {
 	document.getElementById("about").style.display = "none";
 	document.getElementById("photos").style.display = "block";
-	document.getElementById("friends").style.display = "none";
+	//document.getElementById("friends").style.display = "none";
 	document.getElementById("posts").style.display = "none";
 }
 
 function display_info() {
 	document.getElementById("about").style.display = "block";
 	document.getElementById("photos").style.display = "none";
-	document.getElementById("friends").style.display = "none";
+	//document.getElementById("friends").style.display = "none";
 	document.getElementById("posts").style.display = "none";
 }
 
+/*
 function display_friends() {
 	document.getElementById("friends").style.display = "block";
 	document.getElementById("about").style.display = "none";
 	document.getElementById("photos").style.display = "none";
 	document.getElementById("posts").style.display = "none";
-}
+}*/
 
 function display_posts() {
 	document.getElementById("posts").style.display = "block";
 	document.getElementById("about").style.display = "none";
 	document.getElementById("photos").style.display = "none";
-	document.getElementById("friends").style.display = "none";
+	//document.getElementById("friends").style.display = "none";
+}
+
+
+//share photos in facebook
+function fbs_click(element) {
+	var TheImg = element.parentElement.parentElement.firstElementChild;
+	u = TheImg.src;
+	// t=document.title;
+	t = TheImg.getAttribute('alt');
+	window.open('http://www.facebook.com/sharer.php?u=' + encodeURIComponent(u) + '&t=' + encodeURIComponent(t), 'sharer', 'toolbar=0,status=0,width=626,height=436'); return false;
+}
+
+//side nav
+let arrow = document.querySelectorAll(".arrow");
+for (var i = 0; i < arrow.length; i++) {
+	arrow[i].addEventListener("click", (e) => {
+		let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
+		arrowParent.classList.toggle("showMenu");
+	});
+}
+
+let sidebar = document.querySelector(".sidebar");
+let sidebarBtn = document.querySelector(".bx-menu");
+console.log(sidebarBtn);
+sidebarBtn.addEventListener("click", () => {
+	sidebar.classList.toggle("close");
+
+});
+
+
+//logout
+function prof_out() {
+	fetch("http://www.api.crefto.studio/api/v1/users/logout")
+
+		.then(response => response.json())
+
+		.then(json => {
+			console.log(json)
+			if (json.status == "success") {
+				document.cookie = "AuthTokenCookie=; path=/E:/home2/new_home_page/digital-agency-html-template; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+				location.replace("../index.html");
+				
+			}
+
+		})
 }

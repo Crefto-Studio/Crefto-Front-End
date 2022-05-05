@@ -26,43 +26,43 @@ document.getElementById("file_input").addEventListener('change', function () {
 	formdata.append('photo', document.getElementById("file_input").files[0]);
 })
 
-document.getElementById("user_name").addEventListener('focusout', function () {
+document.getElementById("user_name").addEventListener('change', function () {
 	formdata.delete('name');
 	formdata.append("name", document.getElementById('user_name').value);
 });
-document.getElementById("user_bio").addEventListener('focusout', function () {
+document.getElementById("user_bio").addEventListener('change', function () {
 	formdata.delete('bio');
 	formdata.append("bio", document.getElementById('user_bio').value);
 });
-document.getElementById('user_date').addEventListener('focusout', function () {
+document.getElementById('user_date').addEventListener('change', function () {
 	formdata.delete('birthday');
 	formdata.append('birthday', document.getElementById('user_date').value);
 });
-document.getElementById('user_pass').addEventListener('focusout', function () {
+document.getElementById('user_pass').addEventListener('change', function () {
 	formdata.delete('password');
 	formdata.append('password', document.getElementById('user_pass').value);
 });
-document.getElementById('user_interest').addEventListener('focusout', function () {
+document.getElementById('user_interest').addEventListener('change', function () {
 	formdata.delete('interest');
 	formdata.append('interest', document.getElementById('user_interest').value);
 });
-document.getElementById('user_mail').addEventListener('focusout', function () {
+document.getElementById('user_mail').addEventListener('change', function () {
 	formdata.delete('email');
 	formdata.append('email', document.getElementById('user_mail').value);
 });
-document.getElementById('user_face').addEventListener('focusout', function () {
+document.getElementById('user_face').addEventListener('change', function () {
 	formdata.delete('facrbook');
 	formdata.append('facebook', document.getElementById('user_face').value);
 });
-document.getElementById('user_phone').addEventListener('focusout', function () {
+document.getElementById('user_phone').addEventListener('change', function () {
 	formdata.delete('phone');
 	formdata.append('phone', document.getElementById('user_phone').value);
 });
-document.getElementById('user_gender').addEventListener('focusout', function () {
+document.getElementById('user_gender').addEventListener('change', function () {
 	formdata.delete('gender');
 	formdata.append('gender', document.getElementById('user_gender').value);
 });
-document.getElementById('user_street').addEventListener('focusout', function () {
+document.getElementById('user_street').addEventListener('change', function () {
 	formdata.delete('address');
 	formdata.append('address', document.getElementById('user_street').value);
 });
