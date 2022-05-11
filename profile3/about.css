@@ -156,9 +156,12 @@ body .fc-widget-header a {
 }
 .profile-container {
     padding: 1.5625rem;
+   
 }
-@media (max-width: 967px) {
-    .profile-header-img {
+    
+
+    @media (max-width: 967px) {
+        .profile-header-img {
         width: 5.625rem;
         height: 5.625rem;
         margin: 0;
@@ -251,7 +254,7 @@ body .fc-widget-header a {
     padding-top: 0;
 }
 .table.table-profile td {
-    border-color: #c8c7cc;
+    border-color: #6222CC;
 }
 .table.table-profile tbody + thead > tr > th {
     padding-top: 1.5625rem;
@@ -584,6 +587,9 @@ nav {
 
 
     /*photos part*/
+#photos .portfolio-container {
+    margin-left: 5rem;
+}
 #portfolio-flters li {
     display: inline-block;
     font-weight: 500;
@@ -614,6 +620,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
+    
     width: 100%;
     height: 100%;
     top: 0;
@@ -861,10 +868,11 @@ nav {
 .text-danger, .text-red {
     color: #ff5b57 !important;
 }
+.blue-like{
+    color:blue;
+}
 
 @charset "utf-8";
-
-
 /*side nav*/
 @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300&family=Tinos&display=swap');
 
@@ -876,9 +884,8 @@ nav {
     left: 0;
     height: 100%;
     width: 260px;
-    background: #000428;
-    background: -webkit-linear-gradient(to right, #004e92, #000428);
-    background: linear-gradient(to right, #004e92, #000428);
+    background: rgb(251,165,4);
+    background: linear-gradient(32deg, rgba(251,165,4,1) 0%, rgba(98,34,204,1) 100%);
     z-index: 100;
     transition: all 0.5s ease;
 }

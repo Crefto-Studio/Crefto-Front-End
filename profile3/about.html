@@ -165,7 +165,7 @@
             <!--about part-->
             <section class="home-section" id="about">
                 <div class="home-content">
-                    <i class='bx bx-menu'></i>
+                    <i class='bx bx-menu' id="about_btn" onclick="toggle_bar(this)"></i>
                     <div class="profile-container">
                         <div class="row row-space-20">
                             <div class="col-md-8">
@@ -174,10 +174,21 @@
                                         <table class="table table-profile">
                                             <thead>
                                                 <tr>
-                                                    <th colspan="2">INFO</th>
+                                                    
+                                                    <th colspan="2"><i class="fa-solid fa-circle-info"></i>  INFO</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                <tr>
+                                                    <td class="field">Full Name</td>
+                                                    <td class="value user_name">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="field">Bio</td>
+                                                    <td class="value" id="user_bio">
+                                                    </td>
+                                                </tr>
                                                 <tr>
                                                     <td class="field">Birth of Date</td>
                                                     <td class="value" id="user_date">
@@ -199,7 +210,7 @@
                                         <table class="table table-profile">
                                             <thead>
                                                 <tr>
-                                                    <th colspan="2">CONTACT ME</th>
+                                                    <th colspan="2"><i class="fa-solid fa-address-card"></i>  CONTACT ME</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -225,7 +236,7 @@
                                         <table class="table table-profile">
                                             <thead>
                                                 <tr>
-                                                    <th colspan="2">SOCIAL</th>
+                                                    <th colspan="2"><i class="fa-solid fa-globe"></i>  SOCIAL</th>
                                                 </tr>
                                             </thead>
                                             <tr>
@@ -240,37 +251,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4 hidden-xs hidden-sm">
-                                <ul class="profile-info-list">
-                                    <li class="title">PERSONAL INFORMATION</li>
-                                    <li>
-                                        <div class="field">Full Name:</div>
-                                        <div class="value user_name"></div>
-                                    </li>
-                                    <li>
-                                        <div class="field">BIO</div>
-                                        <div class="value" id="user_bio"></div>
-                                    </li>
-
-                                    <li>
-                                        <div class="field">Country:</div>
-                                        <div class="value" id="user_country"></div>
-                                    </li>
-                                    <!---
-                            <li class="title">FRIEND LIST (9)</li>
-                            <li class="img-list">
-                                <a href="#" class="m-b-5"><img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" /></a>
-                                <a href="#" class="m-b-5"><img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="" /></a>
-                                <a href="#" class="m-b-5"><img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" /></a>
-                                <a href="#" class="m-b-5"><img src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="" /></a>
-                                <a href="#" class="m-b-5"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="" /></a>
-                                <a href="#" class="m-b-5"><img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" /></a>
-                                <a href="#" class="m-b-5"><img src="https://bootdey.com/img/Content/avatar/avatar8.png" alt="" /></a>
-                                <a href="#" class="m-b-5"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" /></a>
-                                <a href="#" class="m-b-5"><img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" /></a>
-                            </li>-->
-                                </ul>
-                            </div>
+                           
                         </div>
                     </div>
                 </div>
@@ -279,11 +260,11 @@
             <!--photos part-->
             <section class="home-section" id="photos">
                 <div class="home-content">
-                    <i class='bx bx-menu'></i>
-                    <div class="profile-container">
-                        <div class="row row-space-20">
+                    <i class='bx bx-menu' id="photo_btn" onclick="toggle_bar(this)"></i>
+                   
 
-                            <div class="row g-4 portfolio-container">
+                            <div class="row g-4 portfolio-container" id="gallery">
+                                <!--
                                 <div class="col-lg-4 col-md-6 portfolio-item first wow fadeInUp" data-wow-delay="0.1s">
                                     <div class="rounded overflow-hidden">
                                         <div class="position-relative overflow-hidden" id="parent">
@@ -299,6 +280,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                -->
+                                <!--
                                 <div class="col-lg-4 col-md-6 portfolio-item second wow fadeInUp" data-wow-delay="0.3s">
                                     <div class="rounded overflow-hidden">
                                         <div class="position-relative overflow-hidden">
@@ -373,12 +356,11 @@
                                         </div>
                                     </div>
                                 </div>
+                                -->
                             </div>
 
 
-                        </div>
-
-                    </div>
+                       
                 </div>
             </section>
 
@@ -519,12 +501,8 @@
             <!--posts part-->
             <section class="home-section" id="posts">
                 <div class="home-content">
-                    <i class='bx bx-menu'></i>
-                    <div class="profile-container" >
-                        <div class="row row-space-20">
-                            <div class="col-md-8">
-                                <div class="profile-content">
-                                    <div class="tab-content p-0">
+                    <i class='bx bx-menu' id="posts_btn" onclick="toggle_bar(this)"></i>
+                  
 
                                         <!-- begin #profile-post tab -->
                                         <div class="tab-pane fade active show" id="profile-post">
@@ -534,13 +512,10 @@
                                                         <div class="timeline-header">
                                                             <span class="userimage"><img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt=""></span>
                                                             <span class="username">John Doe</span>
-                                                            <span class="pull-right text-muted">1000 Views</span>
+                                                           
                                                         </div>
                                                         <div class="timeline-content">
-                                                            <h4 class="template-title">
-                                                                <i class="fa fa-map-marker text-danger fa-fw"></i>
-                                                                America
-                                                            </h4>
+                                                           
                                                             <p>Here is my first photo!</p>
                                                             <p class="m-t-20">
                                                                 <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="">
@@ -548,9 +523,9 @@
                                                         </div>
                                                         <div class="timeline-footer">
                                                             <!--<a  href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-heart fa-fw fa-lg m-r-3"></i>Fav </a>-->
-                                                            <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-thumbs-up fa-fw fa-lg m-r-3"></i> Like</a>
+                                                            <a href="javascript:;" class="m-r-15 text-inverse-lighter" onclick="like(this)"><i class="fa fa-thumbs-up fa-fw fa-lg m-r-3"></i> Like</a>
                                                             <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a>
-                                                            <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-share fa-fw fa-lg m-r-3"></i> Share</a>
+                                                            
                                                         </div>
                                                         <div class="timeline-comment-box">
                                                             <div class="user"><img src="https://bootdey.com/img/Content/avatar/avatar7.png"></div>
@@ -571,22 +546,18 @@
                                                         <div class="timeline-header">
                                                             <span class="userimage"><img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt=""></span>
                                                             <span class="username">John Doe</span>
-                                                            <span class="pull-right text-muted">1000 Views</span>
+                                                            
                                                         </div>
                                                         <div class="timeline-content">
-                                                            <h4 class="template-title">
-                                                                <i class="fa fa-map-marker text-danger fa-fw"></i>
-                                                                Italy
-                                                            </h4>
+                                                           
                                                             <p>Here is my second photo</p>
                                                             <p class="m-t-20">
                                                                 <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="">
                                                             </p>
                                                         </div>
                                                         <div class="timeline-footer">
-                                                            <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-thumbs-up fa-fw fa-lg m-r-3"></i> Like</a>
+                                                            <a href="javascript:;" class="m-r-15 text-inverse-lighter" onclick="like(this)"><i class="fa fa-thumbs-up fa-fw fa-lg m-r-3"></i> Like</a>
                                                             <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a>
-                                                            <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-share fa-fw fa-lg m-r-3"></i> Share</a>
                                                         </div>
                                                         <div class="timeline-comment-box">
                                                             <div class="user"><img src="https://bootdey.com/img/Content/avatar/avatar7.png"></div>
@@ -609,17 +580,8 @@
 
 
                                         <!-- end timeline -->
-                                    </div>
-                                    <!-- end #profile-post tab -->
-
-                                </div>
-                            </div>
-                            <div class="col-md-4 hidden-xs hidden-sm">
-
-                            </div>
-                        </div>
-
-                    </div>
+                                  
+                        
                     </div>
                 </section>
 

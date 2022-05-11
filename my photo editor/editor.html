@@ -59,6 +59,9 @@
                     <a title="Borders" style="background:blue;" class="trn" onclick="call_menu(TOOLS, 'tools_borders');" id="horizontal flip" href="#">
                         <i class="fa-solid fa-vector-square fa-2x"></i>
                     </a>
+                    <a title="share" style="background:blue;" class="trn"  onclick="togg()" id="prof_share" href="#">
+                        <i class="fa-solid fa-circle-plus fa-2x"></i>
+                    </a>
                 </div>
             </div>
             <!---  <div style="clear:both;"></div>-->
@@ -337,6 +340,14 @@
     <div style="display:none;" id="tmp"></div>
     <div id="popup"></div>
 
+    <div id="pop_post" style="display:none">
+        <h2>Post</h2>
+        <input type="text" id="post_name" />
+        <textarea id="post_des"></textarea>
+        <button onclick="post()">ok</button>
+        <button onclick="this.parentElement.style.display='none'">cancel</button>
+    </div>
+
     <script src="vendor/jquery/jquery.js"></script>
     <script src="vendor/jquery/jquery-migrate.js"></script>
     <script src="vendor/menu/menu.min.js"></script>
@@ -370,6 +381,7 @@
     <script src="js/tools.js"></script>
     <script src="js/draw_tools.js"></script>
     <script src="js/gui.js"></script>
+    <script src="js/post.js"></script>
 
     <!-- cancel help file: contain shortcuts(don't all work) and languages -->
     <!-- <script src="js/help.js"></script> -->

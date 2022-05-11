@@ -479,6 +479,8 @@ function FILE_CLASS() {
 			
 			tempCanvas.toBlob(function(blob) {
 				saveAs(blob, fname);
+				//var url = URL.createObjectURL(blob);
+				//console.log("mno", url);
 			});
 		}
 		else if (type == 'JPG') {
@@ -702,12 +704,13 @@ function FILE_CLASS() {
 				};
 			})(name, img);
 			img.src = data;
+			
 		}
 	};
 
 
 	/*
-	//cancel quick sace
+	//cancel quick save
 	this.file_quicksave = function(){
 		//save image data
 		var data_json = this.export_as_json();

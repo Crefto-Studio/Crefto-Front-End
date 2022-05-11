@@ -6,10 +6,11 @@ window.onload=info()
 function info() {
 	let token = document.cookie;
 	token = token.split("=");
-	console.log("mmmmmm", token[1]);
+	//console.log("mmmmmm", token[1]);
 	fetch("http://www.api.crefto.studio/api/v1/users/me", {
 		headers: {
-			Authorization: `Bearer ${token[1]}`
+			Authorization: `Bearer ${token[1]}`,
+			
 		}
 	})
 
@@ -36,9 +37,9 @@ function info() {
 
 
 				document.getElementById('user_bio').innerHTML = json.data.user.bio;
-				let text = json.data.user.address;
-				var myArray = text.split(",");
-				document.getElementById('user_country').innerHTML = myArray[myArray.length - 1];
+				//let text = json.data.user.address;
+				//var myArray = text.split(",");
+				//document.getElementById('user_country').innerHTML = myArray[myArray.length - 1];
 
 
 			}
@@ -98,12 +99,12 @@ for (var i = 0; i < arrow.length; i++) {
 }
 
 let sidebar = document.querySelector(".sidebar");
-let sidebarBtn = document.querySelector(".bx-menu");
-console.log(sidebarBtn);
-sidebarBtn.addEventListener("click", () => {
-	sidebar.classList.toggle("close");
+function toggle_bar(btn) {
+	let sidebarBtn = document.getElementById(btn);
+	console.log(sidebarBtn);
+		sidebar.classList.toggle("close");
 
-});
+}
 
 
 //logout
@@ -115,10 +116,71 @@ function prof_out() {
 		.then(json => {
 			console.log(json)
 			if (json.status == "success") {
-				document.cookie = "AuthTokenCookie=; path=/E:/home2/new_home_page/digital-agency-html-template; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+				document.cookie = "AuthTokenCookie=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+				
 				location.replace("../index.html");
+				
 				
 			}
 
 		})
+}
+
+
+//likes
+function like(element) {
+	var btn = element.firstElementChild;
+	//btn.style.color = "blue";
+	btn.classList.toggle("blue-like");
+
+}
+
+
+//my gallery
+window.onload = display_gallery();
+function display_gallery() {
+	let token = document.cookie;
+	token = token.split("=");
+	//console.log("mmmmmm", token[1]);
+	fetch("http://www.api.crefto.studio/api/v1/posts/getMyPosts", {
+
+		headers: {
+			Authorization: `Bearer ${token[1]}`
+		},
+		credentials: "same-origin",
+	})
+
+		.then(response => response.json())
+
+		.then(json => {
+			console.log(json);
+			var num = json.data.length;
+			var text = "";
+			var arr = [];
+			arr[0] = json.data[4];
+			arr[1] = json.data[5];
+			arr.forEach(function (elem) {
+				
+				text += "<div class=\"col-lg-4 col-md-6 portfolio-item first wow fadeInUp\" data-wow-delay=\"0.1s\">";
+				text += "<div class=\"rounded overflow-hidden\" >";
+				text += "<div class=\"position-relative overflow-hidden\" id=\"parent\">";
+				text += "<img class=\"img-fluid w-100\" src=\"http://www.api.crefto.studio/img/posts/" + arr.postImg+" alt =\"\">";
+				text += "<div class=\"portfolio-overlay\">";
+				text += "<a class=\"btn btn-square btn-outline-light mx-1\" href=\"img/portfolio-1.jpg\" data-lightbox=\"portfolio\"><i class=\"fa fa-eye\"></i></a>";
+				text += "<a class=\"btn btn-square btn-outline-light mx-1\" href=\"\" onclick=\"fbs_click(this)\"><i class=\"fa fa-link\"></i></a>";
+				text += "</div>";
+				text += "</div>";
+				text += "<div class=\"bg-light p-4\">";
+				text += "<p class=\"text-primary fw-medium mb-2\">UI / UX Design</p>";
+				text += "</div>";
+				text += "</div>";
+				text += "</div>";
+				
+				console.log(elem.postImg);
+			});
+			document.getElementById("gallery").innerHTML = text;
+
+			})
+
+	
 }

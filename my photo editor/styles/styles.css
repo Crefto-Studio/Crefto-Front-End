@@ -849,26 +849,28 @@ label{
 	}
 
 	/* ========== 6.1 Popup ===================================================== */
+#pop_post{
 
-	#popup {
-		position: fixed;
-		display: none;
-		top: 150px;
-		left: calc(50% - 500px / 2);
-		background-color: #bbb;
-		border: 1px solid #000000;
-		width: 500px;
-		max-width: 100%;
-		max-height: 560px;
-		overflow-y: scroll;
-		margin: 0px auto 0px auto;
-		padding: 10px;
-		font-size: 13px;
-		color: #333;
-		z-index: 100;
-	}
+}
+#popup,#pop_post {
+	position:fixed;
+	display: none;
+	top: 150px;
+	left: calc(50% - 500px / 2);
+	background-color: #bbb;
+	border: 1px solid #000000;
+	width: 500px;
+	max-width: 100%;
+	max-height: 560px;
+	overflow-y: scroll;
+	margin: 0px auto 0px auto;
+	padding: 10px;
+	font-size: 13px;
+	color: #333;
+	z-index: 100;
+}
 
-		#popup h2 {
+		#popup h2,#pop_post h2 {
 			margin-top: 0px;
 			margin-bottom: 10px;
 			cursor: move;
@@ -1014,10 +1016,15 @@ label{
 		margin-left: 14px;
 		margin-top: 13px;
 	}
-	/*style on load*/
-	.no-js #loader {
-		display: none;
-	}
+
+.fa-circle-plus {
+	margin-left: 14px;
+	margin-top: 13px;
+}
+/*style on load*/
+.no-js #loader {
+	display: none;
+}
 
 	.js #loader {
 		display: block;
@@ -1049,3 +1056,43 @@ label{
 		opacity: 0;
 	}
 }
+
+//popmenu
+.container {
+	padding: 2rem 0rem;
+}
+
+@media (min-width: 576px) {
+	.modal-dialog {
+		max-width: 400px;
+	}
+
+		.modal-dialog .modal-content {
+			padding: 1rem;
+		}
+}
+
+.modal-header .close {
+	margin-top: -1.5rem;
+}
+
+.form-title {
+	margin: -2rem 0rem 2rem;
+}
+
+.btn-round {
+	border-radius: 3rem;
+}
+
+.delimiter {
+	padding: 1rem;
+}
+
+.social-buttons .btn {
+	margin: 0 0.5rem 1rem;
+}
+
+.signup-section {
+	padding: 0.3rem 0rem;
+}
+
