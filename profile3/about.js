@@ -147,7 +147,7 @@ function display_gallery() {
 		headers: {
 			Authorization: `Bearer ${token[1]}`
 		},
-		credentials: "same-origin",
+		//credentials: "same-origin",
 	})
 
 		.then(response => response.json())
@@ -157,17 +157,18 @@ function display_gallery() {
 			var num = json.data.length;
 			var text = "";
 			var arr = [];
-			arr[0] = json.data[4];
-			arr[1] = json.data[5];
+			arr[0] = json.data[num-1];
+		//	arr[1] = json.data[num-2];
 			arr.forEach(function (elem) {
 				
 				text += "<div class=\"col-lg-4 col-md-6 portfolio-item first wow fadeInUp\" data-wow-delay=\"0.1s\">";
 				text += "<div class=\"rounded overflow-hidden\" >";
 				text += "<div class=\"position-relative overflow-hidden\" id=\"parent\">";
-				text += "<img class=\"img-fluid w-100\" src=\"http://www.api.crefto.studio/img/posts/" + arr.postImg+" alt =\"\">";
-				text += "<div class=\"portfolio-overlay\">";
+				text += "<img class=\"img-fluid w-100\" src=\"http://www.api.crefto.studio/img/posts/" + elem.postImg+" alt =\"\">";
+				text += "<div class=\"portfolio-overlay\" id=\""+elem._id+"\">";
 				text += "<a class=\"btn btn-square btn-outline-light mx-1\" href=\"img/portfolio-1.jpg\" data-lightbox=\"portfolio\"><i class=\"fa fa-eye\"></i></a>";
 				text += "<a class=\"btn btn-square btn-outline-light mx-1\" href=\"\" onclick=\"fbs_click(this)\"><i class=\"fa fa-link\"></i></a>";
+				text += "<a class=\"btn btn-square btn-outline-light mx-1\" href=\"#\" onclick=\"del_post(this)\"><i class=\"far fa-trash-alt \"></i></a>";
 				text += "</div>";
 				text += "</div>";
 				text += "<div class=\"bg-light p-4\">";
@@ -184,3 +185,211 @@ function display_gallery() {
 
 	
 }
+
+//delete post
+
+
+function del_post(elem) {
+		var post_id = elem.parentElement.id;
+		var url = "http://www.api.crefto.studio/api/v1/posts/" + post_id;
+		let token = document.cookie;
+		token = token.split("=");
+		fetch(url, {
+			headers: {
+				Authorization: `Bearer ${token[1]}`,
+
+			},
+			method: "DELETE",
+		}).then(response => {
+			document.getElementById('id01').style.display = 'block';
+			return response.json()
+		})
+			.then(json => {
+				
+				console.log("33333333333333333333333333333333", json);
+				if (json.status == "fail") {
+					document.getElementById("msg_del").innerHTML = json.message;
+				}
+				else {
+					document.getElementById("msg_del").innerHTML = "sucessfully deleted";
+				}
+			}
+			)
+	
+	
+		
+
+}
+
+
+//display all posts
+window.onload = dis_posts();
+var count = 0;
+function dis_posts() {
+	var text = "";
+	var desc;
+	var max;
+	var img;
+	var post_id;
+	fetch("http://www.api.crefto.studio/api/v1/posts")
+		.then(response => response.json())
+		.then(json => {
+			console.log(json);
+			if (json.status == "success") {
+				var arr = [];
+				
+				arr[0] = json.data.posts[json.data.posts.length - 1];
+				arr[1] = json.data.posts[json.data.posts.length - 2];
+				arr[2] = json.data.posts[json.data.posts.length - 3];
+				
+			//	max = json.results;
+				max = 3;
+
+				text += "<div class=\"timeline-body\">";
+				text += "<div class=\"timeline-header\">";
+				//arr[count] = json.data.posts[count];
+				arr[count].user._id;
+				desc = arr[count].description;
+				img = arr[count].postImg;
+				post_id = arr[count]._id;
+					
+					return fetch("http://www.api.crefto.studio/api/v1/users/" + arr[count].user._id);
+					
+				
+			}
+			
+		}).then(response => response.json())
+		.then(json => {
+			console.log(json);
+			console.log(json.data.user.name);
+			
+			text += "<span class=\"userimage\"><img src=\"http://www.api.crefto.studio/img/users/" + json.data.user.photo  +"\"></span>";
+			text += "<span class=\"username\">" + json.data.user.name + "</span>";
+			text += "</div>";
+			text += "<div class=\"timeline-content\">";
+			text += "<p>" + desc + "</p>";
+			text += "<p class=\"m-t-20\">";
+			text += "<img src=\"http://www.api.crefto.studio/img/posts/\"" + img + "alt=\"\">";
+			text += "</p>";
+			text += "</div>";
+			text += "<div class=\"timeline-footer\" id=\"" + post_id + ">";
+			text += "<a href=\"javascript:;\" class=\"m-r-15 text-inverse-lighter\"><i class=\"fa fa-heart fa-fw fa-lg m-r-3\"></i>Fav </a>";
+			text += "<a href=\"javascript:;\" class=\"m-r-15 text-inverse-lighter\" onclick=\"like(this)\"><i class=\"fa fa-thumbs-up fa-fw fa-lg m-r-3\"></i> Like</a>";
+			text += "<a href=\"javascript:;\" class=\"m-r-15 text-inverse-lighter\"><i class=\"fa fa-comments fa-fw fa-lg m-r-3\"></i> Comment</a>";
+			text += "</div>";
+			text += "<div class=\"timeline-comment-box\">";
+			text += "<div class=\"user\"><img src=\"https://bootdey.com/img/Content/avatar/avatar7.png\"></div>";
+			text += "<div class=\"input\">";
+			text += "<form action=\"\">";
+			text += "<div class=\"input-group\">";
+			text += "<input type=\"text\" class=\"form-control rounded-corner\" placeholder=\"Write a comment...\">";
+			text += "<span class=\"input-group-btn p-l-10\">";
+			text += "<button class=\"btn btn-primary f-s-12 rounded-corner\" type=\"button\">Comment</button>";
+			text += "</span>";
+			text += "</div>";
+			text += "</form>";
+			text += "</div>";
+			text += "</div>";
+			text += "</div>";
+			document.getElementById("wall").innerHTML += text;
+			console.log("################################");
+			count++;
+			if (count < max) {
+				dis_posts();
+			}
+			else {
+				console.log("noooooooooooooooooooooooooooooo");
+            }
+		})
+}
+
+/*
+var user_photo = "";
+//posts
+window.onload = dis_posts();
+function dis_posts() {
+	var text = "";
+	
+	fetch("http://www.api.crefto.studio/api/v1/posts")
+
+		.then(response => response.json())
+
+		.then(json => {
+			console.log(json);
+			
+			if (json.status == "success") {
+				var arr = [];
+				arr[0] = json.data.posts[json.data.posts.length - 1];
+				arr[1] = json.data.posts[json.data.posts.length - 2];
+				arr.forEach(function (elem) {
+					console.log(elem.postImg);
+					console.log(elem.user.name);
+					
+					
+					text += "<div class=\"timeline-body\">";
+					text += "<div class=\"timeline-header\">";
+					/*
+					var url = "http://www.api.crefto.studio/api/v1/users/" + "626271a83dc0985f40652947";
+
+
+					user_photo=fetch(url)
+						.then(response => response.json())
+					.then(function (json) {
+							console.log(json);
+							if (json.status == "success") {
+								//globalThis.user_photo = json.data.user.photo;
+								user_photo = json.data.user.photo;
+							}
+							console.log(user_photo);
+							return json.data.user.photo
+                        })
+
+					const printAddress = async () => {
+						const a = await user_photo;
+						console.log("aaaaaaaaaaaaaaa", a);
+						user_photo = a;
+					};
+					printAddress();
+							console.log("#############################" + user_photo + "!!!!!!!");
+
+
+					//text += "<span class=\"userimage\"><img src=\"http://www.api.crefto.studio/img/users/" + user_photo + "\"  alt=\"\"></span>";
+					//text += "<span class=\"userimage\"><img src=\"http://www.api.crefto.studio/img/users/user-626271a83dc0985f40652947-1650619152697.jpeg" + "\"  alt=\"\"></span>";
+					text += "<span class=\"userimage\"><img src=\"" + "\"  alt=\"\" id=\"user_foo\"></span>";
+					text += "<span class=\"usernamme\" id=\""+elem.user._id+"\">" + elem.user.name + "</span>";
+					text += "</div>";
+					text += "<div class=\"timeline-content\">";
+					text += "<p>" + elem.description + "</p>";
+					text += "<p class=\"m-t-20\">";
+					text += "<img src=\"http://www.api.crefto.studio/img/posts/\"" + elem.postImg + "alt=\"\">";
+					text += "</p>";
+					text += "</div>";
+					text += "<div class=\"timeline-footer\" id=\"" + elem._id + ">";
+					text += "<a href=\"javascript:;\" class=\"m-r-15 text-inverse-lighter\"><i class=\"fa fa-heart fa-fw fa-lg m-r-3\"></i>Fav </a>";
+					text += "<a href=\"javascript:;\" class=\"m-r-15 text-inverse-lighter\" onclick=\"like(this)\"><i class=\"fa fa-thumbs-up fa-fw fa-lg m-r-3\"></i> Like</a>";
+					text += "<a href=\"javascript:;\" class=\"m-r-15 text-inverse-lighter\"><i class=\"fa fa-comments fa-fw fa-lg m-r-3\"></i> Comment</a>";
+					text += "</div>";
+					text += "<div class=\"timeline-comment-box\">";
+					text += "<div class=\"user\"><img src=\"https://bootdey.com/img/Content/avatar/avatar7.png\"></div>";
+					text += "<div class=\"input\">";
+					text += "<form action=\"\">";
+					text += "<div class=\"input-group\">";
+					text += "<input type=\"text\" class=\"form-control rounded-corner\" placeholder=\"Write a comment...\">";
+					text += "<span class=\"input-group-btn p-l-10\">";
+					text += "<button class=\"btn btn-primary f-s-12 rounded-corner\" type=\"button\">Comment</button>";
+					text += "</span>";
+					text += "</div>";
+					text += "</form>";
+					text += "</div>";
+					text += "</div>";
+					text += "</div>";
+					
+					
+				});
+				document.getElementById("wall").innerHTML = text;
+			}
+		})
+}
+
+*/
+
