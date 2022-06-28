@@ -40,7 +40,7 @@ function post() {
 
 	let token = document.cookie;
 	token = token.split(";");
-	//console.log(token);
+	//console.log("token:",token);
 	var c;
 	for (let elem of token) {	
 		c = elem.split("=");
@@ -48,7 +48,7 @@ function post() {
 	//console.log(c);
 	var index;
 	for ( let i = 0; i < c.length; i++) {
-		if (c[i] == "AuthTokenCookie") {
+		if (c[i] == "AuthTokenCookie"||c[i] == " AuthTokenCookie") {
 			//console.log("mno", i);
 			index = i;
         }
@@ -65,7 +65,8 @@ function post() {
 	var myHeaders = new Headers();
 
 	myHeaders.append("Authorization", `Bearer ${c[index]}`);
-
+	console.log("222222222222222222");
+	console.log(c[index]);
 	var requestOptions = {
 		method: 'POST',
 		headers: myHeaders,

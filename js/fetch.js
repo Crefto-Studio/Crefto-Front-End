@@ -79,9 +79,10 @@ function loginapi() {
 		.then(json => {
 			console.log(json);
 			
-			document.cookie = "AuthTokenCookie=" + json.token + ";SameSite=Lax;path=/";
+			
 			
 			if (json.status == "success") {
+				    document.cookie = "AuthTokenCookie=" + json.token + ";SameSite=Lax;path=/";
 					document.getElementById('logalert').innerHTML = '<div class="alert alert-success" role="alert"> Hello ' + json.data.user.name + '. Welcome at our website.</div >';
 					document.getElementById('username').innerHTML = ' ' + json.data.user.name;
 					document.getElementById('logout_btn').style.display = 'block';
@@ -89,6 +90,7 @@ function loginapi() {
 			}
 			else {
 				document.getElementById('logalert').innerHTML = '<div class="alert alert-warning" role="alert">' + json.message + '</div >';
+				console.log("faiiiiiiiiiiil");
 			}
 		})
 }
@@ -102,7 +104,8 @@ function logout() {
 		.then(json => {
 			console.log(json)
 			if (json.status == "success") {
-				document.cookie = "AuthTokenCookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+				//document.cookie = "AuthTokenCookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+				document.cookie = "AuthTokenCookie=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
 				document.getElementById('username').innerHTML = ' Sign UP / Log IN';
 				document.getElementById('logout_btn').style.display = 'none';
 				//document.getElementById('log_btn').classList.add('rounded-pill');
