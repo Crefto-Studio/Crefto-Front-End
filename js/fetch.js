@@ -90,7 +90,6 @@ function loginapi() {
 			}
 			else {
 				document.getElementById('logalert').innerHTML = '<div class="alert alert-warning" role="alert">' + json.message + '</div >';
-				console.log("faiiiiiiiiiiil");
 			}
 		})
 }
@@ -188,14 +187,12 @@ window.onload = images();
 
 
 
-window.onload = function () {
-	
-	
+window.onload = function () {	
 	if (document.cookie.indexOf('AuthTokenCookie=') != -1) {
 		//var user_id = localStorage.getItem('user_id');
 		let token = document.cookie;
 		token = token.split("=");
-		//console.log("mmmmmm", token[1]);
+		console.log("mmmmmm", token[1]);
 		fetch("http://www.api.crefto.studio/api/v1/users/me", {
 			headers: {
 				Authorization: `Bearer ${token[1]}`
@@ -211,14 +208,93 @@ window.onload = function () {
 					document.getElementById('logout_btn').style.display = 'block';
 				}
 			})
-
-		
 	}
 	else {
-	
+		console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		document.getElementById('username').innerHTML = "Sign Up / Sign In";
 	}
 	
+}
+
+//send_feedback
+function rate_func(){
+	var five=document.getElementById('rating-5');
+	var four=document.getElementById('rating-4');
+	var three=document.getElementById('rating-3');
+	var two=document.getElementById('rating-2');
+	var one=document.getElementById('rating-1');
+
+	if (five.checked) {
+		rate_value = "like";
+	  }
+	else if(four.checked){
+		rate_value = "like";
+	}
+	else if(three.checked){
+		rate_value = "like";
+	}
+	else if (two.checked){
+		rate_value = "dislike";
+	  }
+	else if(one.checked){
+		rate_value = "dislike";
+	}
+	
+	let token = document.cookie;
+	token = token.split("=");
+
+	fetch("http://www.api.crefto.studio/api/v1/users/sats", {
+	   method: "POST",
+	   body: JSON.stringify({
+		   "type": rate_value,
+		   "comment": document.getElementById('rate_comment').value,
+	   }),
+	   headers: {
+		   "Content-type": "application/json; charset=UTF-8",	
+		   Authorization: `Bearer ${token[1]}`	
+	   }
+   })
+
+	   .then(res => {
+		   return res.json();
+	   })
+
+	   .then(json => {
+		   console.log(json);
+		   if(json.status!="success"){
+			document.getElementById('rate_comment').style.color="red";
+			document.getElementById('rate_comment').value=json.message+"!!";
+		   }
+		   
+	   })
+}
+
+window.onload=get_rate();
+//get_feedback
+function get_rate(){
+	fetch("http://www.api.crefto.studio/api/v1/users/sats")
+
+	.then(res=>{
+		return res.json();
+	})
+
+	.then(json=>{
+		var text="";
+		console.log(json);
+		document.getElementById('sats_users').innerHTML=json.satisfied;
+		for(let i=0;i<3; i++){
+			text+='<div class="testimonial-item bg-light rounded my-4">';
+			text+='<p class="fs-5"><i class="fa fa-quote-left fa-4x text-primary mt-n4 me-3"></i>'+json.data.Satisfs[i].comment+'</p>';
+			text+='<div class="d-flex align-items-center">';
+			text+='<img class="img-fluid flex-shrink-0 rounded-circle" src="img/testimonial-1.jpg" style="width: 65px; height: 65px;">';
+			text+='<div class="ps-4">';
+			text+='<h5 class="mb-1">'+json.data.Satisfs[i].user.name+'</h5>';
+			text+='</div>';
+			text+='</div>';
+			text+='</div>';
+		}
+		document.getElementById('all_sats').innerHTML=text;
+	})
 }
 
 

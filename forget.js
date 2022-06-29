@@ -2,15 +2,30 @@ const forget = document.getElementById('forget');
 const appear = document.getElementById('appear');
 
 forget.addEventListener("click", function forget_func() {
-    document.getElementById("container").style.display = "none";
+    document.getElementById("container").style.display= "none";
+
+    document.getElementById('appear').style.display="block";
+    document.getElementById('p').style.display="block";
+    document.getElementById('m').style.display="block";
+    document.getElementById('li').style.display="block";
+    document.getElementById('mm').style.display="block";
+    document.getElementById('tt').style.display="block";
+    document.getElementById('aa').style.display="block";
+    document.getElementById('btnn').style.display="block";
+    document.getElementById('l').style.display="block";
+    document.getElementById('pi').style.display="block";
+    document.getElementById('mi').style.display="block";
+    document.getElementById('back_button').style.display="block";
+    document.getElementById('lock_img').style.display="block";
+
     //  container.style.opacity = "0";
     appear.style.opacity = "1";
     document.getElementById("appear").innerHTML = "Reset Your Password";
     document.getElementById("p").innerHTML = '<br>' + "Enter your email address and we will send you a code to reset your password";
     document.getElementById("m").innerHTML = '<br><input type="text"placeholder="Email address" id="mailforget"/>';
-    document.getElementById("l").innerHTML = '<br><button>Send me';
+    document.getElementById("l").innerHTML = '<br><button class="btn btn-secondary py-sm-3 px-sm-5 rounded-pill me-3" id="send_btn">Send me</button>';
 
-    document.getElementById("l").addEventListener("click", () => {
+    document.getElementById("send_btn").addEventListener("click", () => {
 
         //api
         fetch("http://www.api.crefto.studio/api/v1/users/forgotPassword", {
@@ -118,5 +133,23 @@ function eye_func(id) {
     }
 
 
+}
+
+
+function back_func(){
+    document.getElementById('appear').style.display="none";
+    document.getElementById('p').style.display="none";
+    document.getElementById('m').style.display="none";
+    document.getElementById('li').style.display="none";
+    document.getElementById('mm').style.display="none";
+    document.getElementById('tt').style.display="none";
+    document.getElementById('aa').style.display="none";
+    document.getElementById('btnn').style.display="none";
+    document.getElementById('l').style.display="none";
+    document.getElementById('pi').style.display="none";
+    document.getElementById('mi').style.display="none";
+    document.getElementById('back_button').style.display="none";
+    document.getElementById('lock_img').style.display="none";
+    document.getElementById("container").style.display = "block";
 }
 
