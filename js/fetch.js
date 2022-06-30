@@ -109,9 +109,6 @@ function logout() {
 				document.getElementById('logout_btn').style.display = 'none';
 				//document.getElementById('log_btn').classList.add('rounded-pill');
 				logged = 0;
-				//localStorage.removeItem('user_id')
-				//localStorage.setItem("user_id", null);
-				
 			}
 			
 			})
@@ -144,9 +141,9 @@ window.onclick = function (event) {
 	}
 }
 
-function close() {
-	document.getElementById("myCollapse").style.display == "none";
-}
+// function close() {
+// 	document.getElementById("myCollapse").style.display == "none";
+// }
 
 
 
@@ -187,7 +184,8 @@ window.onload = images();
 
 
 
-window.onload = function () {	
+window.onload =toggle_text();
+ function toggle_text() {	
 	if (document.cookie.indexOf('AuthTokenCookie=') != -1) {
 		//var user_id = localStorage.getItem('user_id');
 		let token = document.cookie;
@@ -269,6 +267,35 @@ function rate_func(){
 	   })
 }
 
+
+
+
+//slides
+let slideIndex = 1;
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+ // let dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+//   for (i = 0; i < dots.length; i++) {
+//     dots[i].className = dots[i].className.replace(" active", "");
+//   }
+  slides[slideIndex-1].style.display = "block";  
+ // dots[slideIndex-1].className += " active";
+}
 window.onload=get_rate();
 //get_feedback
 function get_rate(){
@@ -282,7 +309,8 @@ function get_rate(){
 		var text="";
 		console.log(json);
 		document.getElementById('sats_users').innerHTML=json.satisfied;
-		for(let i=0;i<3; i++){
+		for(let i=0;i<json.satisfied; i++){
+			text+='<div class="mySlides">';
 			text+='<div class="testimonial-item bg-light rounded my-4">';
 			text+='<p class="fs-5"><i class="fa fa-quote-left fa-4x text-primary mt-n4 me-3"></i>'+json.data.Satisfs[i].comment+'</p>';
 			text+='<div class="d-flex align-items-center">';
@@ -292,10 +320,15 @@ function get_rate(){
 			text+='</div>';
 			text+='</div>';
 			text+='</div>';
+			text+='</div>'
 		}
-		document.getElementById('all_sats').innerHTML=text;
+		text+='<a class="prev" onclick="plusSlides(-1)">❮</a>';
+		text+='<a class="next" onclick="plusSlides(1)">❯</a>';
+		document.getElementById('all_sats').innerHTML+=text;
+		showSlides(slideIndex);
 	})
 }
+
 
 
 
