@@ -284,50 +284,79 @@ function currentSlide(n) {
 function showSlides(n) {
   let i;
   let slides = document.getElementsByClassName("mySlides");
- // let dots = document.getElementsByClassName("dot");
   if (n > slides.length) {slideIndex = 1}    
   if (n < 1) {slideIndex = slides.length}
   for (i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";  
   }
-//   for (i = 0; i < dots.length; i++) {
-//     dots[i].className = dots[i].className.replace(" active", "");
-//   }
   slides[slideIndex-1].style.display = "block";  
- // dots[slideIndex-1].className += " active";
 }
 window.onload=get_rate();
 //get_feedback
+var count=0;
+var  mytext="";
+var flag;
 function get_rate(){
+	var user_comment;
+	var user_name;
+	var maxx;
+	
 	fetch("http://www.api.crefto.studio/api/v1/users/sats")
-
 	.then(res=>{
 		return res.json();
 	})
-
 	.then(json=>{
-		var text="";
 		console.log(json);
+
+		user_comment=json.data.Satisfs[count].comment;
+		user_name=json.data.Satisfs[count].user.name;
+		maxx=json.satisfied;
 		document.getElementById('sats_users').innerHTML=json.satisfied;
-		for(let i=0;i<json.satisfied; i++){
-			text+='<div class="mySlides">';
-			text+='<div class="testimonial-item bg-light rounded my-4">';
-			text+='<p class="fs-5"><i class="fa fa-quote-left fa-4x text-primary mt-n4 me-3"></i>'+json.data.Satisfs[i].comment+'</p>';
-			text+='<div class="d-flex align-items-center">';
-			text+='<img class="img-fluid flex-shrink-0 rounded-circle" src="img/testimonial-1.jpg" style="width: 65px; height: 65px;">';
-			text+='<div class="ps-4">';
-			text+='<h5 class="mb-1">'+json.data.Satisfs[i].user.name+'</h5>';
-			text+='</div>';
-			text+='</div>';
-			text+='</div>';
-			text+='</div>'
-		}
-		text+='<a class="prev" onclick="plusSlides(-1)">❮</a>';
-		text+='<a class="next" onclick="plusSlides(1)">❯</a>';
-		document.getElementById('all_sats').innerHTML+=text;
-		showSlides(slideIndex);
+		return fetch("http://www.api.crefto.studio/api/v1/users/" + json.data.Satisfs[count].user._id);
+	}).then(response => response.json())
+	.then(json => {
+		console.log(json);
+	     	mytext+='<div class="mySlides fadee">';
+			mytext+='<div class="testimonial-item bg-light rounded my-4">';
+			mytext+='<p class="fs-5"><i class="fa fa-quote-left fa-4x text-primary mt-n4 me-3"></i>'+user_comment+'</p>';
+			mytext+='<div class="d-flex align-items-center">';
+			mytext+='<img class="img-fluid flex-shrink-0 rounded-circle" src="https://crefto.s3.eu-central-1.amazonaws.com/users/'+json.data.user.photo+ '" style="width: 65px; height: 65px;">';
+			mytext+='<div class="ps-4">';
+			mytext+='<h5 class="mb-1">'+user_name+'</h5>';
+			mytext+='</div>';
+			mytext+='</div>';
+			mytext+='</div>';
+			mytext+='</div>';
+			count++;
+			if (count < maxx) {
+				get_rate();
+			}
+			else {
+				mytext+='<div class="arrows">';
+				mytext+='<a class="prev" onclick="plusSlides(-1)">❮</a>';
+				mytext+='<a class="next" onclick="plusSlides(1)">❯</a>';
+				mytext+='</div>';
+				document.getElementById('all_sats').innerHTML+=mytext;
+				showSlides(slideIndex);
+				console.log("finaaalo");
+				flag=1;
+            }
+
 	})
 }
+
+		
+		
+		
+
+
+
+var intervalId = window.setInterval(function(){
+	if(flag==1){
+		plusSlides(1);
+	}
+}, 5000);
+
 
 
 

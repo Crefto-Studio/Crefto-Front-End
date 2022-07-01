@@ -47,24 +47,25 @@ forget.addEventListener("click", function forget_func() {
                 console.log(json)
                 if (json.status == "success") {
 
-                    swal("Code Sent Successfully ", {
+                    swal("Check Your Email Please", {
                         icon: "success",
-                    }).then(function () {
-                            document.getElementById("l").style.display = "none";
-                            document.getElementById("p").style.display = "none";
-                            document.getElementById("m").style.display = "none";
-                            document.getElementById("li").style.display = "none";
-                            document.getElementById("mm").innerHTML = "Change your password";
-                            document.getElementById("tt").innerHTML = '<i class="fa fa-key icon"></i><input class="input-field" id="password-1" type="password" placeholder="Type your new password" name="password">';
-                            document.getElementById("aa").innerHTML = '<i class="fa fa-key icon"></i><input class="input-field" id="password-2" type="password" placeholder="Re-type your new password" name="password">';
-                            document.getElementById("btnn").innerHTML = '<br><button id="done">Done</button>';
-                            document.getElementById("tt").style.display = "flex";
-                           document.getElementById("aa").style.display = "flex";
-                           document.getElementById("done").addEventListener("click", () => {
-                            window.location.href = "index.html";
-                           })
+                     }).then(back_func());
+                     //.then(function () {
+                    //         document.getElementById("l").style.display = "none";
+                    //         document.getElementById("p").style.display = "none";
+                    //         document.getElementById("m").style.display = "none";
+                    //         document.getElementById("li").style.display = "none";
+                    //         document.getElementById("mm").innerHTML = "Change your password";
+                    //         document.getElementById("tt").innerHTML = '<i class="fa fa-key icon"></i><input class="input-field" id="password-1" type="password" placeholder="Type your new password" name="password">';
+                    //         document.getElementById("aa").innerHTML = '<i class="fa fa-key icon"></i><input class="input-field" id="password-2" type="password" placeholder="Re-type your new password" name="password">';
+                    //         document.getElementById("btnn").innerHTML = '<br><button id="done">Done</button>';
+                    //         document.getElementById("tt").style.display = "flex";
+                    //        document.getElementById("aa").style.display = "flex";
+                    //        document.getElementById("done").addEventListener("click", () => {
+                    //         window.location.href = "index.html";
+                    //        })
   
-                    });
+                    // });
 
                 }
 
@@ -135,7 +136,7 @@ function eye_func(id) {
 
 }
 
-
+//go back
 function back_func(){
     document.getElementById('appear').style.display="none";
     document.getElementById('p').style.display="none";

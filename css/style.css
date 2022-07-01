@@ -749,7 +749,7 @@ video {
     margin-left:auto;
     margin-right:auto;
     margin-bottom:80px;
-    width:70%;
+    width:60%;
 }
 
 
@@ -1410,7 +1410,15 @@ margin-top: -2rem;
   }
 
  /* test */
-/* .mySlides {display: none} */
+ .mySlides .testimonial-item {
+    width: 80%;
+    height: 12rem;
+    align-items: center;
+    align-content: center;
+    margin: auto;
+   
+
+}
 /* img {vertical-align: middle;} */
 
 /* Slideshow container */
@@ -1420,9 +1428,14 @@ margin-top: -2rem;
   margin: auto;
 }
 
+.arrows{
+    display: flex;
+    justify-content: center;
+}
+
 /* Next & previous buttons */
 .prev, .next {
-  cursor: pointer;
+  /* cursor: pointer;
   position: absolute;
   top: 50%;
   width: auto;
@@ -1433,18 +1446,32 @@ margin-top: -2rem;
   font-size: 18px;
   transition: 0.6s ease;
   border-radius: 0 3px 3px 0;
-  user-select: none;
+  user-select: none; */
+  margin: 0 12px;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  background: var(--light);
+  border-radius: 60px;
+  font-size: 22px;
+  transition: .5s;
 }
 
 /* Position the "next button" to the right */
-.next {
+/* .next {
   right: 0;
   border-radius: 3px 0 0 3px;
-}
+} */
 
 /* On hover, add a black background color with a little bit see-through */
 .prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
+  /* background-color: rgba(0,0,0,0.8); */
+  color: #FFFFFF;
+    background: var(--primary);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .5);
 }
 
 /* Caption text */
@@ -1468,12 +1495,9 @@ margin-top: -2rem;
 }
 
 
-.active, .dot:hover {
-  background-color: #717171;
-}
 
 /* Fading animation */
-.fade {
+.fadee {
   animation-name: fade;
   animation-duration: 1.5s;
 }
