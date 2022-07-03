@@ -157,7 +157,7 @@ img:hover {
             </div>
 
 
-			<div class="fixed">
+			<!-- <div class="fixed">
 				<div id="clearCanvas" class="drawTool">
 					<i class="far fa-trash-alt fa-2x"></i>
 					<span class="tooltiptext">Trash</span>
@@ -186,10 +186,7 @@ img:hover {
 					<i class="fas fa-eraser fa-2x"></i>
 					<span class="tooltiptext">Eraser</span>
 				</div>
-				<div id="filldrip" class="drawTool">
-					<i class="fa fa-fill-drip fa-2x"></i>
-					<span class="tooltiptext">Fill</span>
-				</div>
+				
 				<div id="button" class="drawTool" onclick="myfunction()">
 					<i class="fas fa-palette fa-2x"></i>
 					<span class="tooltiptext">Colors</span>
@@ -199,8 +196,50 @@ img:hover {
 				</div>
 
 				<div class="clear"></div>
-			</div>
+			</div> -->
+
+
+			
+
 		</div>
+		<nav>
+			<ul>
+			  <li><a href="#" class="tool_item"><div id="brush2" class="drawTool">
+				<i class="fa-solid fa-wand-magic-sparkles"></i>
+				<span>&nbsp;Magic Pencil</span>
+			</div></a></li>
+			  <li><a href="#" class="tool_item"><div id="brush" class="drawTool">
+				<i class="fas fa-pencil-alt"></i>
+				<span>&nbsp;Pencil</span>
+			</div></a></li>
+			<li><a href="#" class="tool_item"><div id="eraser" class="drawTool">
+				<i class="fas fa-eraser"></i>
+				<span>&nbsp;Eraser</span>
+			</div></a></li>
+			  <li><a href="#"><div id="undo" class="drawTool">
+				<i class="fas fa-undo"></i>
+				<span>&nbsp;Undo</span>
+			</div></a></li>
+			  <li><a href="#"><div id="restore" class="drawTool">
+				<i class="fas fa-redo"></i>
+				<span>&nbsp;Redo</span>
+			</div></a></li>
+			<li><a href="#"><a href="save" id="save" class="drawTool">
+				<i class="fas fa-save"></i>
+				<span>&nbsp;Save</span>
+			</a></a></li>
+			<li><a href="#" class="tool_item"><div id="button" class="drawTool" onclick="myfunction()">
+				<i class="fas fa-palette"></i>
+				<span>&nbsp;Colors</span>
+			</div>
+			<div class="tooloption" id="colors">
+			</div></a></li> 
+			<li><a href="#"><div id="clearCanvas" class="drawTool">
+				<i class="far fa-trash-alt"></i>
+				<span>&nbsp;Trash</span>
+			</div></a></li>
+			</ul>
+		  </nav>
 
 		
 		<div id="canvasWrapper">

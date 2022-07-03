@@ -198,6 +198,7 @@
         }
     </style>
     <script type="text/babel">
+        // this.sketchpad.color = 'none';
         const colorMap = [
             { color: "#384f83", id: 154, label: "sea" },
             { color: "#efefef", id: 105, label: "cloud", labelColor: "black" },
@@ -237,7 +238,8 @@
                 this.state = {
                     image: null,
                     strokeWidth: 18,
-                    url: this.canvasRef
+                    url: this.canvasRef,
+                    draw_color : 'None'
                 };
             }
 
@@ -267,6 +269,9 @@
 
             setSketchColor = (color) => {
                 this.sketchpad.color = color;
+                this.setState({
+                    draw_color: color,
+                });
             }
 
             setSketchStrokeWidth = (width) => {
@@ -336,23 +341,26 @@
                                
                             </div>
                             <div  id="stroke" className="row">
-                                <div className="label">Stroke Thickness: {this.state.strokeWidth}px</div>
+                                <div id = "stroke_value" className="label">Stroke Thickness: {this.state.strokeWidth}px</div>
                                 <div className="field">
-                                    <input type="range" min="1" max="80" 
+                                    <input type="range" min="1" max="80" id="stroke_width"
                                         value={this.state.strokeWidth}
-                                        onChange={(e) => this.setSketchStrokeWidth(parseInt(e.target.value))} />
+                                        onChange={(e) => {
+                                            this.setSketchStrokeWidth(parseInt(e.target.value));
+                                        }} />
                                 </div>
                             </div>
                             <div className="row color-panel">
-                                <div className="label">Color Palette:</div>
+                                <div className="label">Color Palette: {this.state.draw_color}</div>
                                 <div className="scroll">
                                     {colorMap.map(c => 
-                                        <div key={c.color} className="color" style={{
+                                        <div key={c.color} id={c.color==this.state.draw_color ? "colorValue" : ""} className="color" style={{
                                             'background': c.color,
                                             'color': c.labelColor || 'white',
                                             'textShadow': c.labelColor ? '' : '0 0 1px black' 
                                         }} onClick={() => this.setSketchColor(c.color)}>{c.label}</div>
-                                    )}
+                                    )
+                                }
                                 </div>
                             </div>
                         </div>

@@ -1,5 +1,5 @@
-var canvas, canvas2,canvas_normal, dataURL, context, context2,context_normal, dragging, x, y, brushColor, bgFillColor,
-    radius = 10, cPushArray = new Array(), cStep = -1,
+var canvas, canvas2,canvas_normal, dataURL, context, context2,context_normal, dragging, x, y, brushColor,
+    radius = 10, cPushArray = new Array(),cPushArray2 = new Array(),cPushArray3 = new Array(), cStep = -1,
     mouseup = false, mousedown = false, eraserOn = false, brushOn = false,
     bgFillOn = false,brushOn2=false;
 
@@ -40,7 +40,7 @@ function init() {
     var brushButton = document.getElementById('brush');
     brushOn = true;
     brushButton.className += ' set';
-
+    brushButton.parentElement.style.backgroundColor="#B87A00";
     // setBrush();
     addSwatches();
     storeSnapshot();
@@ -51,8 +51,12 @@ function storeSnapshot() {
     cStep++;
     if (cStep < cPushArray.length) {
         cPushArray.length = cStep;
+        cPushArray2.length = cStep;
+        cPushArray3.length = cStep;
     }
     cPushArray.push(canvas.toDataURL());
+    cPushArray2.push(canvas2.toDataURL());
+    cPushArray3.push(canvas_normal.toDataURL());
 }
 
 //Puts a circle down wherever the user clicks
@@ -104,10 +108,10 @@ var putPoint = (e) => {
 var engage = (e) => {
     canvas.addEventListener('mousemove', putPoint);
 
-    if (bgFillOn) {
-        context.fillStyle = bgFillColor;
-        context.fillRect(0, 0, canvas.width, canvas.height);
-    }
+    // if (bgFillOn) {
+    //     context.fillStyle = bgFillColor;
+    //     context.fillRect(0, 0, canvas.width, canvas.height);
+    // }
     if(eraserOn ||brushOn){
         dragging = true;
         putPoint(e); 
@@ -134,7 +138,6 @@ var engage = (e) => {
 
 var disengage = () => {
     dragging = false;
-
     mouseup = true;
     mousedown = false;
     context.beginPath();
@@ -145,19 +148,6 @@ var disengage = () => {
     }
     storeSnapshot();
 }
-
-/*document.documentElement.addEventListener('mouseout', function (e) {
-    var str = "pressed Mouse leaving ";
-    console.log(str);
-    if (!mousedown && e.target == canvas) {
-        console.log('Mouse is up now');
-    } 
-});
-
-document.documentElement.addEventListener('mouseup', function (e) {
-    mousedown = false;
-    console.log('mouse is up');
-});*/
 
 
 canvas.addEventListener('mousedown', engage);
@@ -262,24 +252,6 @@ function box() {
 }
 
 
-
-
-
-
-
-// context.clearRect(bounds.x, bounds.y, bounds.w, bounds.h);
-// context.restore();
-//cUndo();
-
-//canvas.addEventListener('mousemove', putPoint);
-
-/* When mouse leaves the canvas and mouse lets up, disengage the mouse
-
-*/
-
-/* Disengage on mouseleave && mouseup */
-//canvas.addEventListener('mouseleave', console.log("mouse leave"));
-
 /*Tool Bar Script*/
 var minRad = 0.5,
     maxRad = 100,
@@ -328,7 +300,7 @@ function addSwatches() {
 function setColor(color) {
     context.fillStyle = color;
     context.strokeStyle = color;
-    bgFillColor = color;
+//    bgFillColor = color;
     brushColor = color;
 
     var active = document.getElementsByClassName('active')[0];
@@ -343,7 +315,6 @@ function setSwatch(e) {
         var swatch = e.target;
         setColor(swatch.style.backgroundColor);
         swatch.className += ' active';
-
         // Refactor this - remove class 'set' from all elements with drawTool class.
         var eraser = document.getElementById('eraser');
         eraser.classList.remove('set');
@@ -374,7 +345,7 @@ brushButton.addEventListener('click', setBrush);
 
 function setBrush() {
     eraserOn = false;
-    bgFillOn = false;
+  //  bgFillOn = false;
     brushOn = true;
     isDrawing = false;
     brushOn2 = false;
@@ -385,6 +356,9 @@ function setBrush() {
 
     if (!brushButton.classList.contains('set')) {
         brushButton.className += ' set';
+        brushButton2.parentElement.style.backgroundColor="";
+        eraser.parentElement.style.backgroundColor="";
+        brushButton.parentElement.style.backgroundColor="#B87A00";
         /*var active = document.getElementsByClassName('active')[0];
         if (active) {
             active.className = 'swatch';
@@ -395,9 +369,10 @@ function setBrush() {
 var brushButton2 = document.getElementById('brush2');
 brushButton2.addEventListener('click', setBrush2);
 
+
 function setBrush2() {
     eraserOn = false;
-    bgFillOn = false;
+   // bgFillOn = false;
     brushOn = false;
     isDrawing = false;
     brushOn2 = true;
@@ -407,6 +382,9 @@ function setBrush2() {
 
     if (!brushButton2.classList.contains('set')) {
         brushButton2.className += ' set';
+        brushButton.parentElement.style.backgroundColor="";
+        eraser.parentElement.style.backgroundColor="";
+        brushButton2.parentElement.style.backgroundColor="#1C699C";
         
         /*var active = document.getElementsByClassName('active')[0];
         if (active) {
@@ -415,50 +393,27 @@ function setBrush2() {
     }
 }
 
-/* Background Fill */
-var fillButton = document.getElementById('filldrip');
-fillButton.addEventListener('click', setBackgroundFill);
+// /* Background Fill */
+// var fillButton = document.getElementById('filldrip');
+// fillButton.addEventListener('click', setBackgroundFill);
 
-function setBackgroundFill(e) {
-    eraserOn = false;
-    bgFillOn = true;
-    isDrawing = false;
-    deselectTool();
+// function setBackgroundFill(e) {
+//     eraserOn = false;
+//     bgFillOn = true;
+//     isDrawing = false;
+//     deselectTool();
 
-    //var bgFill = document.getElementById('filldrip');
-    if (!fillButton.classList.contains('set')) {
-        fillButton.className += ' set';
-        var active = document.getElementsByClassName('active')[0];
-        if (active) {
-            //  active.className = 'swatch';
-        }
+//     //var bgFill = document.getElementById('filldrip');
+//     if (!fillButton.classList.contains('set')) {
+//         fillButton.className += ' set';
+//         var active = document.getElementsByClassName('active')[0];
+//         if (active) {
+//             //  active.className = 'swatch';
+//         }
 
-    }
-    // alert('Fill the background');
-}
-//select
-/*
-var selectButton = document.getElementById('selectCanvas');
-selectButton.addEventListener('click', setselect);
-
-function setselect(e) {
-    eraserOn = false;
-    bgFillOn = false;
-    brushOn = false;
-    isDrawing = true;
-    deselectTool()
-    clicked = true;
-
-    var sel = document.getElementById('selectCanvas');
-    if (!sel.classList.contains('set')) {
-        sel.className += ' set';
-        if (clicked == true) {
-            select();
-        }
-        
-    }
-}
-*/
+//     }
+//     // alert('Fill the background');
+// }
 
 /* Erase */
 var eraserButton = document.getElementById('eraser');
@@ -466,15 +421,17 @@ eraserButton.addEventListener('click', setEraser);
 
 function setEraser(e) {
     eraserOn = true;
-    bgFillOn = false;
+   // bgFillOn = false;
     brushOn = false;
     isDrawing = false;
     deselectTool()
 
     var eraser = document.getElementById('eraser');
     if (!eraser.classList.contains('set')) {
-
         eraser.className += ' set';
+        brushButton.parentElement.style.backgroundColor="";
+        brushButton2.parentElement.style.backgroundColor="";
+        eraser.parentElement.style.backgroundColor="#FF311F";
         var active = document.getElementsByClassName('active')[1];
         if (active) {
             active.className = 'swatch';
@@ -488,11 +445,15 @@ var clearButton = document.getElementById('clearCanvas');
 clearButton.addEventListener('click', clearCanvas);
 
 function clearCanvas(e) {
+    brushButton.parentElement.style.backgroundColor="";
+    brushButton2.parentElement.style.backgroundColor="";
+    eraser.parentElement.style.backgroundColor="";
     storeSnapshot();
     context.clearRect(0, 0, canvas.width, canvas.height);
     context2.clearRect(0, 0, canvas2.width, canvas2.height);
     context_normal.clearRect(0, 0, canvas_normal.width, canvas_normal.height);
-
+    restore_colors();
+    
 }
 
 /* Undo */
@@ -500,13 +461,28 @@ var undoButton = document.getElementById('undo')
 undoButton.addEventListener('click', cUndo);
 
 function cUndo() {
+    brushButton.parentElement.style.backgroundColor="";
+    brushButton2.parentElement.style.backgroundColor="";
+    eraser.parentElement.style.backgroundColor="";
     var canvasPic = new Image();
+    var canvasPic2 = new Image();
+    var canvasPic3 = new Image();
     if (cStep > 0) {
         cStep--;
         canvasPic.src = cPushArray[cStep];
+        canvasPic2.src = cPushArray2[cStep];
+        canvasPic3.src = cPushArray3[cStep];
         canvasPic.onload = function () {
             context.clearRect(0, 0, canvas.width, canvas.height);
             context.drawImage(canvasPic, 0, 0);
+        }
+        canvasPic2.onload = function () {
+            context2.clearRect(0, 0, canvas2.width, canvas2.height);
+            context2.drawImage(canvasPic2, 0, 0);
+        }
+        canvasPic3.onload = function () {
+            context_normal.clearRect(0, 0, canvas_normal.width, canvas_normal.height);
+            context_normal.drawImage(canvasPic3, 0, 0);
         }
 
     } else {
@@ -514,7 +490,16 @@ function cUndo() {
             context.clearRect(0, 0, canvas.width, canvas.height);
             context.drawImage(canvasPic.src, 0, 0);
         }
+        canvasPic2.onload = function () {
+            context2.clearRect(0, 0, canvas2.width, canvas2.height);
+            context2.drawImage(canvasPic2.src, 0, 0);
+        }
+        canvasPic3.onload = function () {
+            context_normal.clearRect(0, 0, canvas_normal.width, canvas_normal.height);
+            context_normal.drawImage(canvasPic3.src, 0, 0);
+        }
     }
+    restore_colors();
 }
 
 /* Redo */
@@ -522,15 +507,31 @@ var restoreButton = document.getElementById('restore');
 restoreButton.addEventListener('click', restoreCanvas);
 
 function restoreCanvas(e) {
+    brushButton.parentElement.style.backgroundColor="";
+    brushButton2.parentElement.style.backgroundColor="";
+    eraser.parentElement.style.backgroundColor="";
     if (cStep >= 0 && (cStep < cPushArray.length - 1)) {
         cStep++;
         var canvasPic = new Image();
+        var canvasPic2 = new Image();
+        var canvasPic3 = new Image();
         canvasPic.src = cPushArray[cStep];
+        canvasPic2.src = cPushArray2[cStep];
+        canvasPic3.src = cPushArray3[cStep];
         canvasPic.onload = function () {
             context.clearRect(0, 0, canvas.width, canvas.height);
             context.drawImage(canvasPic, 0, 0);
         }
+        canvasPic2.onload = function () {
+            context2.clearRect(0, 0, canvas2.width, canvas2.height);
+            context2.drawImage(canvasPic2, 0, 0);
+        }
+        canvasPic3.onload = function () {
+            context_normal.clearRect(0, 0, canvas_normal.width, canvas_normal.height);
+            context_normal.drawImage(canvasPic3, 0, 0);
+        }
     }
+    restore_colors();
 }
 
 document.onkeydown = KeyPress;
@@ -555,6 +556,7 @@ function downloadCanvas(link, canvasId, context_normal, filename) {
  */
 document.getElementById('save').addEventListener('click', function () {
     downloadCanvas(this, 'myCanvas_normal', context_normal, 'Drawing.png');
+    restore_colors();
 
 }, false);
 
@@ -592,11 +594,12 @@ img.addEventListener('click', func);
 
 //put image on click
 function func(e) {
-    storeSnapshot();
+    
     var bounds = contextBoundingBox(context);
     context.clearRect(bounds.x, bounds.y, (bounds.w) + 1, (bounds.h) + 1);
     // context2.drawImage(img, bounds.x, bounds.y, bounds.w, bounds.h);
     context2.fillRect(bounds.x, bounds.y, bounds.w, bounds.h);
+    storeSnapshot();
 
 }
 
@@ -617,12 +620,23 @@ function contextBoundingBox(context, alphaThreshold) {
                 if (y < minY) minY = y;
 
             }
-
         }
-
     }
-
     return { x: minX, y: minY, maxX: maxX, maxY: maxY, w: maxX - minX, h: maxY - minY };
+}
+
+function restore_colors(){
+    setTimeout(function(){
+        if(brushButton.classList.contains('set')){
+            brushButton.parentElement.style.backgroundColor="#B87A00";
+         }
+         if(brushButton2.classList.contains('set')){
+            brushButton2.parentElement.style.backgroundColor="#1C699C";
+         }
+         if(eraser.classList.contains('set')){
+            eraser.parentElement.style.backgroundColor="#FF311F";
+         }
+    },700);
 }
 
 
