@@ -1,4 +1,4 @@
-var canvas, canvas2,canvas_normal, dataURL, context, context2,context_normal, dragging, x, y, brushColor,
+var canvas, canvas2,canvas_normal,canvas_post, dataURL, context, context2,context_normal, dragging, x, y, brushColor,
     radius = 10, cPushArray = new Array(),cPushArray2 = new Array(),cPushArray3 = new Array(), cStep = -1,
     mouseup = false, mousedown = false, eraserOn = false, brushOn = false,
     bgFillOn = false,brushOn2=false;
@@ -44,6 +44,7 @@ function init() {
     // setBrush();
     addSwatches();
     storeSnapshot();
+
 }
 
 //store
@@ -544,7 +545,7 @@ document.onkeydown = KeyPress;
 function downloadCanvas(link, canvasId, context_normal, filename) {
     context_normal.drawImage(canvas, 0, 0);
     context_normal.drawImage(canvas2, 0, 0);
-    
+
     link.href = document.getElementById(canvasId).toDataURL();
     console.log(link.href);
     link.download = filename;
@@ -555,10 +556,124 @@ function downloadCanvas(link, canvasId, context_normal, filename) {
  * parameter (=the link element), ID of the canvas and a filename.
  */
 document.getElementById('save').addEventListener('click', function () {
+    brushButton.parentElement.style.backgroundColor="";
+    brushButton2.parentElement.style.backgroundColor="";
+    eraser.parentElement.style.backgroundColor="";
     downloadCanvas(this, 'myCanvas_normal', context_normal, 'Drawing.png');
     restore_colors();
 
 }, false);
+
+//post
+function display_pop(){
+    document.getElementById('wrapper').style.display="block";
+}
+function lock_pop(){
+    document.getElementById('wrapper').style.display="none";
+}
+
+
+
+//for post btn
+function post_submit(e){
+    e.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'
+    setTimeout(function () {
+      var title = document.querySelector('#title').value ;
+      var posted = (title) ? ' posted' : 'Posted'
+      e.innerHTML = 'Post';
+      toaster('<i>'+title+'</i>'+posted)
+  }, 1000)
+  }
+
+//for del btn
+function trash(){
+  document.querySelector('#title').value = '';
+//   quill.setText('');
+//   toaster('Trashed');
+}
+
+
+//convert inside canvas
+function dataURLtoFile(dataurl, filename) {
+     // convert base64 to raw binary data held in a string
+    // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
+    var byteString = atob(dataurl.split(',')[1]);
+
+    // separate out the mime component
+    var mimeString = dataurl.split(',')[0].split(':')[1].split(';')[0];
+
+    // write the bytes of the string to an ArrayBuffer
+    var ab = new ArrayBuffer(byteString.length);
+    var ia = new Uint8Array(ab);
+    for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+
+    //New Code
+    return new Blob([ab], {type: mimeString});
+}
+
+
+
+
+
+
+
+function post_prof(){
+
+  context_normal.globalCompositeOperation="destination-over";
+    context_normal.beginPath();
+	context_normal.rect(0, 0, canvas_normal.width, canvas_normal.height);
+	context_normal.fillStyle = "#ffffff";
+	context_normal.fill();
+
+    context_normal.globalCompositeOperation="source-over";
+
+    context_normal.drawImage(canvas, 0, 0);
+    context_normal.drawImage(canvas2, 0, 0);
+
+    url = document.getElementById('myCanvas_normal').toDataURL();
+
+    console.log(url);
+
+    var fileData = dataURLtoFile(url, "imageName.png");
+    console.log("Here is JavaScript File Object", fileData);
+
+    let token = document.cookie;
+    console.log(token);
+	token = token.split("=");
+
+    var formdata = new FormData();
+	formdata.append('name', document.getElementById('title').value);
+	formdata.append('type', "Auto Draw");
+	formdata.append('postImg', fileData);
+	formdata.append('description', document.getElementById('desc').value);
+
+	var myHeaders = new Headers();
+
+	myHeaders.append("Authorization", `Bearer ${token[1]}`);
+	console.log("222222222222222222");
+	console.log(token[1]);
+	var requestOptions = {
+		method: 'POST',
+		headers: myHeaders,
+		body: formdata,
+		redirect: 'follow'
+	};
+
+    fetch("http://www.api.crefto.studio/api/v1/posts", requestOptions)
+
+		.then(response => response.json())
+
+		.then(json => {
+			console.log(json);
+			alert("mabroook");
+		})
+
+		.catch((err) => {
+			console.error(err);
+		})
+}
 
 
 /* Undo/Redo on KeyPress */
