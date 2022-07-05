@@ -1,50 +1,25 @@
 let c =false;
+let paint_window;
+var r=[];
 function openCvReady() {
       let Draw_event = false;
       let toggle =false;
       let mode = null;
       let color = "green";
-    //   let strokeID = document.getElementById("stroke_value");
-    //   let stroke_str = strokeID.innerHTML;
-    //   let stroke_value = 5; //By default
-    //   if(stroke_str[19] == 'p')
-    //     stroke_value = parseInt(stroke_str[18]);
-    //   else 
-    //     stroke_value = parseInt(stroke_str[18]+stroke_str[19]);
+      let delay_permission = true;
+
       //hide sketch
       document.querySelector("#sketchpad").style.display="none";
       document.querySelector("#rendered").style.display="none";
       document.querySelector("#clear_btn").style.display="none";
       document.querySelector("#save_btn").style.display="none";
-    //   document.querySelector("#stroke").style.display="none";
       document.querySelector("#virtual").style.display="none";
 
       document.querySelector("#Exit_Button").style.display="block"; 
-      document.querySelector("p").style.display="block";      
+      document.querySelector("#Modes").style.display="flex";  
+      document.querySelector("#virtual_painter_Canvas").style.display="flex"; 
+      document.querySelector("#navbar").style.display="flex";    
      
-  // Canvas Queries and exit button
-      const output_canvas = document.querySelector("#virtual_painter_Canvas");
-    //   a = output_canvas.innerHTML;
-    //   console.log("output canvas : ",a);
-      if(output_canvas.innerHTML == "")
-        output_canvas.innerHTML = '<video id="cam_input" height="480" width="640" ></video>'+'<canvas id="canvas_output2" className="s"></canvas>'+
-        '<canvas id="canvas_output3" className="s"></canvas>';
-      const Exit_button = document.getElementById("Exit_Button");
-      if(Exit_button == "")
-        Exit_button.innerHTML ='<button id="Exit_Button2" onClick={exit_now}>Exit</button>';
-     
-
-  //---------------------------------------------------- Generating Mode Values
-      const modes = ['toggle','hold','line-toggle','circle-toggle'];
-      // generate the radio group        
-      const group = document.querySelector("#mode");
-      if(group.innerHTML == "")
-        group.innerHTML += modes.map((modes) => `
-                <input type="radio" name="mode" value="${modes}" id="${modes}">
-                <label for="${modes}">${modes}</label>
-            `).join(' ');
-     
-  
       // add an event listener for the change event
       const radioButtons = document.querySelectorAll('input[name="mode"]');
       for(const radioButton of radioButtons){
@@ -56,11 +31,11 @@ function openCvReady() {
               mode=this.value;
       }
   //---------------------------------------------------- Display divisions again in case exit
-     output_canvas.style.display='block';
-     group.style.display='flex';
-     Exit_button.style.display ='inline';
+    //  output_canvas.style.display='block';
+    //  group.style.display='flex';
+    //  Exit_button.style.display ='inline';
     //   Exit_button.style.display='inline';
-      c=false;
+    //   c=false;
   
   //---------------------------------------------------- Event handler for pressing on space 
       window.addEventListener("keydown", function(event) 
@@ -91,7 +66,7 @@ function openCvReady() {
                   connect.push(false); // it means this point is not connected to the next one
               }
           }
-          else if(event.code == "Space" && (mode == "line-toggle" || mode == "circle-toggle"))
+          else if(event.code == "Space" && (mode == "line-toggle" || mode == "circle-toggle")) // to draw the line
           {
             Draw_event = true;
           }
@@ -123,7 +98,9 @@ function openCvReady() {
           }
           else if(event.code == "Space" && (mode == "line-toggle" || mode == "circle-toggle"))
           {
-              Draw_event = false;
+            Draw_event = false;
+            // setTimeout(function(){ delay_permission = true;}, 500);
+            delay_permission = true;
           }
       event.preventDefault();
       }, true);
@@ -142,7 +119,7 @@ function openCvReady() {
       let src = new cv.Mat(video.height, video.width, cv.CV_8UC4);
       let hsv = new cv.Mat(video.height, video.width, cv.CV_8UC1);
       let mask = new cv.Mat(video.height, video.width, cv.CV_8UC1);
-      let paint_window = new cv.Mat(video.height, video.width, cv.CV_8UC4, [255,255,255,255]);
+      paint_window = new cv.Mat(video.height, video.width, cv.CV_8UC4, [255,255,255,255]);
       let points = [];
       let line_points =[];
       let circle_points =[];
@@ -163,15 +140,46 @@ function openCvReady() {
         if(c==true)  
           {
             // console.log(output_canvas.style.display);
-            output_canvas.style.display='none';
-            group.style.display='none';
-            Exit_button.style.display = 'none';
-            document.querySelector("#virtual").style.display='inline';
+            // output_canvas.style.display='none';
+            // group.style.display='none';
+            // Exit_button.style.display = 'none';
+            // document.querySelector("#virtual").style.display='block';
             src.delete();
             hsv.delete();
             mask.delete();
-            paint_window.delete(); 
-            return; 
+           
+
+            // var canvas = document.querySelector("#canvas_output3");
+            // var canvas2 = document.querySelector("#sketchpad");
+            // // canvas.width=512;
+            // // canvas.height=512;
+            // canvas2.width=640;
+            // canvas2.height=480;
+            // var ctx = canvas.getContext('2d');
+            // var ctx2 = canvas2.getContext('2d');
+            // var data = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            // console.log(data);
+            // ctx2.beginPath();
+            // ctx2.rect(0, 0, canvas2.width, canvas2.height);
+            // ctx2.fillStyle = "#ffffff";
+            // ctx2.fill();
+            // ctx2.globalCompositeOperation="source-over";
+            // const data = new Uint8ClampedArray(paint_window.data);
+            // var data2 = new ImageData(data,640,480);
+            // console.log(data);
+            // var dataImage = ctx2.createImageData(canvas2.width, canvas2.height);
+            // if (dataImage.data.set) {
+            //     dataImage.data.set(paint_window.data);
+            //     ctx2.putImageData(dataImage,0,0,canvas2.width,canvas2.height); 
+            //   }
+            
+            // console.log("finnnnal");
+
+
+            // paint_window.delete(); 
+            // r=paint_window.data;
+            // r=JSON.parse(JSON.stringify(paint_window.data));
+            return paint_window.data; ; 
           }
           
         let begin = Date.now();
@@ -284,6 +292,7 @@ function openCvReady() {
                         circle_points =[];
                         color_circle_points =[];
                         stroke_circle_points = [];
+                        delay_permission = true;
                         paint_window.delete();
                         paint_window = new cv.Mat(video.height, video.width, cv.CV_8UC4, [255,255,255,255]);
                     }
@@ -296,18 +305,20 @@ function openCvReady() {
                         stroke_points.push(stroke_value);
                     }
                     // case line points
-                    else if(mode == 'line-toggle')
+                    else if(mode == 'line-toggle' && delay_permission == true)
                     {
                         line_points.push(center);
                         color_line_points.push(rgba);
                         stroke_line_points.push(stroke_value);
+                        delay_permission = false ;
                     }
                     // case circle points
-                    else if(mode == 'circle-toggle')
+                    else if(mode == 'circle-toggle' && delay_permission == true)
                     {
                         circle_points.push(center);
                         color_circle_points.push(rgba);
                         stroke_circle_points.push(stroke_value);
+                        delay_permission = false ;
                     }
               }
           }
@@ -382,15 +393,25 @@ function openCvReady() {
   }
   // schedule first one.
   setTimeout(processVideo, 0);
+
+  
     };
 
 function exit_now()
 {
     c = true;
+    
+
     document.querySelector("#sketchpad").style.display="block";
     document.querySelector("#rendered").style.display="flex";
     document.querySelector("#clear_btn").style.display="block";
     document.querySelector("#save_btn").style.display="block";
     document.querySelector("#stroke").style.display="block"; 
-    document.querySelector("p").style.display="none"; 
+    document.querySelector("#virtual").style.display="block";
+    // document.querySelector("p").style.display="none"; 
+    document.querySelector("#Exit_Button").style.display="none"; 
+    document.querySelector("#Modes").style.display="none";  
+    document.querySelector("#virtual_painter_Canvas").style.display="none"; 
+    document.querySelector("#navbar").style.display="none"; 
+    console.log(r);
 }

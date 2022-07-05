@@ -1,9 +1,10 @@
 var canvas, canvas2,canvas_normal,canvas_post, dataURL, context, context2,context_normal, dragging, x, y, brushColor,
     radius = 10, cPushArray = new Array(),cPushArray2 = new Array(),cPushArray3 = new Array(), cStep = -1,
     mouseup = false, mousedown = false, eraserOn = false, brushOn = false,
-    bgFillOn = false,brushOn2=false;
+    bgFillOn = false,brushOn2=false, slideIndex = 1;
 
 init();
+
 
 function init() {
     var toolbarHeight, toolbar;
@@ -205,7 +206,7 @@ function box() {
         }
 
         console.log(datastream.data);
-       context2.putImageData(datastream, 0, 0);
+    //    context2.putImageData(datastream, 0, 0);
 
 
 
@@ -269,6 +270,7 @@ var setRadius = (newRadius) => {
         newRadius = maxRad;
     radius = newRadius;
     context.lineWidth = radius * 2;
+    context_normal.lineWidth=radius*2;
     radSpan.innerHTML = radius;
 }
 
@@ -286,21 +288,45 @@ incRad.addEventListener('click', () => {
     }
 });
 
+function prev(){
+    document.getElementById('button').scrollLeft -= 270;
+}
+
+function next()
+{
+    document.getElementById('button').scrollLeft += 270;
+}
+
 function addSwatches() {
-    var colors = ['black', 'maroon', 'grey', 'red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet', 'brown', 'pink', 'teal'];
-    // var swatches = document.getElementsByClassName('swatch');
+    var text="";
+    var colors = ['black', 'maroon', 'grey', 'red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet', 'brown', 'pink', 'teal','beige', 'aqua','purple'];
+    var swatches = document.getElementsByClassName('swatch');
+    text +='<div onclick="plusSlides(-4)" class="control-prev-btn">';
+    text +='<i class="fas fa-arrow-left"></i>';
+    text +='</div>';
+    document.getElementById('next').innerHTML +=text;
+
     for (var i = 0, n = colors.length; i < n; i++) {
         var swatch = document.createElement('div');
         swatch.className = 'swatch';
         swatch.style.backgroundColor = colors[i];
         swatch.addEventListener('click', setSwatch);
         document.getElementById('colors').appendChild(swatch);
+        
     }
+    text="";
+    text +='<div onclick="plusSlides(4)" class="control-next-btn">';
+    text +='<i class="fas fa-arrow-right"></i>';
+    text+='</div>';
+    document.getElementById('prev').innerHTML +=text;
+    showSlides();
 }
 
 function setColor(color) {
     context.fillStyle = color;
     context.strokeStyle = color;
+    context_normal.fillStyle = color;
+    context_normal.strokeStyle = color;
 //    bgFillColor = color;
     brushColor = color;
 
@@ -309,6 +335,7 @@ function setColor(color) {
         active.className = 'swatch';
     }
 }
+
 
 function setSwatch(e) {
     //identify swatch being clicked
@@ -345,6 +372,8 @@ var brushButton = document.getElementById('brush');
 brushButton.addEventListener('click', setBrush);
 
 function setBrush() {
+    document.getElementById('eraser').parentElement.parentElement.style.display="block";
+    document.getElementById('mynav').style.height="32rem";
     eraserOn = false;
   //  bgFillOn = false;
     brushOn = true;
@@ -372,6 +401,8 @@ brushButton2.addEventListener('click', setBrush2);
 
 
 function setBrush2() {
+    document.getElementById('eraser').parentElement.parentElement.style.display="none";
+   document.getElementById('mynav').style.height="28.5rem";
     eraserOn = false;
    // bgFillOn = false;
     brushOn = false;
@@ -588,6 +619,7 @@ function post_submit(e){
 //for del btn
 function trash(){
   document.querySelector('#title').value = '';
+  document.querySelector('#desc').value = '';
 //   quill.setText('');
 //   toaster('Trashed');
 }
@@ -617,22 +649,22 @@ function dataURLtoFile(dataurl, filename) {
 
 
 
-
-
 function post_prof(){
-
-  context_normal.globalCompositeOperation="destination-over";
-    context_normal.beginPath();
-	context_normal.rect(0, 0, canvas_normal.width, canvas_normal.height);
-	context_normal.fillStyle = "#ffffff";
-	context_normal.fill();
-
-    context_normal.globalCompositeOperation="source-over";
-
-    context_normal.drawImage(canvas, 0, 0);
-    context_normal.drawImage(canvas2, 0, 0);
-
-    url = document.getElementById('myCanvas_normal').toDataURL();
+    document.getElementById('post_btn').innerHTML='<i class="fas fa-spinner fa-spin"></i>';
+    var data = context2.getImageData(0, 0, canvas2.width, canvas2.height);
+    
+  context2.globalCompositeOperation="destination-over";
+    context2.beginPath();
+	context2.rect(0, 0, canvas_normal.width, canvas_normal.height);
+	context2.fillStyle = "#ffffff";
+	context2.fill();
+    context2.globalCompositeOperation="source-over";
+    context2.drawImage(canvas, 0, 0);
+    context2.drawImage(canvas_normal, 0, 0);
+    url = document.getElementById('myCanvas2').toDataURL();
+    context2.clearRect(0, 0, canvas2.width, canvas2.height); 
+    context2.putImageData(data,0,0);  
+    
 
     console.log(url);
 
@@ -667,7 +699,18 @@ function post_prof(){
 
 		.then(json => {
 			console.log(json);
-			alert("mabroook");
+            if(json.status=="success"){
+			// alert("mabroook");
+            document.getElementById('post_btn').innerHTML='Post';
+            document.getElementById('fail_cond').style.color="#49D907";
+            document.getElementById('fail_cond').innerHTML="Posted Successfully";
+            trash();
+            }
+            else{
+                document.getElementById('fail_cond').style.color="#FBA504";
+                document.getElementById('fail_cond').innerHTML="&nbsp;Fail!! "+json.message;
+                document.getElementById('post_btn').innerHTML='Post';
+            }
 		})
 
 		.catch((err) => {
@@ -689,15 +732,20 @@ function KeyPress(e) {
 
 //colors display
 function myfunction() {
-    var x = document.getElementById("colors");
-    if (x.style.display === "none") {
-        x.style.display = "flex";
-        x.style.flexDirection = "column";
-        x.style.alignContent = "center";
-    }
-    else {
-        x.style.display = "none";
-    }
+    // var x = document.getElementById("colors");
+    // if (x.style.display === "none") {
+    //     x.style.display = "flex";
+    //     x.style.flexDirection = "row";
+    //     x.style.alignContent = "center";
+    // }
+    // else {
+    //     x.style.display = "none";
+    // }
+    var x = document.getElementById("tool-color");
+    x.firstElementChild.firstElementChild.style.display="none";
+    x.firstElementChild.firstElementChild.nextElementSibling.style.display="none";
+    document.getElementById("large").style.display="flex";
+    
 }
 
 
@@ -756,6 +804,25 @@ function restore_colors(){
 
 
 
+//show colors
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+  console.log("mmmmmmmmmmmmmmmmmmmmmmmm");
+}
 
+
+function showSlides(n) {
+  let i;
+  let slides = document.getElementsByClassName("swatch");
+  if (n > slides.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  slides[slideIndex-1].style.display = "block";  
+  slides[slideIndex].style.display = "block"; 
+  slides[slideIndex+1].style.display = "block"; 
+  slides[slideIndex+2].style.display = "block"; 
+}
 
 
