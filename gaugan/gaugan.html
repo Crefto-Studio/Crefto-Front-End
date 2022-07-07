@@ -31,6 +31,13 @@
             flex: 1;
             display: flex;
         }
+
+        :root {
+    --primary: #6222CC;
+    --secondary: #FBA504;
+    --light: #F6F4F9;
+    --dark: #04000B;
+}
     </style>
 </head>
 
@@ -52,7 +59,7 @@
             justify-content: center;
             align-items: center;
             
-            background: #111111;
+            background: #1abc9c;
             color: #cccccc;
             font-family: 'Roboto', sans-serif;
         }
@@ -62,11 +69,15 @@
             justify-content: center;
             align-items: center;
         }
-        #sketchpad, #rendered ,#canvas_output2,#canvas_output3{
+        #sketchpad, #rendered ,#canvas_output2,#canvas_output3,#canvas_output1{
             width: 512px;
             height: 512px;
             background: #262626;
             margin: 5px;
+        }
+        #model-canvas{
+          display: none; 
+          background: #fff; 
         }
 
         #rendered {
@@ -99,24 +110,24 @@
         }
         .btn-render {
             position: absolute;
-            background: rgba(15, 48, 214, 0.5);
+            background: var(--primary);
             color: #e8e8e8;
             width: 160px;
             border-radius: 3px;
             text-align: center;
-            padding: 10px;
-            bottom: 40px;
-            left: 50%;
-            margin-left: -80px;
+             padding: 10px;
+            bottom: 8px;
+            left: 53%; 
+            /* margin-left: -80px; */
             cursor: pointer;
-            font-size: 14px;
+            font-size: 18px;
+            /* margin: auto; 
+            align-items: center;
+            align-content: center; */
         }
         .btn-render:hover {
-            background: rgba(15, 48, 214, 0.7);
-            padding: 11px;
-            bottom: 39px;
-            width: 162px;
-            margin-left: -81px;
+            background: var(--secondary);
+            color: #000;
         }
 
         #toolbar {
@@ -157,13 +168,16 @@
             color: white;
         }
 
-        input,#virtual ,#Exit_Button{
+        input,#virtual ,#Exit_Button,#config_btn,#ex_config,#share{
             width: 98%;
         }
-        #Exit_Button,p{
+        #Exit_Button,#config_btn,#ex_config{
             display: none;
         }
-        #Exit_Button2{
+        p{
+            margin-bottom: 0px;
+        }
+        /* #Exit_Button2{
             background: none;
             color: inherit;
             border: none;
@@ -171,20 +185,71 @@
             font: inherit;
             cursor: pointer;
             outline: inherit;
-        }
+        } */
         /* #hold,#toggle{
             width: 20%;
         } */
-        input[type="button"] ,#virtual,#Exit_Button{
+        input[type="button"] ,#virtual,#Exit_Button,#config_btn,#ex_config,#share{
             padding: 7px;
-            background: #676767;
+            /* background: #676767; */
             color: white;
             border: 0;
             border-radius: 3px;
-            font-size: 13px;
+            font-size: 15px;
             margin: 5px 0;
             cursor: pointer;
         }
+        #clear_btn{
+            background: #3498db;
+        }
+        #save_btn input{
+            background: #ffd071;
+        }
+        #save_btn2 input{
+            background: #f0776c;
+        }
+        #virtual{
+            background: #1abc9c;
+        }
+        #share{
+            background: #3498db;
+        }
+        #Exit_Button{
+            background: #ffd071;
+        }
+        #config_btn{
+            background: #f0776c;
+        }
+        #ex_config{
+            background: #1abc9c;
+        }
+
+
+        #clear_btn:hover{
+            background: #1C699C;
+        }
+        #save_btn input:hover{
+            background: #B87A00;
+        }
+        #save_btn2 input:hover{
+            background: #FF311F;
+        }
+        #virtual:hover{
+            background: #149077;
+        }
+        #share:hover{
+            background: #1C699C;
+        }
+        #Exit_Button:hover{
+            background: #B87A00;
+        }
+        #config_btn:hover{
+            background: #FF311F;
+        }
+        #ex_config:hover{
+            background: #149077;
+        }
+
           .color:hover {
                 border: #ffffff 3px solid;
             }
@@ -199,6 +264,14 @@
         #mode{
             display: flex;
             flex-direction: row; 
+        }
+        #mode2{
+            display: flex;
+            flex-direction: row; 
+            margin-top: -15px;
+            margin-bottom: 10px;
+            margin-left: -15px;
+            color: #fff;
         }
         #mode>label{
             margin-left: -0.5rem; 
@@ -219,18 +292,18 @@
 }
 
 #color1 {
-  border-bottom: 12px solid #D4838F;
+  border-bottom: 12px solid #3498db;
   width: 16.67%;
 }
 
 #color2 {
-  border-bottom: 12px solid #2B879E;
+  border-bottom: 12px solid #ffd071;
   width: 16.67%;
 }
 
 
 #color3 {
-  border-bottom: 12px solid #3EC9A7;
+  border-bottom: 12px solid #f0776c;
   width: 16.67%;
 }
 
@@ -238,17 +311,17 @@
 
 
 #color4 {
-  border-bottom: 12px solid #F2E8C4;
+  border-bottom: 12px solid #1abc9c;
   width: 16.67%;
 }
 
 #color5{
-    border-bottom: 12px solid #3EC9A7;
+    border-bottom: 12px solid #3498db;
   width: 16.67%;
 }
 
 #color6{
-    border-bottom: 12px solid #D4838F;
+    border-bottom: 12px solid #ffd071;
   width:16.67%;
 }
 .radios{
@@ -260,6 +333,247 @@
    margin: auto;
    width: 50%;
 }
+
+
+/* post pop menu */
+#wrapper{
+	background-color: #273f4a;
+	width:430px;
+	height: 400px;
+	position: absolute;
+	/* overflow: auto; */
+	z-index: 2;
+	top: 25%;
+	left: 40%;
+	display: none;
+  }
+  
+  #header {
+	background-color:var(--primary);
+	color: white;
+	padding: 1em;
+	padding-left: 2em;
+	text-transform: uppercase;
+	font-weight: 600;
+	letter-spacing: 1px;
+  }
+  
+  #content {
+	padding-top: 1em;
+	padding-left: 2em;
+	padding-right: 2em;
+	padding-bottom: 1em;
+  }
+  
+  #title {
+	color: rgba(255, 255, 255, 1);
+	background-color: transparent;
+	border-style: none;
+	border-bottom: 0.5px solid rgba(0, 0, 0, 0.37);
+	font-size: 1.05em;
+	font-weight:100;
+	margin-top:0.2em;
+	width: 100%;
+	padding-bottom: 0.5em;
+	outline: none;
+	transition: all 0.3s;
+  }
+  
+  #title:focus {
+	border-style: none;
+	border-bottom: 0.5px solid var(--primary);
+  }
+  
+  #triangle-bottomright {
+		width: 0;
+		height: 0;
+		border-bottom: 7px solid var(--primary);
+		border-left: 7px solid transparent;
+	margin-left:calc(100% - 5px);
+	margin-top: -9px;
+	margin-bottom: 1.6em;
+  }
+  
+  #editor textarea{
+	background-color: #1b2f39;
+	height: 150px;
+	width: 370px;
+	color: white;
+	border: none;
+  }
+
+ 
+  
+  
+  #footer {
+	margin-top: 1em;
+  }
+  
+  #footer-left {
+	float: left;
+  }
+  
+  #footer-right {
+	float: right;
+  }
+  
+  #footer-right button:last-child {
+	margin-right: 0px!important;
+	padding-right: 0px!important;
+  
+  }
+  
+  /* Buttons */
+  
+  .btn {
+	border:none;
+	padding-left: 1em;
+	padding-right:1em;
+	padding-top:0.5em;
+	padding-bottom:0.5em;
+	font-size:1em;
+	transition: 0.3s;
+  }
+  
+  .btn:hover {
+	cursor: pointer;
+  }
+  
+  .btn-primary {
+	background-color:var(--primary);
+	color: white;
+	font-weight: 400;
+	letter-spacing: 0.5px;
+  }
+  
+  .btn-primary:hover {
+	background-color: var(--secondary);
+	color: #000;
+  }
+  #header button{
+	background: none;
+	color:white;
+	border: none;
+	padding: 0px;
+	cursor: pointer;
+	font: inherit;
+	outline: inherit;
+	float: right;
+	font-size: large;
+  }
+  #header button:hover{
+	color: var(--secondary);
+  }
+
+  .btn-secondary {
+	background-color: transparent;
+	color: rgba(255, 255, 255, 0.4);
+	font-weight: 400;
+	letter-spacing: 0.5px;
+  }
+  
+  .btn-secondary:hover {
+	color: var(--secondary);
+  }
+  
+  .fa-trash-alt {
+	font-size: 1.3em;
+  }
+  /* File input */
+  
+  .inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+  }
+  
+  .inputfile + label {
+	  font-size: 1.25em;
+	  font-weight: 700;
+	  color: rgba(255, 255, 255, 0.4);
+	  display: inline-block;
+	transition: 0.3s;
+  }
+  
+  .inputfile:focus + label,
+  .inputfile + label:hover {
+	  color: rgba(255, 255, 255, 0.7);
+	cursor: pointer;
+  
+  }
+  
+  .fa-paperclip {
+	transform: rotate(-45deg);
+  }
+  
+  /* Page Header */
+  #pageHeader {
+	position: fixed;
+	top: -200px;
+	right: -200px;
+	width: 300px;
+  height: 300px;
+	cursor: pointer;
+	transition: 0.3s;
+	background-color: rgba(250, 88, 91, 0.86);
+	transform: rotate(45deg);
+	font-size:1.2em;
+  
+  }
+  
+  #pageHeader:hover{
+	background-color: rgba(250, 88, 91, 0.86);
+  top: -190px;
+	right: -190px;
+  }
+  
+  #pageHeader button{
+	 padding:0px;
+	width:100%;
+	text-align:center;
+	margin-top: 0;
+	margin-left: 0;
+	position:absolute;
+	bottom: 1em;
+	left: auto;
+	right:auto;
+	outline:none;
+	
+  }
+  
+  #pageHeader:hover button {
+	color: #ffffff;
+  }
+  
+  /* Page Footer */ 
+  #pageFooter {
+	position:fixed;
+	bottom:0em;
+	color: rgb(195, 147, 115);
+	font-weight:100;
+	background-color: #ffd1b2;
+	text-align: center;
+	width:100%;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+  
+  }
+  
+  #pageFooter a{
+	color: rgb(180, 122, 83);
+	text-decoration: none;
+	font-weight:300;
+	transition: 0.3s;
+  }
+  
+  #pageFooter a:hover{
+	color: rgb(149, 99, 66);
+	text-decoration: none;
+	font-weight:300;
+  }
 
     </style>
     <script type="text/babel">
@@ -355,6 +669,15 @@
                 })
             }
 
+            downloadCanvasout = (filename) => {
+                this.href= document.getElementById("model-canvas").toDataURL();
+                console.log("url: ", this.href);
+                this.download = filename;
+                this.setState({
+                    url: this.href
+                })
+            }
+
             generateSketch = async () => {
                 const context = this.sketchpad.context;
                 const colorLayer = context.getImageData(0, 0, context.canvas.width, context.canvas.height).data;
@@ -389,27 +712,27 @@
                     <div id="nav">
                         <div id="navbar">
                         <div id="color1" className="col-xs-3">
-                            <div className="label">Stroke Thickness: {this.state.strokeWidth}px</div>
+                            <div className="label">Lower Hue : {this.state.strokeWidth}px</div>
                             <input type="range" id="lower_hue" defaultValue ="57" min="0" max ="180"/>
                         </div>
                         <div id="color2" className="col-xs-3">
-                            <div className="label">Stroke Thickness: {this.state.strokeWidth}px</div>
+                            <div className="label">Lower Sat : {this.state.strokeWidth}px</div>
                             <input type="range" id="lower_sat" defaultValue ="67" min="0" max ="255"/>
                         </div>
                         <div id="color3" className="col-xs-3">
-                            <div className="label">Stroke Thickness: {this.state.strokeWidth}px</div>
+                            <div className="label">Lower Val : {this.state.strokeWidth}px</div>
                             <input type="range" id="lower_val" defaultValue ="0" min="0" max ="255"/>
                         </div>
                         <div id="color4" className="col-xs-3">
-                            <div className="label">Stroke Thickness: {this.state.strokeWidth}px</div>
+                            <div className="label">Upper Hue : {this.state.strokeWidth}px</div>
                             <input type="range" id="upper_hue" defaultValue ="100" min="0" max ="180"/>
                         </div>
                         <div id="color5" className="col-xs-3">
-                            <div className="label">Stroke Thickness: {this.state.strokeWidth}px</div>
+                            <div className="label">Upper Sat : {this.state.strokeWidth}px</div>
                             <input type="range" id="upper_sat" defaultValue ="255" min="0" max ="255"/>
                         </div>
                         <div id="color6" className="col-xs-3">
-                            <div className="label">Stroke Thickness: {this.state.strokeWidth}px</div>
+                            <div className="label">Upper Val : {this.state.strokeWidth}px</div>
                             <input type="range" id="upper_val" defaultValue ="255" min="0" max ="255"/>
                             
                         </div>
@@ -422,12 +745,24 @@
                                 <input id="clear_btn" type="button" value="Clear" onClick={() => this.clearSketch()} />
                                 {console.log(this.state.url)}
                                 <a id="save_btn" href={this.state.url} download><input type="button" value="Save" onClick={() => this.downloadCanvas(this, 'Drawing.png')} /></a>
+                                <a id="save_btn2" href={this.state.url} download><input type="button" value="Saveout" onClick={() => this.downloadCanvasout(this, 'Drawing.png')} /></a>
                                 {/* button Event for Virtual painter*/}
                                 <button id="virtual" onClick={openCvReady}>Virtual Painter</button>
                                   {/* Exit Button for virtual Painter*/}
                                 <button id="Exit_Button" className="btn" onClick={exit_now}>
-                                    <button id="Exit_Button2" onClick={exit_now}>Exit</button>
+                                    Exit Virtual
                                     </button>
+                                    <button id="config_btn" className="btn" onClick={config}>
+                                    Config
+                                    </button>
+                                    <button id="ex_config" className="btn" onClick={exit_config}>
+                                    Exit Config
+                                    </button>
+                                    <button id="share" className="btn" onClick={display_pop}>
+                                    Share
+                                    </button>
+                                   
+
                                 {/* Modes of Drawing in Virtual painter*/}
                                 <div id="Modes">
                                     <p>Select your work mode:</p>
@@ -480,7 +815,8 @@
                         
                         {/*Virtual Painter output Canvas*/}
                         <div id="virtual_painter_Canvas">
-                            <video id="cam_input" height="480" width="640" ></video>
+                            <video id="cam_input" height="512" width="512" ></video>
+                            <canvas id="canvas_output1" className="s"></canvas>
                             <canvas id="canvas_output2" className="s"></canvas>
                             <canvas id="canvas_output3" className="s"></canvas>
                         </div>
@@ -492,9 +828,52 @@
                                 <div className="label">Paint something then click the render button below!</div>
                             </div>}
                             {this.state.image ? <img className="generated-image" src={this.state.image} /> : null}
-                            <div className="btn-render" onClick={this.generateSketch}>Generate Image</div>
+                            
                         </div>
+                    
+                            <canvas id="model-canvas" height="512" width="512" ></canvas>
+                            
                     </div>
+                    <div className="btn-render" onClick={()=>{this.generateSketch;run_model()}}>Generate</div>
+
+                    <div id="wrapper">
+			<div id="header" className="noselect">
+				New Post
+				<button onClick={lock_pop}><i className="fa fa-times" aria-hidden="true"></i></button>
+			</div>
+			<div id="content">
+			  <input id="title" type="text" placeholder="Your title here..."></input>
+				<div id="triangle-bottomright"></div>
+			  <div id="editor">
+				<textarea id="desc" type="text" placeholder="Your description here..."></textarea>
+			  </div>
+			  <div id="footer">
+                <div id="mode2">
+                    <div className="radios">
+                                        <input type="radio" name="mode" value="Drawing" id="Drawing" defaultChecked/>
+                                        <label>Drawing</label>
+                                        </div>
+                                        <div className="radios">
+                                        <input type="radio" name="mode" value="Output" id="Output"/>
+                                        <label>Output</label>
+                                        </div>
+                                        </div>
+				<div id="footer-left">
+                    
+				  <button className="btn btn-primary" id="post_btn" onClick={post_prof}>Post</button>
+				 
+				</div>
+				<div id="footer-right">
+				  <button className="btn btn-secondary" onClick={trash}>
+					<i className="far fa-trash-alt"></i>
+				  </button>
+				</div>
+			  </div>
+			</div>
+			<br/>
+			<p id="fail_cond"></p>
+		  </div>
+
                    </div>
                     
                 </React.Fragment>;

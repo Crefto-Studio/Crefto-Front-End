@@ -32,7 +32,7 @@
     <!--mod:cursor-->
     <div id="wrapper">
         <div id="sidebar_left">
-            <a id="logo" href="">hotastic</a>
+            <a id="logo" href="">Crefto</a>
             <div id="menu_left_container" onclick="toggle()">
                 <div id="fir_col">
 
@@ -59,7 +59,7 @@
                     <a title="Borders" style="background:blue;" class="trn" onclick="call_menu(TOOLS, 'tools_borders');" id="horizontal flip" href="#">
                         <i class="fa-solid fa-vector-square fa-2x"></i>
                     </a>
-                    <a title="share" style="background:blue;" class="trn"  onclick="togg()" id="prof_share" href="#">
+                    <a title="share" style="background:blue;" class="trn"  onclick="display_pop()" id="prof_share" href="#">
                         <i class="fa-solid fa-circle-plus fa-2x"></i>
                     </a>
                 </div>
@@ -147,11 +147,12 @@
         <a class="right_mobile_menu" onclick="GUI.toggle('#sidebar_right');return false;" href="#"></a>
     </div>
 
-    <div id="main_menu" class="ddsmoothmenu">
-        <ul>
 
-            <li>
-                <a class="icon file trn" href="#">File</a>
+    <div id="main_menu" class="ddsmoothmenu">
+
+        <ul>
+            <li class="color1">
+                <a class="icon file trn" href="#" >File</a>
 
                 <ul>
                     <!--  <li><a class="trn" onclick="call_menu(FILE, 'file_new');" href="#">New</a></li>-->
@@ -167,7 +168,9 @@
                         -->
                 </ul>
             </li>
-            <li>
+
+
+            <li class="color2">
                 <a class="icon edit trn" href="#">Edit</a>
                 <ul>
                     <li><a class="trn" onclick="call_menu(EDIT, 'edit_undo');" href="#">Undo</a></li>
@@ -180,7 +183,9 @@
                     <li><a class="trn" onclick="call_menu(EDIT, 'edit_clear');" href="#">Clear selection</a></li>
                 </ul>
             </li>
-            <li>
+
+
+            <li class="color3">
                 <a class="icon image trn" href="#">Image</a>
                 <ul>
                     <!--cancel info,siz,trime,auto adjust colorm,decrease color, negative,grid,histogram-->
@@ -227,85 +232,97 @@
                     <!--  <li><a class="trn dots" onclick="call_menu(IMAGE, 'image_histogram');" href="#">Histogram</a></li>-->
                 </ul>
             </li>
-            <li>
-                <a class="icon layer trn" href="#">Layer</a>
-                <ul>
-                    <!--  <li><a class="trn" onclick="call_menu(LAYER, 'layer_new');" href="#">New</a></li>  -->
-                    <li><a class="trn" onclick="call_menu(LAYER, 'layer_duplicate');" href="#">Duplicate</a></li>
-                    <li><a class="trn" onclick="call_menu(LAYER, 'layer_show_hide');" href="#">Show / Hide</a></li>
-                    <li><a class="trn" onclick="call_menu(LAYER, 'layer_crop');" href="#">Crop Selection</a>
-                    <li><a class="trn" onclick="call_menu(LAYER, 'layer_delete');" href="#">Delete</a></li>
-                    <li><div class="mid-line"></div></li>
-                    <li class="more">
-                        <a class="trn" href="#">Move</a>
-                        <ul>
-                            <li><a class="trn" onclick="call_menu(LAYER, 'layer_move_up');" href="#">Up</a></li>
-                            <li><a class="trn" onclick="call_menu(LAYER, 'layer_move_down');" href="#">Down</a></li>
-                        </ul>
-                    </li>
-                    <!-- <li><a class="trn dots" onclick="call_menu(LAYER, 'layer_translate');" href="#">Translate </a></li>  -->
-                    <li><a class="trn dots" onclick="call_menu(LAYER, 'layer_opacity');" href="#">Opacity</a></li>
-                    <li><a class="trn dots" onclick="call_menu(LAYER, 'layer_rename');" href="#">Rename</a></li>
-                    <li><div class="mid-line"></div></li>
-                    <!--  <li><a class="trn" onclick="call_menu(LAYER, 'layer_trim');" href="#">Trim</a></li>  -->
-                    <li><a class="trn dots" onclick="call_menu(LAYER, 'layer_resize');" href="#">Resize</a></li>
-                    <!--  <li><a class="trn" onclick="call_menu(LAYER, 'layer_clear');" href="#">Clear</a></li>  -->
-                    <li><div class="mid-line"></div></li>
-                    <!-- <li><a class="trn" onclick="call_menu(LAYER, 'layer_differences');" href="#">Differences Down</a></li>  -->
-                    <!-- <li><a class="trn dots" onclick="call_menu(LAYER, 'layer_merge_down');" href="#">Merge Down</a></li>  -->
-                    <li><a class="trn" onclick="call_menu(LAYER, 'layer_flatten');" href="#">Flatten Image</a></li>
-                </ul>
-            </li>
-            <li>
-                <a class="icon effects trn" href="#">Effects</a>
-                <ul id="effects_list">
-                    <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_bw');" href="#">Black and White</a>
-                    <li class="more">
-                        <a class="trn" href="#">Blur</a>
-                        <ul>
-                            <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_BoxBlur');" href="#">Blur-Box</a>
-                            <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_GaussianBlur');" href="#">Blur-Gaussian</a>
-                            <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_StackBlur');" href="#">Blur-Stack</a>
-                            <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_zoomblur');" href="#">Blur-Zoom</a>
-                        </ul>
-                    </li>
-                    <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_bulge_pinch');" href="#">Bulge/Pinch</a>
-                    <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_colorize');" href="#">Colorize</a></li>
-                    <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_denoise');" href="#">Denoise</a>
-                    <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_Desaturate');" href="#">Desaturate</a>
-                    <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_Dither');" href="#">Dither</a>
-                    <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_dot_screen');" href="#">Dot Screen</a>
-                    <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_Edge');" href="#">Edge</a>
-                    <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_Emboss');" href="#">Emboss</a>
-                    <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_Enrich');" href="#">Enrich</a>
-                    <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_Grains');" href="#">Grains</a>
-                    <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_heatmap');" href="#">Heatmap</a>
-                    <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_jpg_vintage');" href="#">JPG Compression</a></li>
-                    <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_Mosaic');" href="#">Mosaic</a>
-                    <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_Oil');" href="#">Oil</a>
-                    <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_perspective');" href="#">Perspective</a>
-                    <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_Sepia');" href="#">Sepia</a>
-                    <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_Sharpen');" href="#">Sharpen</a>
-                    <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_Solarize');" href="#">Solarize</a>
-                    <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_tilt_shift');" href="#">Tilt Shift</a>
-                    <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_vignette');" href="#">Vignette</a>
-                    <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_vibrance');" href="#">Vibrance</a>
-                    <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_vintage');" href="#">Vintage</a>
-                </ul>
-            </li>
-            <li>
+
+                <li class="color4">
+                    <a class="icon layer trn" href="#">Layer</a>
+                    <ul>
+                        <!--  <li><a class="trn" onclick="call_menu(LAYER, 'layer_new');" href="#">New</a></li>  -->
+                        <li><a class="trn" onclick="call_menu(LAYER, 'layer_duplicate');" href="#">Duplicate</a></li>
+                        <li><a class="trn" onclick="call_menu(LAYER, 'layer_show_hide');" href="#">Show / Hide</a></li>
+                        <li><a class="trn" onclick="call_menu(LAYER, 'layer_crop');" href="#">Crop Selection</a>
+                        <li><a class="trn" onclick="call_menu(LAYER, 'layer_delete');" href="#">Delete</a></li>
+                        <li><div class="mid-line"></div></li>
+                        <li class="more">
+                            <a class="trn" href="#">Move</a>
+                            <ul>
+                                <li><a class="trn" onclick="call_menu(LAYER, 'layer_move_up');" href="#">Up</a></li>
+                                <li><a class="trn" onclick="call_menu(LAYER, 'layer_move_down');" href="#">Down</a></li>
+                            </ul>
+                        </li>
+                        <!-- <li><a class="trn dots" onclick="call_menu(LAYER, 'layer_translate');" href="#">Translate </a></li>  -->
+                        <li><a class="trn dots" onclick="call_menu(LAYER, 'layer_opacity');" href="#">Opacity</a></li>
+                        <li><a class="trn dots" onclick="call_menu(LAYER, 'layer_rename');" href="#">Rename</a></li>
+                        <li><div class="mid-line"></div></li>
+                        <!--  <li><a class="trn" onclick="call_menu(LAYER, 'layer_trim');" href="#">Trim</a></li>  -->
+                        <li><a class="trn dots" onclick="call_menu(LAYER, 'layer_resize');" href="#">Resize</a></li>
+                        <!--  <li><a class="trn" onclick="call_menu(LAYER, 'layer_clear');" href="#">Clear</a></li>  -->
+                        <li><div class="mid-line"></div></li>
+                        <!-- <li><a class="trn" onclick="call_menu(LAYER, 'layer_differences');" href="#">Differences Down</a></li>  -->
+                        <!-- <li><a class="trn dots" onclick="call_menu(LAYER, 'layer_merge_down');" href="#">Merge Down</a></li>  -->
+                        <li><a class="trn" onclick="call_menu(LAYER, 'layer_flatten');" href="#">Flatten Image</a></li>
+                    </ul>
+                </li>
+           
+ 
+                <li class="color5">
+                    <a class="icon effects trn" href="#">Effects</a>
+                    <ul id="effects_list">
+                        <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_bw');" href="#">Black and White</a>
+                        <li class="more">
+                            <a class="trn" href="#">Blur</a>
+                            <ul>
+                                <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_BoxBlur');" href="#">Blur-Box</a>
+                                <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_GaussianBlur');" href="#">Blur-Gaussian</a>
+                                <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_StackBlur');" href="#">Blur-Stack</a>
+                                <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_zoomblur');" href="#">Blur-Zoom</a>
+                            </ul>
+                        </li>
+                        <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_bulge_pinch');" href="#">Bulge/Pinch</a>
+                        <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_colorize');" href="#">Colorize</a></li>
+                        <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_denoise');" href="#">Denoise</a>
+                        <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_Desaturate');" href="#">Desaturate</a>
+                        <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_Dither');" href="#">Dither</a>
+                        <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_dot_screen');" href="#">Dot Screen</a>
+                        <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_Edge');" href="#">Edge</a>
+                        <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_Emboss');" href="#">Emboss</a>
+                        <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_Enrich');" href="#">Enrich</a>
+                        <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_Grains');" href="#">Grains</a>
+                        <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_heatmap');" href="#">Heatmap</a>
+                        <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_jpg_vintage');" href="#">JPG Compression</a></li>
+                        <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_Mosaic');" href="#">Mosaic</a>
+                        <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_Oil');" href="#">Oil</a>
+                        <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_perspective');" href="#">Perspective</a>
+                        <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_Sepia');" href="#">Sepia</a>
+                        <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_Sharpen');" href="#">Sharpen</a>
+                        <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_Solarize');" href="#">Solarize</a>
+                        <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_tilt_shift');" href="#">Tilt Shift</a>
+                        <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_vignette');" href="#">Vignette</a>
+                        <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_vibrance');" href="#">Vibrance</a>
+                        <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_vintage');" href="#">Vintage</a>
+                    </ul>
+                </li>
+            </ul>
+            
+
+
+
+    
+     
+        
+           
+            <!-- <li>
                 <a class="icon tools trn" href="#">Tools</a>
                 <ul>
                     <li><a class="trn dots" onclick="call_menu(TOOLS, 'tools_borders');" href="#">Borders</a></li>
-                    <!--  <li><a class="trn" onclick="call_menu(TOOLS, 'tools_sprites');" href="#">Sprites</a></li>
+                     <li><a class="trn" onclick="call_menu(TOOLS, 'tools_sprites');" href="#">Sprites</a></li>
                     <li><a class="trn" onclick="call_menu(TOOLS, 'tools_keypoints');" href="#">Key-points</a></li>
                     <li><a class="trn dots" onclick="call_menu(TOOLS, 'tools_color2alpha');" href="#">Color to Alpha</a></li>
                     <li><a class="trn dots" onclick="call_menu(TOOLS, 'tools_color_zoom');" href="#">Color Zoom</a></li>
                     <li><a class="trn dots" onclick="call_menu(TOOLS, 'tools_replace_color');" href="#">Replace Color</a></li>
-                    <li><a class="trn dots" onclick="call_menu(TOOLS, 'tools_restore_alpha');" href="#">Restore alpha</a></li> -->
+                    <li><a class="trn dots" onclick="call_menu(TOOLS, 'tools_restore_alpha');" href="#">Restore alpha</a></li>
 
                 </ul>
-            </li>
+            </li> -->
             <!--
             <li>
                 <a class="icon help trn" href="#">Help</a>
@@ -335,18 +352,44 @@
                 </ul>
             </li>
             -->
-        </ul>
+        
     </div>
     <div style="display:none;" id="tmp"></div>
     <div id="popup"></div>
 
-    <div id="pop_post" style="display:none">
+    <!-- <div id="pop_post" style="display:none">
         <h2>Post</h2>
         <input type="text" id="post_name" />
         <textarea id="post_des"></textarea>
         <button onclick="post()">ok</button>
         <button onclick="this.parentElement.style.display='none'">cancel</button>
-    </div>
+    </div> -->
+    <div id="wrapper2">
+        <div id="header" class="noselect">
+            New Post
+            <button onclick="lock_pop()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div id="content">
+          <input id="title" type="text" placeholder="Your title here..."></input>
+            <div id="triangle-bottomright"></div>
+          <div id="editor">
+            <textarea id="desc" type="text" placeholder="Your description here..."></textarea>
+          </div>
+          <div id="footer">
+            <div id="footer-left">
+              <button class="btn btn-primary" id="post_btn" onclick="post()">Post</button>
+             
+            </div>
+            <div id="footer-right">
+              <button class="btn btn-secondary"  onclick="trash()">
+                <i class="far fa-trash-alt"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <br>
+        <p id="fail_cond" style="text-align: center;""></p>
+      </div>
 
     <script src="vendor/jquery/jquery.js"></script>
     <script src="vendor/jquery/jquery-migrate.js"></script>

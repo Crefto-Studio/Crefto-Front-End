@@ -10,13 +10,18 @@ Table of Contents:
 */
 
 /* ========== 1. General ==================================================== */
-
+:root {
+    --primary: #6222CC;
+    --secondary: #FBA504;
+    --light: #F6F4F9;
+    --dark: #04000B;
+}
 *{
 	box-sizing: border-box;
 }
 body{
 	font-size: 75%; /* Resets to 12px */
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: "Jost",sans-serif !important;
 	color: #000000;
 	margin: 0px;
 	padding: 0px;
@@ -43,7 +48,7 @@ canvas{
 	image-rendering: -o-crisp-edges;
 	image-rendering: pixelated;
 	-ms-interpolation-mode: nearest-neighbor;
-	
+	margin-top: 20px;
 	
 }
 img{
@@ -103,7 +108,7 @@ label{
 	display: block;
 	height: 30px;
 	padding: 5px 5px 5px 36px;
-	margin: 5px 0 10px 0;
+	margin: 20px 0 10px 0;
 	background: url("../img/logo.png") no-repeat -3px 0px;
 	background-size: auto 30px;
 	text-decoration: none;
@@ -157,15 +162,17 @@ label{
 	font:12px Arial,sans-serif;
 	background: #2D2D2D;
 	width: 100%;
-	padding-left:10px;
+	/* padding-left:10px; */
 	z-index:100;
+	height: 7%;
 }
 .ddsmoothmenu ul{
 	z-index:100;
 	margin: 0;
 	padding: 0;
 	list-style-type: none;
-	height:30px;
+	height:100%;
+	width: 100%;
 }
 .ddsmoothmenu ul li{
 	position: relative;	
@@ -176,25 +183,31 @@ label{
 }
 .ddsmoothmenu ul ul li a{
 	width:100%;
+	width: 100% !important;
+	text-align: center !important;
 }
 .ddsmoothmenu .rightarrowclass{
 	display:none !important;
 }
 .ddsmoothmenu ul li a{	
-	display: inline-block;
+	/* display: inline-block; */
 	color: #2D2D2D;
 	text-decoration: none;
 	color: #cccccc;
 	text-align:center;
-	padding: 7px 10px 8px 10px !important;
+	padding: 7px 10px 8px 100px !important;
+	margin-top:20px !important ;
+	/* width: 100% !important;
+	text-align: center !important; */
 }
 .ddsmoothmenu ul li a.selected{
-	background-color: #FFFFFF !important;
-	color: #2d2b2b;
+	width: 100%;
+	/* background-color: #FFFFFF !important; */
+	/* color: #2d2b2b; */
 }
-.ddsmoothmenu ul li ul li a.selected{
+/* .ddsmoothmenu ul li ul li a.selected{
 	background-color:#E4EBF8 !important;
-}
+} */
 .ddsmoothmenu ul li a:hover{
 	background-color: #E4EBF8;
 	color: #2D2D2D;
@@ -1096,3 +1109,271 @@ label{
 	padding: 0.3rem 0rem;
 }
 
+
+
+/* post pop menu */
+#wrapper2{
+	background-color: #273f4a;
+	width:430px;
+	height: 400px;
+	position: absolute;
+	/* overflow: auto; */
+	z-index: 2;
+	top: 25%;
+	left: 40%;
+	display: none;
+  }
+  
+  #header {
+	background-color:var(--primary);
+	color: white;
+	padding: 1em;
+	padding-left: 2em;
+	text-transform: uppercase;
+	font-weight: 600;
+	letter-spacing: 1px;
+  }
+  
+  #content {
+	padding-top: 1em;
+	padding-left: 2em;
+	padding-right: 2em;
+	padding-bottom: 1em;
+  }
+  
+  #title {
+	color: rgba(255, 255, 255, 1);
+	background-color: transparent;
+	border-style: none;
+	border-bottom: 0.5px solid rgba(0, 0, 0, 0.37);
+	font-size: 1.05em;
+	font-weight:100;
+	margin-top:0.2em;
+	width: 100%;
+	padding-bottom: 0.5em;
+	outline: none;
+	transition: all 0.3s;
+  }
+  
+  #title:focus {
+	border-style: none;
+	border-bottom: 0.5px solid var(--primary);
+  }
+  
+  #triangle-bottomright {
+		width: 0;
+		height: 0;
+		border-bottom: 7px solid var(--primary);
+		border-left: 7px solid transparent;
+	margin-left:calc(100% - 5px);
+	margin-top: -9px;
+	margin-bottom: 1.6em;
+  }
+  
+  #editor textarea{
+	background-color: #1b2f39;
+	height: 150px;
+	width: 370px;
+	color: white;
+	border: none;
+  }
+
+ 
+  
+  
+  #footer {
+	margin-top: 1em;
+  }
+  
+  #footer-left {
+	float: left;
+  }
+  
+  #footer-right {
+	float: right;
+  }
+  
+  #footer-right button:last-child {
+	margin-right: 0px!important;
+	padding-right: 0px!important;
+  
+  }
+  
+  /* Buttons */
+  
+  .btn {
+	border:none;
+	padding-left: 1em;
+	padding-right:1em;
+	padding-top:0.5em;
+	padding-bottom:0.5em;
+	font-size:1em;
+	text-transform: uppercase;
+	transition: 0.3s;
+  }
+  
+  .btn:hover {
+	cursor: pointer;
+  }
+  
+  .btn-primary {
+	background-color:var(--primary);
+	color: white;
+	font-weight: 400;
+	letter-spacing: 0.5px;
+  }
+  
+  .btn-primary:hover {
+	background-color: var(--secondary);
+	color: #000;
+  }
+  #header button{
+	background: none;
+	color:white;
+	border: none;
+	padding: 0px;
+	cursor: pointer;
+	font: inherit;
+	outline: inherit;
+	float: right;
+	font-size: large;
+  }
+  #header button:hover{
+	color: var(--secondary);
+  }
+
+  .btn-secondary {
+	background-color: transparent;
+	color: rgba(255, 255, 255, 0.4);
+	font-weight: 400;
+	letter-spacing: 0.5px;
+  }
+  
+  .btn-secondary:hover {
+	color: var(--secondary);
+  }
+  
+  .fa-trash-alt {
+	font-size: 1.3em;
+  }
+  /* File input */
+  
+  .inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+  }
+  
+  .inputfile + label {
+	  font-size: 1.25em;
+	  font-weight: 700;
+	  color: rgba(255, 255, 255, 0.4);
+	  display: inline-block;
+	transition: 0.3s;
+  }
+  
+  .inputfile:focus + label,
+  .inputfile + label:hover {
+	  color: rgba(255, 255, 255, 0.7);
+	cursor: pointer;
+  
+  }
+  
+  .fa-paperclip {
+	transform: rotate(-45deg);
+  }
+  
+  /* Page Header */
+  #pageHeader {
+	position: fixed;
+	top: -200px;
+	right: -200px;
+	width: 300px;
+  height: 300px;
+	cursor: pointer;
+	transition: 0.3s;
+	background-color: rgba(250, 88, 91, 0.86);
+	transform: rotate(45deg);
+	font-size:1.2em;
+  
+  }
+  
+  #pageHeader:hover{
+	background-color: rgba(250, 88, 91, 0.86);
+  top: -190px;
+	right: -190px;
+  }
+  
+  #pageHeader button{
+	 padding:0px;
+	width:100%;
+	text-align:center;
+	margin-top: 0;
+	margin-left: 0;
+	position:absolute;
+	bottom: 1em;
+	left: auto;
+	right:auto;
+	outline:none;
+	
+  }
+  
+  #pageHeader:hover button {
+	color: #ffffff;
+  }
+  
+  /* Page Footer */ 
+  #pageFooter {
+	position:fixed;
+	bottom:0em;
+	color: rgb(195, 147, 115);
+	font-weight:100;
+	background-color: #ffd1b2;
+	text-align: center;
+	width:100%;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+  
+  }
+  
+  #pageFooter a{
+	color: rgb(180, 122, 83);
+	text-decoration: none;
+	font-weight:300;
+	transition: 0.3s;
+  }
+  
+  #pageFooter a:hover{
+	color: rgb(149, 99, 66);
+	text-decoration: none;
+	font-weight:300;
+  }
+  
+  
+  /* nav */
+  .color1 {
+	border-bottom: 12px solid #D4838F;
+	width: 20%;
+  }
+  
+  .color4 {
+	  border-bottom: 12px solid red;
+	  width: 20%;
+	}
+  
+  
+  .color2 {
+	border-bottom: 12px solid #2B879E;
+	width: 20%;
+  }
+  .color3 {
+	  border-bottom: 12px solid #3EC9A7;
+	  width: 20%;
+	}
+	.color5 {
+		border-bottom: 12px solid #3EC9A7;
+		width: 20%;
+	  }

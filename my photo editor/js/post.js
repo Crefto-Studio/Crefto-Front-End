@@ -1,17 +1,32 @@
 //popmenu
- function togg() {
-	 if (document.getElementById("pop_post").style.display == "none") {
-		 document.getElementById("pop_post").style.display = "block";
-	}
-	 else {
-		 document.getElementById("pop_post").style.display = "none";
-        } 
+function display_pop(){
+    document.getElementById('wrapper2').style.display="block";
 }
+function lock_pop(){
+    document.getElementById('wrapper2').style.display="none";
+}
+//  function togg() {
+// 	 if (document.getElementById("pop_post").style.display == "none") {
+// 		 document.getElementById("pop_post").style.display = "block";
+// 	}
+// 	 else {
+// 		 document.getElementById("pop_post").style.display = "none";
+//         } 
+// }
+
+//for del btn
+function trash(){
+	document.querySelector('#title').value = '';
+	document.querySelector('#desc').value = '';
+  //   quill.setText('');
+  //   toaster('Trashed');
+  }
 
 
 // post
 var url;
 function post() {
+	document.getElementById('post_btn').innerHTML='<i class="fas fa-spinner fa-spin"></i>'
     var only_one_layer = false;
     var type = 'PNG';
     var tempCanvas = document.createElement("canvas");
@@ -57,10 +72,10 @@ function post() {
 	//console.log(c[index]);
 
 	var formdata = new FormData();
-	formdata.append('name', document.getElementById('post_name').value);
+	formdata.append('name', document.getElementById('title').value);
 	formdata.append('type', "Photo Editor");
 	formdata.append('postImg', fileData);
-	formdata.append('description', document.getElementById('post_des').value);
+	formdata.append('description', document.getElementById('desc').value);
 
 	var myHeaders = new Headers();
 
@@ -80,7 +95,18 @@ function post() {
 
 		.then(json => {
 			console.log(json);
-			alert("mabroook");
+			if(json.status=="success"){
+				// alert("mabroook");
+				document.getElementById('post_btn').innerHTML='Post';
+				document.getElementById('fail_cond').style.color="#49D907";
+				document.getElementById('fail_cond').innerHTML="Posted Successfully";
+				trash();
+				}
+				else{
+					document.getElementById('fail_cond').style.color="#FBA504";
+					document.getElementById('fail_cond').innerHTML="&nbsp;Fail!! "+json.message;
+					document.getElementById('post_btn').innerHTML='Post';
+				}
 		})
 
 		.catch((err) => {

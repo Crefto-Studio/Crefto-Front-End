@@ -4,8 +4,8 @@
 var EVENTS = new EVENTS_CLASS();
 
 //keyboard handlers
-document.onkeydown = function(e) {	return EVENTS.on_keyboard_action(e); };
-document.onkeyup = function(e) {return EVENTS.on_keyboardup_action(e); };
+// document.onkeydown = function(e) {	return EVENTS.on_keyboard_action(e); };
+// document.onkeyup = function(e) {return EVENTS.on_keyboardup_action(e); };
 //mouse
 window.ondrop = function(e) { EVENTS.upload_drop(e); };		//drop
 window.ondragover = function(e) { e.preventDefault(); };
@@ -114,202 +114,202 @@ function EVENTS_CLASS() {
 	var mouse_average_speed = 0;
 
 	//keyboard actions
-	this.on_keyboard_action = function (event) {
-		k = event.keyCode;	//console.log(k);
+	// this.on_keyboard_action = function (event) {
+	// 	k = event.keyCode;	//console.log(k);
 
-		if (k != 27) {
-			//we can not touch these events!
-			if (POP != undefined && POP.active == true){
-				//dialog active
-				return true;
-			}
-			if (document.activeElement.type == 'text' || document.activeElement.type == 'number'){
-				//text input selected
-				return true;
-			}
-		}
+	// 	if (k != 27) {
+	// 		//we can not touch these events!
+	// 		if (POP != undefined && POP.active == true){
+	// 			//dialog active
+	// 			return true;
+	// 		}
+	// 		if (document.activeElement.type == 'text' || document.activeElement.type == 'number'){
+	// 			//text input selected
+	// 			return true;
+	// 		}
+	// 	}
 		
-		//ctrl
-		if (event.ctrlKey == true) {
-			EVENTS.ctrl_pressed = true;
-		}
-		//command
-		if(event.metaKey == true){
-			EVENTS.command_pressed = true;
-			EVENTS.ctrl_pressed = true;
-		}
+	// 	//ctrl
+	// 	if (event.ctrlKey == true) {
+	// 		EVENTS.ctrl_pressed = true;
+	// 	}
+	// 	//command
+	// 	if(event.metaKey == true){
+	// 		EVENTS.command_pressed = true;
+	// 		EVENTS.ctrl_pressed = true;
+	// 	}
 		
-		//F9
-		if (k == 120) {
-			FILE.file_quicksave();
-		}
+	// 	//F9
+	// 	if (k == 120) {
+	// 		FILE.file_quicksave();
+	// 	}
 		
-		//F10
-		if (k == 121) {
-			FILE.file_quickload();
-		}
+	// 	//F10
+	// 	if (k == 121) {
+	// 		FILE.file_quickload();
+	// 	}
 		
-		//up
-		if (k == 38) {
-			if (DRAW.active_tool == 'select_tool') {
-				EDIT.save_state();
-				LAYER.layer_move_active(0, -1);
-				GUI.zoom();
-				return false;
-			}
-		}
-		//down
-		else if (k == 40) {
-			if (DRAW.active_tool == 'select_tool') {
-				EDIT.save_state();
-				LAYER.layer_move_active(0, 1);
-				GUI.zoom();
-				return false;
-			}
-		}
-		//right
-		else if (k == 39) {
-			if (DRAW.active_tool == 'select_tool') {
-				EDIT.save_state();
-				LAYER.layer_move_active(1, 0);
-				GUI.zoom();
-				return false;
-			}
-		}
-		//left
-		else if (k == 37) {
-			if (DRAW.active_tool == 'select_tool') {
-				EDIT.save_state();
-				LAYER.layer_move_active(-1, 0);
-				GUI.zoom();
-				return false;
-			}
-		}
-		//esc
-		else if (k == 27) {
-			if (POP != undefined && POP.active == true)
-				POP.hide();
-			DRAW.last_line = [];
+	// 	//up
+	// 	if (k == 38) {
+	// 		if (DRAW.active_tool == 'select_tool') {
+	// 			EDIT.save_state();
+	// 			LAYER.layer_move_active(0, -1);
+	// 			GUI.zoom();
+	// 			return false;
+	// 		}
+	// 	}
+	// 	//down
+	// 	else if (k == 40) {
+	// 		if (DRAW.active_tool == 'select_tool') {
+	// 			EDIT.save_state();
+	// 			LAYER.layer_move_active(0, 1);
+	// 			GUI.zoom();
+	// 			return false;
+	// 		}
+	// 	}
+	// 	//right
+	// 	else if (k == 39) {
+	// 		if (DRAW.active_tool == 'select_tool') {
+	// 			EDIT.save_state();
+	// 			LAYER.layer_move_active(1, 0);
+	// 			GUI.zoom();
+	// 			return false;
+	// 		}
+	// 	}
+	// 	//left
+	// 	else if (k == 37) {
+	// 		if (DRAW.active_tool == 'select_tool') {
+	// 			EDIT.save_state();
+	// 			LAYER.layer_move_active(-1, 0);
+	// 			GUI.zoom();
+	// 			return false;
+	// 		}
+	// 	}
+	// 	//esc
+	// 	else if (k == 27) {
+	// 		if (POP != undefined && POP.active == true)
+	// 			POP.hide();
+	// 		DRAW.last_line = [];
 			
-			DRAW.curve_points = [];
-			if (DRAW.select_data != false) {
-				EDIT.edit_clear();
-			}
-		}
-		//z - undo
-		else if (k == 90) {
-			//undo
-			if (EVENTS.ctrl_pressed == true){
-				EDIT.undo();
-				event.preventDefault();
-			}
-		}
-		//t - trim
-		else if (k == 84) {
-			EDIT.save_state();
-			IMAGE.trim();
-		}
-		//s - save
-		else if (k == 83) {
-			if (POP != undefined)
-				FILE.save_dialog(event);
-		}
-		//l - rotate left
-		else if (k == 76) {
-			EDIT.save_state();
-			IMAGE.rotate_resize_doc(270, WIDTH, HEIGHT);
-			IMAGE.rotate_layer({angle: 270}, canvas_active(), WIDTH, HEIGHT);
-		}
-		//r - resize
-		else if (k == 82)
-			IMAGE.resize_box();
-		//grid
-		else if (k == 71) {
-			if (GUI.grid == false)
-				GUI.grid = true;
-			else
-				GUI.grid = false;
-			GUI.draw_grid();
-		}
-		//del
-		else if (k == 46) {
-			if (DRAW.select_data != false) {
-				EDIT.save_state();
-				canvas_active().clearRect(DRAW.select_data.x, DRAW.select_data.y, DRAW.select_data.w, DRAW.select_data.h);
-				DRAW.select_data = false;
-				DRAW.select_square_action = '';
-				canvas_front.clearRect(0, 0, WIDTH, HEIGHT);
-			}
-		}
-		//shift
-		else if (k == 16){
-			EVENTS.shift_pressed = true;
-		}
-		//d
-		else if (k == 68) {
-			call_menu(LAYER, 'layer_duplicate');
-		}
-		//a
-		else if (k == 65) {	
-			if (EVENTS.ctrl_pressed == true) {
-				DRAW.select_data = {
-					x: 0,
-					y: 0,
-					w: WIDTH,
-					h: HEIGHT
-				};
-				GUI.draw_selected_area();
-				return false;
-			}
-		}
-		//v
-		else if (k == 86) {
-			EDIT.save_state();
-			if (EVENTS.ctrl_pressed == true)
-				EDIT.paste();
-		}
-		//f - fix images
-		else if (k == 70) {
-			EDIT.save_state();
-			IMAGE.auto_adjust(canvas_active(), WIDTH, HEIGHT);
-		}
-		//h - histogram	
-		else if (k == 72) {
-			IMAGE.histogram();
-		}
-		//minus
-		else if (k == 109){
-			GUI.zoom(-1);
-		}
-		//plus
-		else if (k == 107){
-			GUI.zoom(+1);
-		}
-		//n - new layer
-		else if (k == 78){
-			EDIT.save_state();
-			LAYER.layer_add();
-		}
+	// 		DRAW.curve_points = [];
+	// 		if (DRAW.select_data != false) {
+	// 			EDIT.edit_clear();
+	// 		}
+	// 	}
+	// 	//z - undo
+	// 	else if (k == 90) {
+	// 		//undo
+	// 		if (EVENTS.ctrl_pressed == true){
+	// 			EDIT.undo();
+	// 			event.preventDefault();
+	// 		}
+	// 	}
+	// 	//t - trim
+	// 	else if (k == 84) {
+	// 		EDIT.save_state();
+	// 		IMAGE.trim();
+	// 	}
+	// 	//s - save
+	// 	else if (k == 83) {
+	// 		if (POP != undefined)
+	// 			FILE.save_dialog(event);
+	// 	}
+	// 	//l - rotate left
+	// 	else if (k == 76) {
+	// 		EDIT.save_state();
+	// 		IMAGE.rotate_resize_doc(270, WIDTH, HEIGHT);
+	// 		IMAGE.rotate_layer({angle: 270}, canvas_active(), WIDTH, HEIGHT);
+	// 	}
+	// 	//r - resize
+	// 	else if (k == 82)
+	// 		IMAGE.resize_box();
+	// 	//grid
+	// 	else if (k == 71) {
+	// 		if (GUI.grid == false)
+	// 			GUI.grid = true;
+	// 		else
+	// 			GUI.grid = false;
+	// 		GUI.draw_grid();
+	// 	}
+	// 	//del
+	// 	else if (k == 46) {
+	// 		if (DRAW.select_data != false) {
+	// 			EDIT.save_state();
+	// 			canvas_active().clearRect(DRAW.select_data.x, DRAW.select_data.y, DRAW.select_data.w, DRAW.select_data.h);
+	// 			DRAW.select_data = false;
+	// 			DRAW.select_square_action = '';
+	// 			canvas_front.clearRect(0, 0, WIDTH, HEIGHT);
+	// 		}
+	// 	}
+	// 	//shift
+	// 	else if (k == 16){
+	// 		EVENTS.shift_pressed = true;
+	// 	}
+	// 	//d
+	// 	else if (k == 68) {
+	// 		call_menu(LAYER, 'layer_duplicate');
+	// 	}
+	// 	//a
+	// 	else if (k == 65) {	
+	// 		if (EVENTS.ctrl_pressed == true) {
+	// 			DRAW.select_data = {
+	// 				x: 0,
+	// 				y: 0,
+	// 				w: WIDTH,
+	// 				h: HEIGHT
+	// 			};
+	// 			GUI.draw_selected_area();
+	// 			return false;
+	// 		}
+	// 	}
+	// 	//v
+	// 	else if (k == 86) {
+	// 		EDIT.save_state();
+	// 		if (EVENTS.ctrl_pressed == true)
+	// 			EDIT.paste();
+	// 	}
+	// 	//f - fix images
+	// 	else if (k == 70) {
+	// 		EDIT.save_state();
+	// 		IMAGE.auto_adjust(canvas_active(), WIDTH, HEIGHT);
+	// 	}
+	// 	//h - histogram	
+	// 	else if (k == 72) {
+	// 		IMAGE.histogram();
+	// 	}
+	// 	//minus
+	// 	else if (k == 109){
+	// 		GUI.zoom(-1);
+	// 	}
+	// 	//plus
+	// 	else if (k == 107){
+	// 		GUI.zoom(+1);
+	// 	}
+	// 	//n - new layer
+	// 	else if (k == 78){
+	// 		EDIT.save_state();
+	// 		LAYER.layer_add();
+	// 	}
 		
-		GUI.zoom();
-		return true;
-	};
+	// 	GUI.zoom();
+	// 	return true;
+	// };
 	//keyboard release
-	this.on_keyboardup_action = function (event) {
-		k = event.keyCode;
-		//shift
-		if (k == 16)
-			EVENTS.shift_pressed = false;
-		//ctrl
-		else if (event.ctrlKey == false && EVENTS.ctrl_pressed == true) {
-			EVENTS.ctrl_pressed = false;
-		}
-		//command
-		else if(event.metaKey == false && EVENTS.command_pressed == true){
-			EVENTS.command_pressed = false;
-			EVENTS.ctrl_pressed = false;
-		}
-	};
+	// this.on_keyboardup_action = function (event) {
+	// 	k = event.keyCode;
+	// 	//shift
+	// 	if (k == 16)
+	// 		EVENTS.shift_pressed = false;
+	// 	//ctrl
+	// 	else if (event.ctrlKey == false && EVENTS.ctrl_pressed == true) {
+	// 		EVENTS.ctrl_pressed = false;
+	// 	}
+	// 	//command
+	// 	else if(event.metaKey == false && EVENTS.command_pressed == true){
+	// 		EVENTS.command_pressed = false;
+	// 		EVENTS.ctrl_pressed = false;
+	// 	}
+	// };
 	// mouse_x, mouse_y, event.pageX, event.pageY
 	this.get_mouse_position = function (event) {
 		if(event.changedTouches){
