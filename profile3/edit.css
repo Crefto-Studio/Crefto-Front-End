@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding-top: 40px;
     color: black;
-    background: #f5f6fa;
+    background: #eaeaea;
     position: relative;
     height: 100%;
 }
@@ -160,4 +160,14 @@ body {
 .trigger-btn {
     display: inline-block;
     margin: 100px auto;
+}
+.btn-primary,#file_input{
+	
+    background-color:#6222CC;
+    color: #ffffff;
+    border-color:white;
+    cursor: pointer;
+}
+#submit:hover{
+    background-color: #FBA504;
 }

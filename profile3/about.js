@@ -1,5 +1,6 @@
 
 //get user api:display user info
+var userphoto;
 window.onload=info()
 function info() {
 	let token = document.cookie;
@@ -17,6 +18,7 @@ function info() {
 		.then(json => {
 			console.log(json)
 			if (json.status == "success") {
+				userphoto=json.data.user.photo;
 				var arr = document.querySelectorAll(".user_name");
 				for (let item of arr) {
 					item.innerHTML = json.data.user.name;
@@ -85,9 +87,17 @@ for (var i = 0; i < arrow.length; i++) {
 let sidebar = document.querySelector(".sidebar");
 function toggle_bar(btn) {
 	let sidebarBtn = document.getElementById(btn);
-	console.log(sidebarBtn);
 		sidebar.classList.toggle("close");
+		if(sidebar.classList.contains('close')){
+			document.getElementById("posts_btn").style.marginLeft="-2rem";
+			document.getElementById("about_btn").style.marginLeft="-1rem";
+			document.getElementById("photo_btn").style.marginLeft="-3rem";
 
+		} else{
+			document.getElementById("posts_btn").style.marginLeft="-2rem";
+			document.getElementById("about_btn").style.marginLeft="-1rem";
+			document.getElementById("photo_btn").style.marginLeft="-2.9rem";
+		}
 }
 
 //logout
@@ -156,13 +166,13 @@ function display_gallery() {
 				text += "<div class=\"position-relative overflow-hidden\" id=\"parent\">";
 				text += "<img class=\"img-fluid w-100\" src=\"https://crefto.s3.eu-central-1.amazonaws.com/posts/" + elem.postImg+ "\">";
 				text += "<div class=\"portfolio-overlay\" id=\""+elem._id+"\">";
-				text += "<a class=\"btn btn-square btn-outline-light mx-1\" href=\"img/portfolio-1.jpg\" data-lightbox=\"portfolio\"><i class=\"fa fa-eye\"></i></a>";
+				text += "<a class=\"btn btn-square btn-outline-light mx-1\" href=\"https://crefto.s3.eu-central-1.amazonaws.com/posts/"+elem.postImg+"\" data-lightbox=\"portfolio\"><i class=\"fa fa-eye\"></i></a>";
 				text += "<a class=\"btn btn-square btn-outline-light mx-1\" href=\"\" onclick=\"fbs_click(this)\"><i class=\"fa fa-link\"></i></a>";
 				text += "<a class=\"btn btn-square btn-outline-light mx-1\" href=\"#\" onclick=\"del_post(this)\"><i class=\"far fa-trash-alt \"></i></a>";
 				text += "</div>";
 				text += "</div>";
 				text += "<div class=\"bg-light p-4\">";
-				text += "<p class=\"text-primary fw-medium mb-2\">UI / UX Design</p>";
+				text += "<p class=\"text-primary fw-medium mb-2\">"+elem.name+"</p>";
 				text += "</div>";
 				text += "</div>";
 				text += "</div>";
@@ -173,28 +183,52 @@ function display_gallery() {
 
 //delete post
 function del_post(elem) {
-		var post_id = elem.parentElement.id;
+	var post_id = elem.parentElement.id;
 		var url = "http://www.api.crefto.studio/api/v1/posts/" + post_id;
 		let token = document.cookie;
 		token = token.split("=");
-		fetch(url, {
-			headers: {
-				Authorization: `Bearer ${token[1]}`,
-			},
-			method: "DELETE",
-		}).then(response => {
-			document.getElementById('id01').style.display = 'block';
-			return response.json()
-		})
-			.then(json => {
-				if (json.status == "fail") {
-					document.getElementById("msg_del").innerHTML = json.message;
-				}
-				else {
-					document.getElementById("msg_del").innerHTML = "sucessfully deleted";
-				}
-			}
-			)
+
+	var myHeaders = new Headers();
+myHeaders.append("Authorization", `Bearer ${token[1]}`);
+
+var requestOptions = {
+  method: 'DELETE',
+  headers: myHeaders,
+  redirect: 'follow'
+};
+
+fetch(url, requestOptions)
+  .then(response => response.text())
+  .then(result => {console.log(result);
+	if(result.status != "fail"){
+		elem.parentElement.parentElement.parentElement.parentElement.style.display="none";
+	}
+})
+  .catch(error => console.log('error', error));
+		// var post_id = elem.parentElement.id;
+		// var url = "http://www.api.crefto.studio/api/v1/posts/" + post_id;
+		// let token = document.cookie;
+		// token = token.split("=");
+		// fetch(url, {
+		// 	headers: {
+		// 		Authorization: `Bearer ${token[1]}`,
+		// 	},
+		// 	method: "DELETE",
+		// }).then(response => {
+		// 	document.getElementById('id01').style.display = 'block';
+		// 	return response.json()
+		// })
+		// 	.then(json => {
+		// 		console.log("mno",json);
+		// 		if (json.status == "fail") {
+		// 			document.getElementById("msg_del").innerHTML = json.message;
+		// 		}
+		// 		else {
+		// 			document.getElementById("msg_del").innerHTML = "sucessfully deleted";
+		// 			window.location.reload();
+		// 		}
+		// 	}
+		// 	)
 }
 
 
@@ -255,7 +289,7 @@ function dis_posts() {
 			text += "<div class=\"timeline-comment\">";
 			text += "</div>";
 			text += "<div class=\"timeline-comment-box\">";
-			text += "<div class=\"user\"><img src=\"https://crefto.s3.eu-central-1.amazonaws.com/users/" + json.data.user.photo +"\"></div>";
+			text += "<div class=\"user\"><img src=\"https://crefto.s3.eu-central-1.amazonaws.com/users/" + userphoto+"\"></div>";
 			text += "<div class=\"input\">";
 			text += "<form action=\"\">";
 			text += "<div class=\"input-group\">";
@@ -306,6 +340,12 @@ function make_comment(elem) {
 
 		.then(json => {
 			console.log(json)
+			if(json.status=="success"){
+				comment_box.value=" ";
+                var x=elem.parentElement.parentElement.parentElement.parentElement.parentElement.previousElementSibling.previousElementSibling.firstElementChild.nextSibling;
+				console.log(x);
+				get_comment(x);
+			}
 		})
 };
 
@@ -326,22 +366,23 @@ function get_comment(elem) {
 			//console.log(json.data.comments.comments);
 			if(json.results==0){
 				text+="<div class=\"container\">";
-				text+="<div class=\"be-comment-block\"></div>";
+				//text+="<div class=\"be-comment-block\"></div>";
 				text+="<h1 class=\"comments-title\">Comments ("+json.results+")</h1>";
 				text+="</div>";
 				text+="</div>";
 			}
 			else{
 				text+="<div class=\"container\">";
-				text+="<div class=\"be-comment-block\"></div>";
-				text+="<h1 class=\"comments-title\">Comments ("+json.results+")</h1>";
+				//text+="<div class=\"be-comment-block\"></div>";
+				text+="<h1 class=\"comments-title\" onclick=\"hide_comment(this)\">Comments ("+json.results+")</h1>";
+				text+='<div id="hideall">'
             for(let i=0;i<json.results;i++){
 				
 				text+="<div class=\"be-comment\">";
 				text+="<div class=\"be-img-comment\">";
 				text+="<a href=\"#\">";
-				var img_user=json.data.comments.comments[i].authorPhoto.split("'");
-				text+="<img src=\"https://crefto.s3.eu-central-1.amazonaws.com/users/"+img_user[1]+"\" class=\"be-ava-comment\">";
+				var img_user=json.data.comments.comments[i].author.photo;
+				text+="<img src=\"https://crefto.s3.eu-central-1.amazonaws.com/users/"+img_user+"\" class=\"be-ava-comment\">";
 				text+="</a>";
 				text+="</div>";
 				text+="<div class=\"be-comment-content\">";
@@ -357,6 +398,7 @@ function get_comment(elem) {
 				text+="</div>";
 				
             }
+			text+='</div>'
 			text+="</div>";
 			text+="</div>";
 		}
@@ -364,3 +406,13 @@ function get_comment(elem) {
 			place.nextSibling.innerHTML=text;
 		})
 };
+
+//hide comments
+function hide_comment(elem){
+	if(elem.nextSibling.style.display=="none"){
+		elem.nextSibling.style.display="block";
+	}
+	else{
+		elem.nextSibling.style.display="none";
+	}
+}
