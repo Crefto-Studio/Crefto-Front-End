@@ -681,7 +681,7 @@ function LAYER_CLASS() {
 		document.getElementById('resize-w').style.marginLeft = W + "px";
 		document.getElementById('resize-w').style.marginTop = Math.round(H / 2) + "px";
 		document.getElementById('resize-h').style.marginLeft = Math.round(W / 2) + "px";
-		document.getElementById('resize-h').style.marginTop = H + "px";
+		document.getElementById('resize-h').style.marginTop = H+20 + "px";
 		document.getElementById('resize-wh').style.marginLeft = W + "px";
 		document.getElementById('resize-wh').style.marginTop = H + "px";
 

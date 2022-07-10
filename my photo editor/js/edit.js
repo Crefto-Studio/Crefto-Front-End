@@ -19,15 +19,22 @@ function EDIT_CLASS() {
 	 * latest 3 saved states of all layers for undo
 	 */
 	var layers_archive = [{}, {}, {}, {}, {}];
+	var layers_redo = [{}, {}, {}, {}, {}];
 	
 	/**
 	 * on undo, current data index in layers_archive array
 	 */
 	var undo_level = 0;
+	var redo_level = 0;
 	
 	//undo
 	this.edit_undo = function () {
 		this.undo();
+	};
+
+	//redo
+	this.edit_redo = function () {
+		this.redo();
 	};
 
 	//cut
@@ -137,7 +144,8 @@ function EDIT_CLASS() {
 			layers_archive[j].data[LAYER.layers[i].name].width = WIDTH;
 			layers_archive[j].data[LAYER.layers[i].name].height = HEIGHT;
 			layers_archive[j].data[LAYER.layers[i].name].getContext('2d').drawImage(document.getElementById(LAYER.layers[i].name), 0, 0);
-		}								
+		}	
+		layers_redo[0]=	layers_archive[j];						
 	};
 	//supports 3 levels undo system - more levels requires more memory
 	this.undo = function () {
@@ -185,7 +193,18 @@ function EDIT_CLASS() {
 			document.getElementById(LAYER.layers[i].name).getContext("2d").clearRect(0, 0, WIDTH, HEIGHT);
 			document.getElementById(LAYER.layers[i].name).getContext("2d").drawImage(layers_archive[j].data[LAYER.layers[i].name], 0, 0);
 		}
-		
+		layers_redo[0]=layers_archive[j];
 		GUI.zoom();
 	};
+}
+
+this.redo = function () {
+	if(undo_level==0){
+		return false;
+	}
+	for (var i = LAYER.layers.length-1; i >= 0; i--) {
+		//restore data
+		document.getElementById(LAYER.layers[i].name).getContext("2d").clearRect(0, 0, WIDTH, HEIGHT);
+		document.getElementById(LAYER.layers[i].name).getContext("2d").drawImage(layers_redo[j].data[LAYER.layers[i].name], 0, 0);
+	}
 }

@@ -86,7 +86,7 @@ function GUI_CLASS() {
 		
 		//left menu
 		var html = '';
-		var draw_colors = ['#fe2500', '#ff8a00', '#79b343', '#00b6fd', '#7417e2', ' #ffbe0b'];
+		var draw_colors = ['#6222CC', '#6222CC', '#6222CC', '#6222CC', '#6222CC', ' #6222CC'];
 		var draw_icons = ['<i class="fa-solid fa-arrow-pointer fa-2x"></i>', '<i class="fa-solid fa-object-group fa-2x"></i>', '<i class="fa-solid fa-font fa-2x"></i>',
 			'<i class="fa-solid fa-stamp fa-2x"></i>', '<i class="fa-solid fa-grip fa-2x"></i>', '<i class="fa-solid fa-crop fa-2x"></i>',
 			'<i class="fa-solid fa-maximize fa-2x"></i>'];
@@ -103,7 +103,7 @@ function GUI_CLASS() {
 		}
 
 		document.getElementById("fir_col").innerHTML = html;
-		document.getElementById("fir_col").innerHTML += '<a title="Resize" style="background:blue;" class="trn" onclick = "call_menu(IMAGE,\'image_resize\');" id = "horizontal flip" href = "#" > <i class="fa-solid fa-maximize fa-2x"></i></a >';
+		document.getElementById("fir_col").innerHTML += '<a title="Resize" style="background:#6222CC;" class="trn" onclick = "call_menu(IMAGE,\'image_resize\');" id = "horizontal flip" href = "#" > <i class="fa-solid fa-maximize fa-2x"></i></a >';
 
 		//cancel it
 		//draw colors

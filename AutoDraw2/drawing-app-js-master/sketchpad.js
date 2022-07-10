@@ -232,14 +232,20 @@ function box() {
         
 
         
-        const myJSON = JSON.stringify(res3);
-        var url = 'https://inputtools.google.com/request?ime=handwriting&app=autodraw&dbg=1&cs=1&oe=UTF-8';
+        // const myJSON = JSON.stringify(res3);
+        var url = 'https://autodraw-service-1.lusl2hv0nq5h6.us-west-2.cs.amazonlightsail.com';
+        let token = document.cookie;
+        // console.log(token);
+        token = token.split("=");
         fetch(url, {
             method: 'POST',
             headers: new Headers({
                 'Content-Type': 'application/json; charset=utf-8'
             }),
-            body: myJSON,
+            body:  JSON.stringify({
+                "token": token[1],
+                "data":res3,
+            }),
         }).then(function (response) {
             return response.json();
         })
@@ -824,5 +830,6 @@ function showSlides(n) {
   slides[slideIndex+1].style.display = "block"; 
   slides[slideIndex+2].style.display = "block"; 
 }
+
 
 

@@ -294,7 +294,7 @@ function EVENTS_CLASS() {
 	// 	GUI.zoom();
 	// 	return true;
 	// };
-	//keyboard release
+	// keyboard release
 	// this.on_keyboardup_action = function (event) {
 	// 	k = event.keyCode;
 	// 	//shift

@@ -26,7 +26,7 @@ body{
 	margin: 0px;
 	padding: 0px;
 	padding-top: 30px;
-	background-color:#111111;
+	background-color:#273f4a;;
 	font-weight: normal;
 	overflow: hidden;
 }
@@ -133,8 +133,8 @@ label{
 	display: block;
 	height: 30px;
 	padding: 5px 5px 5px 36px;
-	margin: 20px 0 10px 0;
-	background: url("../img/logo.png") no-repeat -3px 0px;
+	margin: 20px 0 -10px 0;
+	background: url("../img/logoo2.png") no-repeat 0px 0px;
 	background-size: auto 30px;
 	text-decoration: none;
 	font-weight: bold;
@@ -181,7 +181,7 @@ label{
 
 .ddsmoothmenu{
 	position:fixed;
-	top:0;
+	top:-20px;
 	left:0;
 	width:100%;
 	font:12px Arial,sans-serif;
@@ -272,12 +272,15 @@ label{
 	background: #ffffff;
 	float: none;
 	height:auto;
-	width:252px;
+	width:270px;
 	text-align: center;
 	cursor: pointer;
 }
+/* .ddsmoothmenu ul li:hover ul{
+	display: block;
+} */
 .ddsmoothmenu ul li ul li:hover{
-	background-color: gray;
+	background-color: #ccc;
 }
 .ddsmoothmenu ul li ul li a{
 	text-align:left;
@@ -480,13 +483,14 @@ label{
 
 	#sidebar_right {
 		position: absolute;
-		width: 152px;
+		width: 165px;
 		right: 0;
 		top: 0;
 		z-index: 100;
 		transition: 0.2s;
-		background-color: #727272;
+		background-color: #273f4a;
 		-webkit-transition: 0.2s;
+		margin-top: 1rem;
 	}
 
 	#sidebar_left.active {
@@ -562,12 +566,17 @@ label{
 		width: 150px;
 		background-color: #273f4a;
 		border: 1px solid #393939;
-		margin-bottom: 5px;
+		/* margin-bottom: 5px;
+		margin-top: 10px;
+		margin-left: 3px; */
+		margin: auto;
+		margin-top: 5px;
 	}
 	
 
 		#preview canvas {
 			cursor: pointer;
+			margin-top: 1px;
 		}
 
 	#menu_left_container {
@@ -593,6 +602,7 @@ label{
 		#menu_left_container .active {
 			/*background-color: #5680c1 !important;*/
 			border: white 3px solid;
+			background: var(--secondary) !important;
 		}
 
 			#menu_left_container .active .fa-solid {
@@ -601,7 +611,7 @@ label{
 
 		#menu_left_container a {
 			float: left;
-			border: 1px solid #393939;
+			border: 3px solid #fff;
 			border-radius: 50px;
 			/*background: #989898 url('../img/sprites.png') no-repeat 0px 0px;*/
 			width: 53px;
@@ -609,7 +619,8 @@ label{
 			/*margin: 0px 1px 1px 0px;*/
 			overflow: hidden;
 			display: block;
-			margin-top: 10px;
+			margin-top: 20px;
+			padding-top: -5px !important;
 		}
 
 			#menu_left_container a:hover .fa-solid {
@@ -618,6 +629,7 @@ label{
 
 			#menu_left_container a:hover {
 				border: white 3px solid;
+				
 			}
 			/*mnoooo*/
 			#menu_left_container a#pencil {
@@ -863,8 +875,8 @@ label{
 		pointer-events: none;
 	}
 
-	.trn {
-	}
+	/* .trn {
+	} */
 
 	.block {
 		border: 1px solid #393939;
@@ -906,15 +918,15 @@ label{
 
 	/* ========== 6.1 Popup ===================================================== */
 #pop_post{
-
+margin-top: -2px;
 }
-#popup,#pop_post {
+#popup {
 	position:fixed;
 	display: none;
 	top: 150px;
 	left: calc(50% - 500px / 2);
 	background-color: #273f4a;
-	border: 1px solid #000000;
+	border: 1px solid var(--primary);
 	width: 500px;
 	max-width: 100%;
 	max-height: 560px;
@@ -924,7 +936,7 @@ label{
 	font-size: 13px;
 	color: #fff;
 	z-index: 100;
-	margin-top: 7rem;
+	margin-top: 3rem;
 }
 
 		#popup h2,#pop_post h2 {
@@ -1174,6 +1186,7 @@ label{
 	top: 25%;
 	left: 40%;
 	display: none;
+	border: 1px solid var(--primary);
   }
   
   #header {
@@ -1502,29 +1515,18 @@ label{
 		border-top-color: #3e86a3;
 	  }
 	  .menu-title_3rd {
-		background: #c97676;
+		background: #88adb3;
 	  }
 	  .menu-title_3rd:hover {
-		background: #b96666;
+		background: #88adb3;
 	  }
 	  .menu-title_3rd:before {
-		border-top-color: #c97676;
+		border-top-color: #88adb3;
 	  }
 	  .menu-title_3rd:hover:before {
-		border-top-color: #b96666;
+		border-top-color: #88adb3;
 	  }
-	  .menu-title_4th {
-		background: #dbab58;
-	  }
-	  .menu-title_4th:hover {
-		background: #cb9b48;
-	  }
-	  .menu-title_4th:before {
-		border-top-color: #dbab58;
-	  }
-	  .menu-title_4th:hover:before {
-		border-top-color: #cb9b48;
-	  }
+	 
 	  .menu-dropdown {
 		min-width: 100%;
 		padding: 15px 0;
@@ -1588,6 +1590,7 @@ label{
 	  .hList{
 top:0;
 margin-top: -20rem;
+
 	  }
 
 	  /* final nav */
@@ -1608,20 +1611,20 @@ margin-top: -20rem;
 		width: 150px;
 		height: 40px;
 		padding: 12px 0 0;
-		background: #9dc852;
+		background: var(--primary);
 		text-align: center;
 		color: #ffffff;
 		font-weight: bold;
 		text-transform: uppercase;
 		transition: 0.3s background-color;
-		width: 253px;
+		width: 272.5px;
 		
 	  }
 	  .menu-title:before {
 		content: "";
 		display: block;
 		height: 0;
-		border-top: 5px solid #9dc852;
+		border-top: 5px solid var(--primary);
 		border-left: 75px solid transparent;
 		border-right: 75px solid transparent;
 		border-bottom: 0 solid #dddddd;
@@ -1632,10 +1635,12 @@ margin-top: -20rem;
 		transition: 0.2s 0.2s border-top ease-out, 0.3s border-top-color;
 	  }
 	  .menu-title:hover {
-		background: #8db842;
+		background:var(--primary);
+		
 	  }
 	  .menu-title:hover:before {
-		border-top-color: #8db842;
+		border-top-color: var(--primary);
+		
 	  }
 	  .menu:hover > .menu-title:before {
 		border-top-width: 0;
@@ -1659,43 +1664,57 @@ margin-top: -20rem;
 		transition: 0.2s 0.2s border-bottom-width ease-out;
 	  }
 	  .menu-title_2nd {
-		background: #4e96b3;
+		background: #7F00FF;
 	   
 	  }
 	  .menu-title_2nd:hover {
-		background: #3e86a3;
+		background: #7F00FF;
 	  }
 	  .menu-title_2nd:before {
-		border-top-color: #4e96b3;
+		border-top-color: #7F00FF;
 	  }
 	  .menu-title_2nd:hover:before {
-		border-top-color: #3e86a3;
+		border-top-color: #7F00FF;
 	  }
 	  .menu-title_3rd {
-		background: #c97676;
+		background: #BF00FE;
 		
 	  }
 	  .menu-title_3rd:hover {
-		background: #b96666;
+		background: #BF00FE;
 	  }
 	  .menu-title_3rd:before {
-		border-top-color: #c97676;
+		border-top-color: #BF00FE;
 	  }
 	  .menu-title_3rd:hover:before {
-		border-top-color: #b96666;
+		border-top-color: #BF00FE;
 	  }
 	  .menu-title_4th {
-		background: #dbab58;
+		background: #D677DF;
 		
 	  }
 	  .menu-title_4th:hover {
-		background: #cb9b48;
+		background: #D677DF;
 	  }
 	  .menu-title_4th:before {
-		border-top-color: #dbab58;
+		border-top-color: #D677DF;
 	  }
 	  .menu-title_4th:hover:before {
-		border-top-color: #cb9b48;
+		border-top-color: #D677DF;
+	  }
+
+	  .menu-title_5th {
+		background: #E896EB;
+		
+	  }
+	  .menu-title_5th:hover {
+		background: #E896EB;
+	  }
+	  .menu-title_5th:before {
+		border-top-color: #E896EB;
+	  }
+	  .menu-title_5th:hover:before {
+		border-top-color: #E896EB;
 	  }
 	  .menu-dropdown {
 		min-width: 100%;

@@ -32,36 +32,36 @@
     <!--mod:cursor-->
     <div id="wrapper">
         <div id="sidebar_left">
-            <a id="logo" href="">hotastic</a>
+            <a id="logo" href="">CREFTO</a>
             <div id="menu_left_container" onclick="toggle()">
                 <div id="fir_col">
 
                 </div>
                 <div id="sec_col" class="sec">
-                    <a title="vertical flip" style="background:red;" class="trn" onclick="call_menu(IMAGE, 'image_vflip');" id="vertical flip" href="#">
+                    <a title="vertical flip" style="background:#6222CC" class="trn" onclick="call_menu(IMAGE, 'image_vflip');" id="vertical flip" href="#">
                         <i class="fa-solid fa-up-down fa-2x"></i>
                     </a>
-                    <a title="horizontal flip" style="background:blue;" class="trn" onclick="call_menu(IMAGE, 'image_hflip')" id="horizontal flip" href="#">
+                    <a title="horizontal flip" style="background:#6222CC;" class="trn" onclick="call_menu(IMAGE, 'image_hflip')" id="horizontal flip" href="#">
                         <i class="fa-solid fa-left-right fa-2x"></i>
                     </a>
-                    <a title="Rotate" style="background:blue;" class="trn" onclick="call_menu(IMAGE, 'image_rotate_right');" id="horizontal flip" href="#">
+                    <a title="Rotate" style="background:#6222CC;" class="trn" onclick="call_menu(IMAGE, 'image_rotate_right');" id="horizontal flip" href="#">
                         <i class="fa-solid fa-rotate fa-2x"></i>
                     </a>
-                    <a title="Angle Rotation" style="background:blue;" class="trn" onclick="call_menu(IMAGE, 'image_rotate');" id="horizontal flip" href="#">
+                    <a title="Angle Rotation" style="background:#6222CC;" class="trn" onclick="call_menu(IMAGE, 'image_rotate');" id="horizontal flip" href="#">
                         <i class="fa-solid fa-compass-drafting fa-2x"></i>
                     </a>
-                    <a title="Color Correction" style="background:blue;" class="trn" onclick="call_menu(IMAGE, 'image_colors');" id="horizontal flip" href="#">
+                    <a title="Color Correction" style="background:#6222CC;" class="trn" onclick="call_menu(IMAGE, 'image_colors');" id="horizontal flip" href="#">
                         <i class="fa-solid fa-sliders fa-2x"></i>
                     </a>
-                    <a title="Effects" style="background:blue;" class="trn" onclick="call_menu(EFFECTS, 'effects_bw');" id="horizontal flip" href="#">
+                    <a title="Effects" style="background:#6222CC;" class="trn" onclick="call_menu(EFFECTS, 'effects_bw');" id="horizontal flip" href="#">
                         <i class="fa-solid fa-fire-flame-simple fa-2x"></i>
                     </a>
-                    <a title="Borders" style="background:blue;" class="trn" onclick="call_menu(TOOLS, 'tools_borders');" id="horizontal flip" href="#">
+                    <a title="Borders" style="background:#6222CC;" class="trn" onclick="call_menu(TOOLS, 'tools_borders');" id="horizontal flip" href="#">
                         <i class="fa-solid fa-vector-square fa-2x"></i>
                     </a>
-                    <a title="share" style="background:blue;" class="trn"  onclick="togg()" id="prof_share" href="#">
+                    <!-- <a title="share" style="background:#6222CC;" class="trn"  onclick="display_pop()" id="prof_share" href="#">
                         <i class="fa-solid fa-circle-plus fa-2x"></i>
-                    </a>
+                    </a> -->
                 </div>
             </div>
             <!---  <div style="clear:both;"></div>-->
@@ -159,6 +159,7 @@
                     <li onclick="call_menu(FILE, 'file_open');""><a class="trn dots"  href="#">Open</a></li>
                     <li onclick="call_menu(FILE, 'file_open_url');"><a class="trn dots"  href="#">Open URL</a></li>
                     <li onclick="call_menu(FILE, 'file_save');"><a class="trn dots"  href="#">Save as</a></li>
+                    <li onclick="display_pop()"><a class="trn dots"  href="#">Share</a></li>
                     <li onclick="call_menu(FILE, 'file_print');"><a class="trn dots" href="#">Print</a></li>
                     
 
@@ -174,7 +175,7 @@
                   <h2 class="menu-title menu-title_2nd">Edit</h2>
                 <ul class="menu-dropdown">
                     <li onclick="call_menu(EDIT, 'edit_undo');"><a class="trn" onclick="call_menu(EDIT, 'edit_undo');" href="#">Undo</a></li>
-                    
+                    <li onclick="call_menu(EDIT, 'edit_undo');"><a class="trn" onclick="call_menu(EDIT, 'edit_redo');" href="#">redo</a></li>
                     <li onclick="call_menu(EDIT, 'edit_cut');"><a class="trn" onclick="call_menu(EDIT, 'edit_cut');" href="#">Cut selection</a></li>
                     <li onclick="call_menu(EDIT, 'edit_copy');"><a class="trn" onclick="call_menu(EDIT, 'edit_copy');" href="#">Copy selection</a></li>
                     <li onclick="call_menu(EDIT, 'edit_paste');"><a class="trn" onclick="call_menu(EDIT, 'edit_paste');" href="#">Paste selection</a></li>
@@ -204,7 +205,7 @@
                         </ul>
                     </li>
                     
-                    <li><a class="trn dots" onclick="call_menu(IMAGE, 'image_resize');" href="#">Resize</a></li>
+                    <li onclick="call_menu(IMAGE, 'image_resize');"><a class="trn dots" onclick="call_menu(IMAGE, 'image_resize');" href="#">Resize</a></li>
                     <li class="more">
                         <a class="trn" href="#">Rotate</a>
                         <ul>
@@ -267,7 +268,7 @@
             </li>
             <li>
                 <a class="icon effects trn menu" href="#">
-                  <h2 class="menu-title">Effects</h2>
+                  <h2 class="menu-title menu-title_5th">Effects</h2>
                 <ul id="effects_list" class="menu-dropdown">
                     <li><a class="trn dots" onclick="call_menu(EFFECTS, 'effects_bw');" href="#">Black and White</a>
                     <li class="more">
@@ -339,13 +340,40 @@
     <div style="display:none;" id="tmp"></div>
     <div id="popup"></div>
 
-    <div id="pop_post" style="display:none">
+    <!-- <div id="pop_post2" style="display:none">
         <h2>Post</h2>
         <input type="text" id="post_name" />
         <textarea id="post_des"></textarea>
         <button onclick="post()">ok</button>
         <button onclick="this.parentElement.style.display='none'">cancel</button>
-    </div>
+    </div> -->
+
+    <div id="wrapper2">
+        <div id="header" class="noselect">
+            New Post
+            <button onclick="lock_pop()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div id="content">
+          <input id="title" type="text" placeholder="Your title here..."></input>
+            <div id="triangle-bottomright"></div>
+          <div id="editor">
+            <textarea id="desc" type="text" placeholder="Your description here..."></textarea>
+          </div>
+          <div id="footer">
+            <div id="footer-left">
+              <button class="btn btn-primary" id="post_btn" onclick="post()">Post</button>
+             
+            </div>
+            <div id="footer-right">
+              <button class="btn btn-secondary"  onclick="trash()">
+                <i class="far fa-trash-alt"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <br>
+        <p id="fail_cond" style="text-align: center;""></p>
+      </div>
 
     <script src="vendor/jquery/jquery.js"></script>
     <script src="vendor/jquery/jquery-migrate.js"></script>
