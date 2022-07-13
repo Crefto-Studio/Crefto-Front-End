@@ -242,8 +242,9 @@ function box() {
             "data":res3,});
             console.log(test);
         var url = 'https://autodraw-service-1.lusl2hv0nq5h6.us-west-2.cs.amazonlightsail.com';
-       
+        var bar=document.getElementById("hide2");
         setTimeout(() => {
+            bar.innerHTML="";
             fetch(url, {
                 method: 'POST',
                 headers: new Headers({
@@ -262,7 +263,7 @@ function box() {
                 var test=JSON.parse(jsonResponse);
                 console.log(test);
     
-                var bar=document.getElementById("hide2");
+                
                 var text="";
                 for(let i=0;i<10;i++){
                   text+='<img id="mno" src="https://autodraw.s3.us-west-2.amazonaws.com/SVGICON/SVGICON/'+test[i].image+'" onclick="func(this)" width="50" height="50"/>';
@@ -623,7 +624,7 @@ document.onkeydown = KeyPress;
  */
 function downloadCanvas(link, canvasId, context_normal, filename) {
     context_normal.drawImage(canvas, 0, 0);
-    // context_normal.drawImage(canvas2, 0, 0);
+    context_normal.drawImage(canvas2, 0, 0);
 
     link.href = document.getElementById(canvasId).toDataURL();
     console.log(link.href);

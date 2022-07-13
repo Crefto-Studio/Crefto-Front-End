@@ -140,6 +140,37 @@ window.onclick = function (event) {
 }
 
 
+//toggle text in nav button
+window.onload =toggle_text();
+ function toggle_text() {	
+	if (document.cookie.indexOf('AuthTokenCookie=') != -1) {
+		//var user_id = localStorage.getItem('user_id');
+		let token = document.cookie;
+		token = token.split("=");
+		fetch("http://www.api.crefto.studio/api/v1/users/me", {
+			headers: {
+				Authorization: `Bearer ${token[1]}`
+			}
+		})
+
+			.then(response => response.json())
+
+			.then(json => {
+				console.log(json)
+				if (json.status == "success") {
+					document.getElementById('username').innerHTML = ' ' + json.data.user.name;
+					document.getElementById('logout_btn').style.display = 'block';
+				}
+			})
+	}
+	else {
+		document.getElementById('username').innerHTML = "Sign Up / Sign In";
+	}
+	
+}
+
+
+
 //registerd users count
 function regisre_users() {
 	fetch("http://www.api.crefto.studio/api/v1/users")
@@ -174,35 +205,7 @@ function images() {
 window.onload = images();
 
 
-//toggle text in nav button
-window.onload =toggle_text();
- function toggle_text() {	
-	if (document.cookie.indexOf('AuthTokenCookie=') != -1) {
-		//var user_id = localStorage.getItem('user_id');
-		let token = document.cookie;
-		token = token.split("=");
-		fetch("http://www.api.crefto.studio/api/v1/users/me", {
-			headers: {
-				Authorization: `Bearer ${token[1]}`
-			}
-		})
 
-			.then(response => response.json())
-
-			.then(json => {
-				console.log(json)
-				if (json.status == "success") {
-					document.getElementById('username').innerHTML = ' ' + json.data.user.name;
-					document.getElementById('logout_btn').style.display = 'block';
-				}
-			})
-	}
-	else {
-		console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-		document.getElementById('username').innerHTML = "Sign Up / Sign In";
-	}
-	
-}
 
 
 //send_feedback
