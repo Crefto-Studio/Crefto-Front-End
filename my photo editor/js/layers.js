@@ -25,37 +25,6 @@ function LAYER_CLASS() {
 	 */
 	this.layer_max_index = 0;
 
-	//cancel add new layer
-	/*
-	//new layer
-	this.layer_new = function () {
-		EDIT.save_state();
-		this.layer_add();
-	};
-	*/
-
-	//cancel translation: change position of photo
-	/*
-	//remaps layer at different position
-	this.layer_translate = function () {
-		POP.add({name: "x", title: "X position:", value: 0});
-		POP.add({name: "y", title: "Y position:", value: 0});
-		POP.show('Translate to', [LAYER, 'layer_translate_custom']);	
-	};
-	
-	//transalte handler for layer_translate()
-	this.layer_translate_custom = function(user_response){
-		EDIT.save_state();
-		var x = parseInt(user_response.x);
-		var y = parseInt(user_response.y);
-		
-		//move
-		var tmp = canvas_active().getImageData(0, 0, WIDTH, HEIGHT);
-		canvas_active().clearRect(0, 0, WIDTH, HEIGHT);
-		canvas_active().putImageData(tmp, x, y);
-	};
-	*/
-
 	
 	//removes all layers
 	this.remove_all_layers = function(){
@@ -299,128 +268,12 @@ function LAYER_CLASS() {
 		document.getElementById("pop_data_param1").select();
 	};
 
-	//cancel trim:don't work
-	/*
-	//trim
-	this.layer_trim = function () {
-		EDIT.save_state();
-		IMAGE.trim(this.layers[LAYER.layer_active].name, true);
-	};
-	*/
 
 	//resize
 	this.layer_resize = function () {
 		IMAGE.resize_box();
 	};
 
-	//cancel it: similar to delete
-	/*
-	//clear
-	this.layer_clear = function () {
-		EDIT.save_state();
-		canvas_active().clearRect(0, 0, WIDTH, HEIGHT);
-	};
-	*/
-
-	//cancel it
-	/*
-	//show differences
-	this.layer_differences = function () {
-		if (parseInt(LAYER.layer_active) + 1 >= this.layers.length) {
-			POP.add({html: 'This can not be last layer'});
-			POP.show('Error', '');
-			return false;
-		}
-
-		POP.add({name: "param1", title: "Sensitivity:", value: "0", range: [0, 255]});
-		POP.show(
-			'Differences', 
-			function (response) {
-				var param1 = parseInt(response.param1);
-				LAYER.calc_differences(param1);
-			},
-			function (user_response, canvas_preview, w, h) {
-				var param1 = parseInt(user_response.param1);
-				LAYER.calc_differences(param1, canvas_preview, w, h);
-			}
-		);
-	};
-	*/
-
-
-	//cancel it: merge layer with the layer under it
-	/*
-	//merge
-	this.layer_merge_down = function () {
-		var compositions = ["source-over", "source-in", "source-out", "source-atop",
-			"destination-over", "destination-in", "destination-out", "destination-atop",
-			"lighter", "darker", "copy", "xor"];
-
-		var blend_modes = ["normal", "multiply", "screen", "overlay", "darken", "lighten",
-			"color-dodge", "color-burn", "hard-light", "soft-light", "difference",
-			"exclusion", "hue", "saturation", "color", "luminosity"];
-
-		if (LAYER.layer_active + 1 >= this.layers.length) {
-			POP.add({html: 'This can not be last layer.'});
-			POP.show('Error', '');
-			return false;
-		}
-		POP.add({name: "param1", title: "Composition:", values: compositions});
-		POP.add({name: "param2", title: "Blend:", values: blend_modes});
-		POP.add({name: "param3", title: "Mode:", values: ["Composite", "Blend"]});
-		POP.show(
-			'Merge',
-			function (response) {
-				var param1 = response.param1;
-				var param2 = response.param2;
-				var param3 = response.param3;
-
-				EDIT.save_state();
-				
-				//copy
-				var tmp_data = document.createElement("canvas");
-				tmp_data.width = WIDTH;
-				tmp_data.height = HEIGHT;
-				tmp_data.getContext("2d").drawImage(LAYER.canvas_active(true), 0, 0);
-
-				//paste
-				LAYER.canvas_active().save();
-				LAYER.canvas_active().clearRect(0, 0, WIDTH, HEIGHT);
-				LAYER.canvas_active().drawImage(document.getElementById(LAYER.layers[LAYER.layer_active + 1].name), 0, 0);
-				
-				if (param3 == "Composite")
-					LAYER.canvas_active().globalCompositeOperation = param1;
-				else
-					LAYER.canvas_active().globalCompositeOperation = param2;
-				LAYER.canvas_active().drawImage(tmp_data, 0, 0);
-				LAYER.canvas_active().restore();
-
-				//remove next layer
-				LAYER.layer_remove(LAYER.layer_active + 1);
-				LAYER.layer_renew();
-			},
-			function (response, canvas_preview, w, h) {
-				var param1 = response.param1;
-				var param2 = response.param2;
-				var param3 = response.param3;
-
-				//paste
-				canvas_preview.save();
-				canvas_preview.clearRect(0, 0, w, h);
-				LAYER.layer_active++;
-				canvas_preview.drawImage(LAYER.canvas_active(true), 0, 0, WIDTH, HEIGHT, 0, 0, w, h);
-				LAYER.layer_active--;
-				
-				if (param3 == "Composite")
-					canvas_preview.globalCompositeOperation = param1;
-				else
-					canvas_preview.globalCompositeOperation = param2;
-				canvas_preview.drawImage(LAYER.canvas_active(true), 0, 0, WIDTH, HEIGHT, 0, 0, w, h);
-				canvas_preview.restore();
-			}
-		);
-	};
-	*/
 
 	//flatten all
 	this.layer_flatten = function () {
@@ -538,23 +391,6 @@ function LAYER_CLASS() {
 		GUI.redraw_preview();
 	};
 
-	//i think it related to translator which we cancel it
-	/*
-	this.layer_move_active = function (x, y) {
-		var distance = 10;
-		if (EVENTS.ctrl_pressed == true)
-			distance = 50;
-		if (EVENTS.shift_pressed == true)
-			distance = 1;
-
-		//move
-		dx = x * distance;
-		dy = y * distance;
-		var tmp = canvas_active().getImageData(0, 0, WIDTH, HEIGHT);
-		canvas_active().clearRect(0, 0, WIDTH, HEIGHT);
-		canvas_active().putImageData(tmp, dx, dy);
-	};
-	*/
 
 	this.select_layer = function (i) {
 		if (LAYER.layer_active != i) {
@@ -625,40 +461,7 @@ function LAYER_CLASS() {
 			canvas_front.clearRect(0, 0, WIDTH, HEIGHT);
 		}
 	};
-	/* cancel info
-	this.update_info_block = function () {
-		//show size
-		document.getElementById('mouse_info_size').innerHTML = WIDTH + "x" + HEIGHT;
-		
-		//show mouse position
-		var x = 0;
-		var y = 0;
-		if (EVENTS.mouse != undefined) {
-			x = EVENTS.mouse.x;
-			y = EVENTS.mouse.y;
-		}
-		if(EVENTS.mouse.valid == true){
-			document.getElementById('mouse_info_mouse').innerHTML = x + "x" + y;
-		}
-		else{
-			//mouse is not inside canvas
-			document.getElementById('mouse_info_mouse').innerHTML = '';
-		}
-		
-		//show selected area info
-		if (DRAW.select_data != false) {
-			document.getElementById('mouse_info_xy').innerHTML = DRAW.select_data.x + ", " + DRAW.select_data.y;
-			document.getElementById('mouse_info_area').innerHTML = DRAW.select_data.w + ", " + DRAW.select_data.h;
-			
-			document.getElementById('mouse_info_selected').style.display = 'block';
-		}
-		else{
-			document.getElementById('mouse_info_xy').innerHTML = '';
-			document.getElementById('mouse_info_area').innerHTML = '';
-			document.getElementById('mouse_info_selected').style.display = 'none';
-		}
-	};
-	*/
+
 
 	this.set_canvas_size = function (repaint) {
 		var ratio = WIDTH/HEIGHT;
@@ -754,68 +557,7 @@ function LAYER_CLASS() {
 			return document.getElementById(LAYER.layers[LAYER.layer_active].name);
 	};
 
-	//used in difference whish we cancel it
-	/*
-	this.calc_differences = function (sensitivity, canvas_preview, w, h) {
-		vlayer_active = parseInt(LAYER.layer_active);
-		//first layer
-		var img1 = canvas_active().getImageData(0, 0, WIDTH, HEIGHT);
-		var imgData1 = img1.data;
-
-		//second layer
-		var context2 = document.getElementById(this.layers[vlayer_active + 1].name).getContext("2d");
-		var img2 = context2.getImageData(0, 0, WIDTH, HEIGHT);
-		var imgData2 = img2.data;
-
-		//result layer
-		if (canvas_preview == undefined) {
-			//add differences layer
-			LAYER.layer_add();
-			canvas_active().rect(0, 0, WIDTH, HEIGHT);
-			canvas_active().fillStyle = "#ffffff";
-			canvas_active().fill();
-			var img3 = canvas_active().getImageData(0, 0, WIDTH, HEIGHT);
-		}
-		else {
-			//work on preview layer
-			var canvas_tmp = document.createElement("canvas");
-			canvas_tmp.width = WIDTH;
-			canvas_tmp.height = HEIGHT;
-			var img3 = canvas_tmp.getContext("2d").getImageData(0, 0, WIDTH, HEIGHT);
-		}
-		var imgData3 = img3.data;
-		for (var xx = 0; xx < WIDTH; xx++) {
-			for (var yy = 0; yy < HEIGHT; yy++) {
-				var x = (xx + yy * WIDTH) * 4;
-				if (Math.abs(imgData1[x] - imgData2[x]) > sensitivity
-					|| Math.abs(imgData1[x + 1] - imgData2[x + 1]) > sensitivity
-					|| Math.abs(imgData1[x + 2] - imgData2[x + 2]) > sensitivity
-					|| Math.abs(imgData1[x + 3] - imgData2[x + 3]) > sensitivity) {
-					imgData3[x] = 255;
-					imgData3[x + 1] = 0;
-					imgData3[x + 2] = 0;
-					imgData3[x + 3] = 255;
-				}
-			}
-		}
-		if (canvas_preview == undefined)
-			canvas_active().putImageData(img3, 0, 0);
-		else {
-			canvas_tmp.getContext("2d").rect(0, 0, WIDTH, HEIGHT);
-			canvas_tmp.getContext("2d").fillStyle = "#ffffff";
-			canvas_tmp.getContext("2d").fill();
-			canvas_tmp.getContext("2d").putImageData(img3, 0, 0);
-			canvas_preview.clearRect(0, 0, w, h);
-
-			canvas_preview.save();
-			canvas_preview.scale(w / WIDTH, h / HEIGHT);
-			canvas_preview.drawImage(canvas_tmp, 0, 0);
-			canvas_preview.restore();
-		}
-	};
-	*/
-
-
+	
 	/**
 	 * exports all layers to canvas for saving
 	 * 

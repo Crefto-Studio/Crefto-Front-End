@@ -15,72 +15,8 @@ function FILE_CLASS() {
 		exif: [],
 	};
 
-
-
 	
-
-	//cancel new file
-	//new
-	/*
-	this.file_new = function () {
-		var w = WIDTH;
-		var h = HEIGHT;
-		var resolutions = ['Custom'];
-		for(var i in GUI.common_dimensions){
-			resolutions.push(GUI.common_dimensions[i][0]+'x'+GUI.common_dimensions[i][1]+' - '+GUI.common_dimensions[i][2]);
-		}
-		
-		var save_resolution_cookie = HELPER.getCookie('save_resolution');
-		if(save_resolution_cookie == '')
-			save_resolution = 'No';
-		else{
-			save_resolution = 'Yes';
-			var last_resolution = JSON.parse(save_resolution_cookie);
-			w = parseInt(last_resolution[0]);
-			h = parseInt(last_resolution[1]);
-		}
-		
-		POP.add({name: "width", title: "Width:", value: w});
-		POP.add({name: "height", title: "Height:", value: h});
-		POP.add({name: "resolution", title: "Resolution:", values: resolutions});
-		POP.add({name: "transparency", title: "Transparent:", values: ['Yes', 'No']});
-		POP.add({name: "save_resolution", title: "Save resolution:", value: save_resolution, values: ['Yes', 'No']});
-		POP.show(
-			'New file...', 
-			function (response) {
-				var width = parseInt(response.width);
-				var height = parseInt(response.height);
-				var resolution = response.resolution;
-				var save_resolution = response.save_resolution;
-				
-				if(resolution != 'Custom'){
-					var dim = resolution.split(" ");
-					dim = dim[0].split("x");
-					width = dim[0];
-					height = dim[1];
-				}
-				if (response.transparency == 'Yes')
-					GUI.TRANSPARENCY = true;
-				else
-					GUI.TRANSPARENCY = false;
-
-				GUI.ZOOM = 100;
-				WIDTH = width;
-				HEIGHT = height;
-				MAIN.init();
-				
-				if(save_resolution == 'No')
-					save_resolution = '';
-				else {
-					save_resolution = JSON.stringify([WIDTH, HEIGHT]);
-				}				
-				HELPER.setCookie('save_resolution', save_resolution);
-			}
-		);
-	};*/
-
 	
-
 	//open 
 	this.file_open = function () {
 		EDIT.save_state();
@@ -183,9 +119,6 @@ function FILE_CLASS() {
 	};
 
 
-
-
-
 	//open url
 	this.file_open_url = function(){
 		POP.add({name: "url", title: "URL:", value: ""});
@@ -241,12 +174,7 @@ function FILE_CLASS() {
 	this.SAVE_TYPES = [
 		"PNG - Portable Network Graphics",	//default
 		"JPG - JPG/JPEG Format",		//autodetect on photos where png useless?
-		//	"JSON - Full layers data",		//aka PSD
-	 	// "GIF - Graphics Interchange Format",//animated GIF
-		//	"WEBP - Weppy File Format",		//chrome only
-		//	"BMP - Windows Bitmap",			//firefox only
 	];
-
 
 	//save
 	this.file_save = function () {
@@ -254,18 +182,13 @@ function FILE_CLASS() {
 	};
 
 
-
-
 	//print
 	this.file_print = function () {
 		window.print();
 	};
 
-
-	
 	
 	//inside save as//
-
 	this.save_dialog = function (e) {
 		//find default format
 		var save_default = this.SAVE_TYPES[0];	//png
@@ -281,14 +204,7 @@ function FILE_CLASS() {
 
 		POP.add({name: "name", title: "File name:", value: this.SAVE_NAME});
 		POP.add({name: "type", title: "Save as type:", values: this.SAVE_TYPES, value: save_default, onchange: "FILE.save_dialog_onchange(this)"});
-
-		//cancel jpeg quality
-	//	POP.add({ name: "quality", title: "Quality (jpeg):", value: 90, range: [1, 100], onchange: "FILE.save_dialog_onchange(this)" });
-		// POP.add({name: "delay", title: "Gif delay (in ms):", value: 500});
 		POP.add({name: "layers", title: "Save layers:", values: ['All', 'Selected'], onchange: "FILE.save_dialog_onchange(this)"});
-
-		//cancel option of select file size
-		//POP.add({name: "calc_size", title: "Show file size:", values: ['No','Yes'], value:calc_size_value, onchange: "FILE.save_dialog_onchange(this)"});
 		POP.add({title: "File size:", html: '<span id="file_size">-</span>'});
 		POP.show('Save as', [FILE, 'save']);
 		document.getElementById("pop_data_name").select();
@@ -312,12 +228,8 @@ function FILE_CLASS() {
 		//make size always calculated
 		var calc_size = true/*document.getElementById("pop_data_calc_size_poptmp1").checked*/;
 
-
 		//set the quality of jpeg const
 		var quality = 90/* document.getElementById("pop_data_quality").value*/;
-		/*if (quality > 100 || quality < 1 || isNaN(quality) == true)
-			quality = 90;
-		quality = quality / 100;*/
 		
 		var type = null;
 		for(var i in this.SAVE_TYPES){
@@ -356,51 +268,6 @@ function FILE_CLASS() {
 			tempCanvas.toBlob(function (blob) {
 				_this.update_file_size(blob.size);
 			}, "image/jpeg", quality);
-		}
-
-			/* cancel sizes of other types of images
-			 * 
-		else if (type == 'WEBP') {
-			//WEBP - new format for chrome only
-			var data_header = "image/webp";
-			
-			//check support
-			if(this.check_format_support(tempCanvas, data_header, false) == false){
-				this.update_file_size('-');
-				return;
-			}
-			
-			tempCanvas.toBlob(function (blob) {
-				_this.update_file_size(blob.size);
-			}, data_header);
-		}
-		else if (type == 'BMP') {
-			//bmp
-			var data_header = "image/bmp";
-			
-			//check support
-			if(this.check_format_support(tempCanvas, data_header, false) == false){
-				this.update_file_size('-');
-				return;
-			}
-			
-			tempCanvas.toBlob(function (blob) {
-				_this.update_file_size(blob.size);
-			}, data_header);
-		}
-			
-		else if (type == 'JSON') {
-			//json
-			var data_json = this.export_as_json();
-			
-			var blob = new Blob([data_json], {type: "text/plain"});
-			this.update_file_size(blob.size);
-		}*/
-
-		else if (type == 'GIF') {
-			//gif
-			//want to calculate gif size
-			this.update_file_size('-');
 		}
 	};
 	
@@ -444,13 +311,6 @@ function FILE_CLASS() {
 			type = 'PNG';
 		else if (HELPER.strpos(fname, '.jpg') !== false)
 			type = 'JPG';
-			/*
-		else if (HELPER.strpos(fname, '.json') !== false)
-			type = 'JSON';
-		else if (HELPER.strpos(fname, '.bmp') !== false)
-			type = 'BMP';
-		else if (HELPER.strpos(fname, '.webp') !== false)
-			type = 'WEBP';*/
 		
 		//save type as cookie
 		var save_default = this.SAVE_TYPES[0]; //png
@@ -492,74 +352,7 @@ function FILE_CLASS() {
 				saveAs(blob, fname);
 			}, "image/jpeg", quality);
 		}
-			/*
-		else if (type == 'WEBP') {
-			//WEBP - new format for chrome only
-			if (HELPER.strpos(fname, '.webp') == false)
-				fname = fname + ".webp";
-			var data_header = "image/webp";
-			
-			//check support
-			if(this.check_format_support(tempCanvas, data_header) == false)
-				return false;		
-			
-			tempCanvas.toBlob(function (blob) {
-				saveAs(blob, fname);
-			}, data_header);
-		}
-		else if (type == 'BMP') {
-			//bmp
-			if (HELPER.strpos(fname, '.bmp') == false)
-				fname = fname + ".bmp";
-			var data_header = "image/bmp";
-			
-			//check support
-			if(this.check_format_support(tempCanvas, data_header) == false)
-				return false;
-			
-			tempCanvas.toBlob(function (blob) {
-				saveAs(blob, fname);
-			}, data_header);
-		}
-		else if (type == 'JSON') {
-			//json - full data with layers
-			if (HELPER.strpos(fname, '.json') == false)
-				fname = fname + ".json";
-			
-			var data_json = this.export_as_json();
-			
-			var blob = new Blob([data_json], {type: "text/plain"});
-			//var data = window.URL.createObjectURL(blob); //html5
-			saveAs(blob, fname);
-		}*/
-		else if (type == 'GIF') {
-			//gif
-			var cores = navigator.hardwareConcurrency || 4;
-			var gif_settings = {
-				workers: cores,
-				quality: 10, //1-30, lower is better
-				repeat: 0,
-				width: WIDTH,
-				height: HEIGHT,
-				dither: 'FloydSteinberg-serpentine',
-				workerScript: 'vendor/gif.js/dist/gif.worker.js',
-			};
-			if(GUI.TRANSPARENCY == true){
-				gif_settings.transparent = 'rgba(0,0,0,0)';
-			}
-			var gif = new GIF(gif_settings);
-			
-			//add frames
-			for(var i = LAYER.layers.length - 1; i >= 0; i--){
-				if (LAYER.layers[i].visible == false)
-					continue;
-				gif.addFrame(document.getElementById(LAYER.layers[i].name).getContext("2d"), {copy: true, delay: delay});
-			}
-			gif.render();
-			gif.on('finished', function(blob) {
-				saveAs(blob, fname);
-			});
-		}
+		
 	};
 	
 	this.check_format_support = function(canvas, data_header, show_error){
@@ -708,60 +501,5 @@ function FILE_CLASS() {
 		}
 	};
 
-
-	/*
-	//cancel quick save
-	this.file_quicksave = function(){
-		//save image data
-		var data_json = this.export_as_json();
-		if(data_json.length > 5000000){
-			POP.add({html: 'Sorry, image is too big, max 5 MB.'});
-			POP.show('Error', '');
-			return false;
-		}
-		localStorage.setItem('quicksave_data', data_json);
-		
-		//save settings
-		settings = {
-			color: COLOR,
-			active_tool: DRAW.active_tool,
-			zoom: GUI.ZOOM,
-		};
-		settings = JSON.stringify(settings);
-		localStorage.setItem('quicksave_settings', settings);
-	};*/
-
-
-
-	/*
-	 * cancel quick load
-	this.file_quickload = function(){
-		//load image data
-		var json = localStorage.getItem('quicksave_data');
-		if(json == '' || json == null){
-			//nothing was found
-			return false;
-		}
-		this.load_json(json);
-		GUI.zoom_auto(true);
-		
-		//load settings
-		var settings = localStorage.getItem('quicksave_settings');
-		if(settings == '' || settings == null){
-			//nothing was found
-			return false;
-		}
-		settings = JSON.parse(settings);
-		
-		//load color
-		COLOR = settings.color;
-		GUI.sync_colors();
-		
-		//load active tool
-		GUI.action(settings.active_tool);
-		
-		//load zoom
-		GUI.zoom(settings.zoom, false);
-	};*/
 
 }

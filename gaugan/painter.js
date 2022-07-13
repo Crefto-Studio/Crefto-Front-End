@@ -604,4 +604,11 @@ function trash(){
 		})
 }
 
+window.onload=function(){
+    var jsonResponse='[[[5,1],[0,1]],[[0,1],[0,1]],[[0,1],[0,1]]]';
+    var test=JSON.parse(jsonResponse);
+    console.log(test);
+    console.log(test[0][0][0]);
+    }
+
 

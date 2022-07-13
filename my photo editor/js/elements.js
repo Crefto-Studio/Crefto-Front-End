@@ -8,21 +8,9 @@ var EL = new ELEMENTS_CLASS();
  * @author ViliusL
  */
 function ELEMENTS_CLASS() {
-	//cancel it
-	/*
-	//draw lines
-	this.line = function(ctx, from_x, from_y, to_x, to_y, size){
-		ctx.beginPath();
-		if(size != undefined)
-			ctx.lineWidth = size;
-		ctx.moveTo(from_x + 0.5, from_y + 0.5);
-		ctx.lineTo(to_x + 0.5, to_y + 0.5);
-		ctx.stroke();
-	};
-	*/
 
-	
-	//draws rectangle
+
+	//draws rectangle:usd in borders
 	this.rectangle = function (ctx, x, y, width, height, fill, stroke) {
 		x = x + 0.5;
 		y = y + 0.5;
@@ -51,50 +39,6 @@ function ELEMENTS_CLASS() {
 	};
 	
 
-	//cancel it
-	/*
-	//draws square
-	this.square = function (ctx, x, y, width, height, fill, stroke) {
-		x = x + 0.5;
-		y = y + 0.5;
-		if (typeof stroke == "undefined")
-			stroke = true;
-		if(fill == false && stroke == undefined)
-			stroke = true;
-		
-		if (Math.abs(width) < Math.abs(height)){
-			if(width > 0)
-				width = Math.abs(height);
-			else
-				width = -Math.abs(height);
-		}
-		else{
-			if(height > 0)
-				height = Math.abs(width);
-			else
-				height = -Math.abs(width);
-		}
-		
-		ctx.beginPath();
-		ctx.moveTo(x, y);
-		ctx.lineTo(x + width, y);
-		ctx.quadraticCurveTo(x + width, y, x + width, y);
-		ctx.lineTo(x + width, y + height);
-		ctx.quadraticCurveTo(x + width, y + height, x + width, y + height);
-		ctx.lineTo(x, y + height);
-		ctx.quadraticCurveTo(x, y + height, x, y + height);
-		ctx.lineTo(x, y);
-		ctx.quadraticCurveTo(x, y, x, y);
-		ctx.closePath();
-		if (stroke) {
-			ctx.stroke();
-		}
-		if (fill) {
-			ctx.fill();
-		}
-	};
-	*/
-
 	// used in clone option
 	this.circle = function (ctx, x, y, size, color) {
 		ctx.lineWidth = 1;
@@ -108,97 +52,7 @@ function ELEMENTS_CLASS() {
 		ctx.stroke();
 	};
 
-	//cancel it
-	/*
-	this.ellipse_by_center = function (ctx, cx, cy, w, h, color, fill) {
-		this.ellipse(ctx, cx - w / 2.0, cy - h / 2.0, w, h, color, fill);
-	};
 	
-	this.ellipse = function (ctx, x, y, w, h, color, fill) {
-		var kappa = .5522848,
-			ox = (w / 2) * kappa, // control point offset horizontal
-			oy = (h / 2) * kappa, // control point offset vertical
-			xe = x + w, // x-end
-			ye = y + h, // y-end
-			xm = x + w / 2, // x-middle
-			ym = y + h / 2; // y-middle
-
-		ctx.beginPath();
-		ctx.moveTo(x, ym);
-		ctx.bezierCurveTo(x, ym - oy, xm - ox, y, xm, y);
-		ctx.bezierCurveTo(xm + ox, y, xe, ym - oy, xe, ym);
-		ctx.bezierCurveTo(xe, ym + oy, xm + ox, ye, xm, ye);
-		ctx.bezierCurveTo(xm - ox, ye, x, ym + oy, x, ym);
-		ctx.closePath();
-		ctx.fillStyle = color;
-		ctx.strokeStyle = color;
-		if (fill == undefined)
-			ctx.stroke();
-		else
-			ctx.fill();
-	};
-	*/
-
-	//cancel it
-	/*
-	this.arrow = function (context, fromx, fromy, tox, toy, headlen) {
-		if (headlen == undefined)
-			headlen = 10;	// length of head in pixels
-		var dx = tox - fromx;
-		var dy = toy - fromy;
-		var angle = Math.atan2(dy, dx);
-		context.beginPath();
-		context.moveTo(fromx, fromy);
-		context.lineTo(tox, toy);
-		context.stroke();
-		context.beginPath();
-		context.moveTo(tox - headlen * Math.cos(angle - Math.PI / 6), toy - headlen * Math.sin(angle - Math.PI / 6));
-		context.lineTo(tox, toy);
-		context.lineTo(tox - headlen * Math.cos(angle + Math.PI / 6), toy - headlen * Math.sin(angle + Math.PI / 6));
-		context.stroke();
-	};
-	*/
-
-	//cancel it
-	/*
-	//dashed objects
-	this.rectangle_dashed = function (canvas, x1, y1, x2, y2, dashLen, color) {
-		this.line_dashed(canvas, x1, y1, x2, y1, dashLen, color);
-		this.line_dashed(canvas, x2, y1, x2, y2, dashLen, color);
-		this.line_dashed(canvas, x2, y2, x1, y2, dashLen, color);
-		this.line_dashed(canvas, x1, y2, x1, y1, dashLen, color);
-	};
-	
-	this.line_dashed = function (canvas, x1, y1, x2, y2, dashLen, color) {
-		x1 = x1 + 0.5;
-		y1 = y1 + 0.5;
-		x2 = x2 + 0.5;
-		y2 = y2 + 0.5;
-		if (color != undefined)
-			canvas.strokeStyle = color;
-		else
-			canvas.strokeStyle = "#000000";
-		if (dashLen == undefined)
-			dashLen = 4;
-		canvas.beginPath();
-		canvas.moveTo(x1, y1);
-		var dX = x2 - x1;
-		var dY = y2 - y1;
-		var dashes = Math.floor(Math.sqrt(dX * dX + dY * dY) / dashLen);
-		var dashX = dX / dashes;
-		var dashY = dY / dashes;
-		var q = 0;
-		while (q++ < dashes) {
-			x1 += dashX;
-			y1 += dashY;
-			canvas[q % 2 == 0 ? 'moveTo' : 'lineTo'](x1, y1);
-		}
-		canvas[q % 2 == 0 ? 'moveTo' : 'lineTo'](x2, y2);
-		canvas.stroke();
-		canvas.closePath();
-	};
-	*/
-
 	//used in clone option
 	this.image_round = function (canvas, mouse_x, mouse_y, size, img_data, canvas_tmp, anti_aliasing) {
 		var size_half = Math.round(size / 2);

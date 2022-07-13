@@ -5,14 +5,7 @@ function display_pop(){
 function lock_pop(){
     document.getElementById('wrapper2').style.display="none";
 }
-//  function togg() {
-// 	 if (document.getElementById("pop_post").style.display == "none") {
-// 		 document.getElementById("pop_post").style.display = "block";
-// 	}
-// 	 else {
-// 		 document.getElementById("pop_post").style.display = "none";
-//         } 
-// }
+
 
 //for del btn
 function trash(){
@@ -34,12 +27,8 @@ function post() {
     tempCanvas.width = WIDTH;
     tempCanvas.height = HEIGHT;
     LAYER.export_layers_to_canvas(tempCtx, type, only_one_layer);
-   /* tempCanvas.toBlob(function (blob) {
-    url = URL.createObjectURL(blob);
-    console.log("mno", url);*/
+   
 	url = tempCanvas.toDataURL();
-	//console.log("mno", url);
-	// })	;
 
 	function dataURLtoFile(dataurl, filename) {
 		var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],

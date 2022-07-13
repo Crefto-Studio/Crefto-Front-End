@@ -16,7 +16,7 @@ function EDIT_CLASS() {
 	var PASTE_DATA = false;
 	
 	/**
-	 * latest 3 saved states of all layers for undo
+	 * latest 5 saved states of all layers for undo
 	 */
 	var layers_archive = [{}, {}, {}, {}, {}];
 	

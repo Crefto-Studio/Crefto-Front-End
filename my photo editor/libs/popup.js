@@ -342,9 +342,6 @@ function popup() {
 			layer_active_small_ctx.drawImage(document.getElementById(LAYER.layers[LAYER.layer_active].name), 0, 0, POP.width_mini, POP.height_mini);
 			POP.view();
 		}
-		
-		//call translation again to translate popup
-		//HELP.help_translate(LANG);
 	};
 	
 	//hide popup

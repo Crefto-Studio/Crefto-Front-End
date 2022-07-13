@@ -77,25 +77,31 @@ select{
 input[type="range"]{
 	margin-left:0px;
 	width:100%;
-	-webkit-appearance: none;
+	-webkit-appearance:none;
 	/* border-radius: 20px;
 	border: 1px solid #fff; */
 	background:none;
+	/* background:var(--secondary);
+	height: 3px; */
 }
  
 input[type="range"]::-moz-range-progress {
-	background-color: var(--secondary); 
+	background-color: var(--secondary) !important; 
   }
+
   input[type="range"]::-moz-range-track {  
-	background-color: var(--primary);
+	background-color: var(--primary) !important;
   }
+
   /* IE*/
   input[type="range"]::-ms-fill-lower {
-	background-color: var(--secondary); 
+	background-color: var(--secondary) !important; 
   } 
+
   input[type="range"]::-ms-fill-upper {  
-	background-color: var(--primary);
-  } 
+	background-color: var(--primary) !important;
+  }  
+
 
 input[type="button"]:disabled{
 	visibility:hidden;
@@ -1783,4 +1789,6 @@ margin-top: -20rem;
 	  .hList > * + * {
 		margin-left: 0;
 	  }
+	  
+
 	  

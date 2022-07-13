@@ -104,26 +104,6 @@ function GUI_CLASS() {
 
 		document.getElementById("fir_col").innerHTML = html;
 		document.getElementById("fir_col").innerHTML += '<a title="Resize" style="background:#6222CC;" class="trn" onclick = "call_menu(IMAGE,\'image_resize\');" id = "horizontal flip" href = "#" > <i class="fa-solid fa-maximize fa-2x"></i></a >';
-
-		//cancel it
-		//draw colors
-		/*
-		var html = '';
-		var colors_data = [
-			['#ff0000', '#ff5b31', '#ffa500', '#ff007f', '#ff00ff'], //red
-			['#00ff00', '#008000', '#7fff00', '#00ff7f', '#8ac273'], //green
-			['#0000ff', '#007fff', '#37629c', '#000080', '#8000ff'], //blue
-			['#ffff00', '#ffff80', '#ddd06a', '#808000', '#bcb88a'], //yellow
-			['#ffffff', '#c0c0c0', '#808080', '#404040', '#000000'], //grey
-		];
-		for (var i in colors_data) {
-			for (var j in colors_data[i]) {
-				html += '<div style="background-color:' + colors_data[i][j] + ';" class="mini-color" onclick="GUI.set_color(this);"></div>' + "\n";
-			}
-			html += '<div style="clear:both;"></div>' + "\n";
-		}
-		document.getElementById("all_colors").innerHTML = html;
-		*/
 	};
 	
 	this.autodetect_dimensions = function(){
