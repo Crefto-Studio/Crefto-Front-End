@@ -407,6 +407,7 @@ function exit_now()
 
 //mohamed amr
     //mohamed amr
+    
 //     let canvas = document.querySelector("#sketchpad");
 //     let ctx = canvas.getContext('2d');
 //     var data=ctx.getImageData(0, 0, canvas.width, canvas.height);

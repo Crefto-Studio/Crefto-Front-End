@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-
+    <meta charset="utf-8">
     <title>Crefto - Photo Editing and Smart Drawing</title>
 
 
@@ -12,45 +12,35 @@
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500&family=Jost:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500&family=Jost:wght@500;600;700&display=swap" rel="stylesheet"> 
 
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/fedea1496e.js" crossorigin="anonymous"></script>
-
-
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
     <!-- Libraries Stylesheet -->
     <link href="lib/animate/animate.min.css" rel="stylesheet">
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="lib/lightbox/css/lightbox.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
-
     <!--log library-->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-
-
 </head>
 
 <body>
     <div class="container-xxl bg-white p-0">
-
-        <!-- Spinner Start: circle appear when start page -->
+        <!-- Spinner Start -->
         <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
         </div>
         <!-- Spinner End -->
-
 
 
         <!-- Navbar & Hero Start -->
@@ -67,9 +57,9 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav mx-auto py-0">
                         <a href="index.html" class="nav-item nav-link active">Home</a>
-                        <a href="#" class="nav-item nav-link" onclick="alertphoto(this)">Photo Editor</a>
-                        <a href="#" onclick="alertfingo()" class="nav-item nav-link">Fingo</a>
-                        <a href="#" class="nav-item nav-link" onclick="alertdraw()">Smart Draw</a>
+                        <a href="my photo editor/editor.html" class="nav-item nav-link">Photo Editor</a>
+                        <a href="gaugan/gaugan.html" class="nav-item nav-link">Fingo</a>
+                        <a href="AutoDraw2/drawing-app-js-master/index.html" class="nav-item nav-link">Smart Draw</a>
                         <a href="#prom" class="nav-item nav-link">Help</a>
                       <!--  <a href="#" class="nav-item nav-link" id="log-responsive" data-bs-toggle="modal" data-bs-target="#myModal"><p class="fa fa-user"></p> Sign Up / Log In</a>-->
 
@@ -91,6 +81,7 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="#" onclick="logout()">Log Out</a></li>
                         </ul>
+
                     </div>
 
 
@@ -99,14 +90,16 @@
 
             <!-- log in-->
             <!-- The Modal -->
+           
             <div id="myModal" class="modal">
+
                 <div class="modal-content">
 
                     <!-- Modal Header -->
                     <div class="modal-header">
                         <span class="close">&times;</span>
                     </div>
-                    <!-- forget part -->
+                    
                             <div id="mai">
                                 <button id="back_button" class="btn btn-secondary py-x-sm-3 px-x-sm-5 rounded-pill me-3" title="Back" onclick="back_func()" style="display: none;"><i class="fa-solid fa-arrow-left"></i></button>
                                 <img id="lock_img" src="https://static.lingoapp.com/assets/images/email/il-password-reset@2x.png" width="50%"  style="display: none;"/>
@@ -125,11 +118,11 @@
                             </div>
                         
                     <div class="container log" id="container">
-
-                        <!-- sign up -->
                         <div class="form-container sign-up-container">
                             <form action="#" class="log">
                                 <h1 class="creating">Create Account</h1>
+
+                                
 
                                 <input class="form log" id="name" type="text" placeholder=" Full Name" />
                                 <input class="form log" id="mail" type="email" placeholder="Email" />
@@ -137,18 +130,21 @@
                                 <i class="fa fa-eye" id="eye1" aria-hidden="true" onclick="eye_func(this.id)"></i>
                                 <input class="form log" id="repass" type="password" placeholder="Repeat Password" />
                                 <i class="fa fa-eye" id="eye2" aria-hidden="true" onclick="eye_func(this.id)"></i>
+                                <!---<input class="form log" id="phone" type="tel" placeholder="Phone Number">
+    <input class="form log" id="date" type="date" />-->
 
                                 <button class="btn btn-secondary py-sm-3 px-sm-5 rounded-pill me-3" style="margin-top:15px" onclick="upapi()">Sign Up</button>
                             </form>
                             <section id="alert">
                             </section>
                         </div>
-
-                        <!-- log in -->
                         <div class="form-container sign-in-container">
+
                             <form action="#">
                                 <h1>Sign in</h1>
 
+                               
+                                <!-- <span>or use your account</span>-->
                                 <input class="log" id="logmail" type="email" placeholder="Email" />
                                 <input class="log" id="logpass" type="password" placeholder="Password" />
                                 <i class="fa fa-eye" id="eye3" aria-hidden="true" onclick="eye_func(this.id)"></i>
@@ -158,8 +154,6 @@
                             <section id="logalert">
                             </section>
                         </div>
-
-                        <!-- side part -->
                         <div class="overlay-container">
                             <div class="overlay">
                                 <div class="overlay-panel overlay-left">
@@ -174,311 +168,45 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
+
                 </div>
             </div>
+              
             <!--end login-->
 
-<!-- intro part -->
+
             <div class="container-xxl bg-primary hero-header">
                 <div class="container px-lg-5">
-                    <div class="row g-5">
-                        <div class="col-lg-6 text-center text-lg-start" id="txt_header">
-                            <h1 class="text-white mb-4 animated slideInDown">Photo Editing and Fast Drawing Made for Everyone</h1>
-                            <p class="text-white pb-3 animated slideInDown">
-                                Photastic is all-in-one online creative platform has everything you need to easily edit photos,
-                                fast drawing with fingo option,and smart draw icons.
-                            </p>
-                            <a href="#start" class="btn btn-secondary py-sm-3 px-sm-5 rounded-pill me-3 animated slideInLeft">Get Started</a>
-                            <!--  <a href="" class="btn btn-light py-sm-3 px-sm-5 rounded-pill animated slideInRight">Contact Us</a> -->
-                        </div>
-                        <div class="col-lg-6 text-center text-lg-start">
-                            <img class=" animated zoomIn" src="img/curve-removebg-preview.png" alt="" style="height:30rem;width:40rem">
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
-
         </div>
         <!-- Navbar & Hero End -->
 
-       <!-- alert to lgin -->
-<div id="notification-container"></div>
 
-        <!-- Service Start -->
-        <div class="container-xxl py-5" id="start">
-            <div class="container py-5 px-lg-5">
-                <div class="wow fadeInUp" data-wow-delay="0.1s">
-                    <p class="section-title text-secondary justify-content-center"><span></span>Our Features<span></span></p>
-                    <h1 class="text-center mb-5">Easily Create Anything You Can Imagine.</h1>
-                </div>
-                <div class="row g-4">
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="service-item d-flex flex-column text-center rounded">
-                            <div class="service-icon flex-shrink-0">
-                                <i class="fa fa-crop-alt fa-2x"></i>
-                            </div>
-                            <h5 class="mb-3">Crop and Resize</h5>
-                            <p class="m-0">With our Photo Editor you can easily crop and resize your images with pixel perfect accuracy.</p>
-                            <a class="btn btn-square" href="#" onclick="alertphoto(this)"><i class="fa fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="service-item d-flex flex-column text-center rounded">
-                            <div class="service-icon flex-shrink-0">
-                                <i class="fa-solid fa-star fa-2x"></i>
-
-                            </div>
-                            <h5 class="mb-3">Amazing effects</h5>
-                            <p class="m-0">
-                                Want to enhance the mood of your photos? Spice things up instantly with the right photo filters to achieve
-                                the desired photo effects in your visuals.
-                            </p>
-                            <a class="btn btn-square" href="#" onclick="alertphoto(this)"><i class="fa fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="service-item d-flex flex-column text-center rounded">
-                            <div class="service-icon flex-shrink-0">
-                                <i class="fa-solid fa-rotate fa-2x"></i>
-                            </div>
-                            <h5 class="mb-3">Flip and Rotate</h5>
-                            <p class="m-0">
-                                Need to quickly flip the image? Then use our simple editor, which will help you quickly flip the image
-                                vertically or horizontally, as well as rotate the image to the right or left.
-                            </p>
-                            <a class="btn btn-square" href="#" onclick="alertphoto(this)"><i class="fa fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="service-item d-flex flex-column text-center rounded">
-                            <div class="service-icon flex-shrink-0">
-                                <i class="fa-solid fa-t fa-2x"></i>
-                            </div>
-                            <h5 class="mb-3">Add Text</h5>
-                            <p class="m-0">
-                                With only a few clicks, you can upload your image, put your favorite text/caption, select the output size,
-                                and download the result immediately.
-                            </p>
-                            <a class="btn btn-square" href="#" onclick="alertphoto(this)"><i class="fa fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="service-item d-flex flex-column text-center rounded">
-                            <div class="service-icon flex-shrink-0">
-                                <i class="fa-solid fa-wand-magic-sparkles fa-2x"></i>
-                            </div>
-                            <h5 class="mb-3">Auto Draw</h5>
-                            <p class="m-0">
-                                Are you looking for a picture inspired by your imagination? You will find it with us. All you have to do
-                                is drawing and we will magically transform everything you imagine into an amazing reality.
-                            </p>
-                            <a class="btn btn-square" href="#" onclick="alertdraw()"><i class="fa fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="service-item d-flex flex-column text-center rounded">
-                            <div class="service-icon flex-shrink-0">
-                                <i class="fa-solid fa-hand-sparkles fa-2x"></i>
-                            </div>
-                            <h5 class="mb-3">Draw With Camera</h5>
-                            <p class="m-0">
-                                We have all new. You will be able to draw easily and in a professional manner. All you have to do is
-                                opening the camera and move your finger and we will surprise you..
-                            </p>
-                            <a class="btn btn-square" href="#" onclick="alertfingo()"><i class="fa fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Service End -->
-
-        <!-- Facts Start -->
-        <div class="container-xxl bg-primary fact py-5 wow fadeInUp" data-wow-delay="0.1s">
-            <div class="container py-5 px-lg-5">
-                <div class="row g-4">
-                    <div class="col-md-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.5s" id="fact1">
-                        <i class="fa fa-users fa-3x text-secondary mb-3"></i>
-                        <h1 class="text-white mb-2" id="reg_users" data-toggle="counter-up">1234</h1>
-                        <p class="text-white mb-0"> Registered Users</p>
-                    </div>
-                    <div class="col-md-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.1s" id="fact2">
-                        <i class="fa-solid fa-face-smile-beam fa-3x text-secondary mb-3"></i>
-                        <h1 class="text-white mb-2" data-toggle="counter-up" id="sats_users">1234</h1>
-                        <p class="text-white mb-0">Satisfied Users</p>
-                    </div>
-                    <div class="col-md-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.3s" id="fact3">
-                        <i class="fa-solid fa-image fa-3x text-secondary mb-3"></i>
-                        <h1 class="text-white mb-2" id="images" data-toggle="counter-up">1234</h1>
-                        <p class="text-white mb-0">Images</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Facts End -->
-        
-        <!-- cards Start -->
+        <!-- Projects Start -->
         <div class="container-xxl py-5">
-            <div class="container mno py-5 px-lg-5">
-                <div class="wow fadeInUp" data-wow-delay="0.1s">
-                    <p class="section-title text-secondary justify-content-center"><span></span>Our Services<span></span></p>
-                    <h1 class="text-center mb-5">What Services We Provide?</h1>
-                </div>
-               
-                <!--cards-->
-                <main class="all-cards">
-                    <section class="card-area">
-
-                        <!-- Card: City -->
-                        <section class="card-section col-lg col-md wow fadeInUp" data-wow-delay="0.1s">
-                            <div class="card">
-                                <div class="flip-card">
-                                    <div class="flip-card__container">
-                                        <div class="card-front">
-                                            <div class="card-front__tp card-front__tp--city">
-                                                <h2 class="card-front__heading">
-                                                    Photo Editor
-                                                </h2>
-                                            </div>
-                                            <div class="card-front__bt">
-                                                <p class="card-front__text-view card-front__text-view--city">
-                                                    View me
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="card-back">
-                                            <img src="img/edit.jpg" class="media" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="inside-page">
-                                    <div class="inside-page__container">
-                                        <h3 class="inside-page__heading inside-page__heading--city">
-                                            Photo Editor
-                                        </h3>
-                                        <p class="inside-page__text">
-                                            With Photastic's free Photo Editor, you can easily create stunning, professional-quality images with a single click.
-                                            The editing process might be simple, but the results are incredibly sophisticated.
-                                        </p>
-                                        <a onclick="alertphoto(this)" href="#" class="inside-page__btn inside-page__btn--city" >Try Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-
-                        <!-- Card: Ski -->
-                        <section class="card-section col-lg col-md wow fadeInUp" data-wow-delay="0.3s">
-                            <div class="card">
-                                <div class="flip-card">
-                                    <div class="flip-card__container">
-                                        <div class="card-front">
-                                            <div class="card-front__tp card-front__tp--ski">
-                                                <h2 class="card-front__heading">
-                                                    Fingo
-                                                </h2>
-                                            </div>
-                                            <div class="card-front__bt">
-                                                <p class="card-front__text-view card-front__text-view--ski">
-                                                    View me
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="card-back">
-                                            <img src="img/fingo.jpg" class="media" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="inside-page">
-                                    <div class="inside-page__container">
-                                        <h3 class="inside-page__heading inside-page__heading--ski">
-                                            Fingo
-                                        </h3>
-                                        <p class="inside-page__text">
-                                            This makes it faster and easier to turn an artist’s vision into a high-quality AI-generated image.
-                                            You can open your camera then draw and share your image with friends.
-
-                                        </p>
-                                        <a href="#" onclick="alertfingo()" class="inside-page__btn inside-page__btn--ski">Try Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-
-
-                        <!-- Card: Camping -->
-                        <section class="card-section col-lg col-md wow fadeInUp" data-wow-delay="0.5s">
-                            <div class="card">
-                                <div class="flip-card">
-                                    <div class="flip-card__container">
-                                        <div class="card-front">
-                                            <div class="card-front__tp card-front__tp--camping">
-                                                <h2 class="card-front__heading">
-                                                    Smart Draw
-                                                </h2>
-                                            </div>
-                                            <div class="card-front__bt">
-                                                <p class="card-front__text-view card-front__text-view--camping">
-                                                    View me
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="card-back">
-                                            <img src="img/draw.png" class="media" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="inside-page">
-                                    <div class="inside-page__container">
-                                        <h3 class="inside-page__heading inside-page__heading--camping">
-                                            Smart Draw
-                                        </h3>
-                                        <p class="inside-page__text">
-                                            Auto Draw is a contemporary drawing tool that employs machine learning or artificial intelligence to transform rough,
-                                            horrible sketches, scribbles, and doodles into innovative, conventional icons.
-
-                                        </p>
-                                        <a href="#" onclick="alertdraw()" class="inside-page__btn inside-page__btn--camping">Try Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </section>
-
-                </main>
-
-            </div>
-        </div>
-        <!-- cards End -->
-
-        <!-- help part:video -->
-        <div class="wow fadeInUp" data-wow-delay="0.1s" id="prom">
-            <p class="section-title text-secondary justify-content-center"><span></span>Our Website<span></span></p>
-            <h1 class="text-center mb-5">Watch Tour In Our Website.</h1>
-        </div>
-        <video width="520" height="440" controls  >
-            <source src="video/promo.mp4" />
-
-        </video>
-
-        <!-- Testimonial Start -->
-        <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
             <div class="container py-5 px-lg-5">
-                <p class="section-title text-secondary justify-content-center"><span></span>Testimonial<span></span></p>
-                <h1 class="text-center mb-5">What Say Our Clients!</h1>
-                <div>
+                <div class="wow fadeInUp" data-wow-delay="0.1s">
+                    <p class="section-title text-secondary justify-content-center"><span></span>Our Gallery<span></span></p>
+                    <h1 class="text-center mb-5">Recently Completed Photos</h1>
+                </div>
+   
+                <div class="row g-4 portfolio-container" id="gal">
+               
+                
+                
 
-                    <div class="slideshow-container" id="all_sats">
-                        
-                            </div>
+                    
                 </div>
             </div>
         </div>
-        <!-- Testimonial End -->
-       
+        <!-- Projects End -->
+        
+
         <!-- Footer Start -->
-        <div class="container-fluid bg-primary text-light footer wow fadeIn" data-wow-delay="0.1s">
+        <!-- <div class="container-fluid bg-primary text-light footer wow fadeIn"  data-wow-delay="0.1s">
             <div class="container py-5 px-lg-5">
                 <div class="row g-5">
                     <div class="col-md-6 col-lg-3">
@@ -496,13 +224,13 @@
                     <div class="col-md-6 col-lg-3">
                         <p class="section-title text-white h5 mb-4">Quick Link<span></span></p>
                         <a class="btn btn-link" href="">Home</a>
-                        <a class="btn btn-link" href="#" onclick="alertphoto(this)">Photo Editor</a>
-                        <a class="btn btn-link" href="#" onclick="alertfingo()">Fingo</a>
-                        <a class="btn btn-link" href="#" onclick="alertdraw()">Smart Draw</a>
+                        <a class="btn btn-link" href="my photo editor/editor.html">Photo Editor</a>
+                        <a class="btn btn-link" href="gaugan.html">Fingo</a>
+                        <a class="btn btn-link" href="AutoDraw/drawing-app-js-master/index.html">Smart Draw</a>
                         <a class="btn btn-link" href="#prom">Help</a>
                     </div>
                     <div class="col-md-6 col-lg-3">
-                        <a href="gallery.html" class="section-title text-white h5 mb-4">Gallery<span></span></a>
+                        <a href="#" class="section-title text-white h5 mb-4">Gallery<span></span></a>
                         <div class="row g-2">
                             <div class="col-4">
                                 <img class="img-fluid" src="img/portfolio-1.jpg" alt="Image">
@@ -635,14 +363,16 @@
 
                         <div class="position-relative w-100 mt-3">
                             <textarea rows="5" class="form-control border-0  w-100 ps-4 pe-5" id="rate_comment" placeholder="Your Feedback" style="height:auto; width:auto;"></textarea>
-                            <!--<button type="button" class="btn shadow-none position-absolute top-0 end-0 mt-1 me-2"><i class="fa fa-paper-plane text-primary fs-4"></i></button>-->
+                           
                         </div>
                         <button class="btn btn-secondary py-x-sm-3 px-x-sm-5 rounded-pill me-3" id="rate_btn" onclick="rate_func()">Post</button>
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- Footer End -->
+
+
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-secondary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
@@ -656,17 +386,11 @@
     <script src="lib/counterup/counterup.min.js"></script>
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="lib/isotope/isotope.pkgd.min.js"></script>
-    <script src="lib/lightbox/js/lightbox.min.js"></script>
-    <!-- apis js:sign up, log in,logout, counters, rate, comments of users -->
-    <script src="js/fetch.js"></script>
+    <script src="lib/lightbox/js/lightbox.js"></script>
+
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
-<!-- forget pass js -->
-    <script src="js/forget.js"></script>
-
-    <!--login js-->
-    <!-- <script src="login&signup/js/login.js"></script> -->
-
+    <script src="js/allgallery.js"></script>
 </body>
 
 </html>

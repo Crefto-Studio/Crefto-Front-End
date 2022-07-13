@@ -68,19 +68,14 @@ forget.addEventListener("click", function forget_func() {
                     // });
 
                 }
-
                 else {
-
                     swal("Not valid mail try again! ", {
                         icon: "error",
                     })
                 }
             })
-
     });
-
 })
-
 
 
 // show pass
@@ -88,20 +83,15 @@ function eye_func(id) {
     var who = id;
     var x = document.getElementById("pass");
     var x2 = document.getElementById("repass");
-    var x3 = document.getElementById("logpass");
-    
-    
+    var x3 = document.getElementById("logpass");    
     if (who == "eye1") {
         if (x.type === "password") {
             x.type = "text";
             document.getElementById(who).className = "fa fa-eye-slash";
 
         } else {
-
             x.type = "password";
-
             document.getElementById(who).className = "fa fa-eye";
-
         }
     }
 
@@ -111,11 +101,8 @@ function eye_func(id) {
             document.getElementById(who).className = "fa fa-eye-slash";
 
         } else {
-
             x2.type = "password";
-
             document.getElementById(who).className = "fa fa-eye";
-
         }
     }
 
@@ -125,16 +112,12 @@ function eye_func(id) {
             document.getElementById(who).className = "fa fa-eye-slash";
 
         } else {
-
             x3.type = "password";
-
             document.getElementById(who).className = "fa fa-eye";
-
         }
     }
-
-
 }
+
 
 //go back
 function back_func(){
@@ -154,3 +137,82 @@ function back_func(){
     document.getElementById("container").style.display = "block";
 }
 
+
+//alert login before services
+var notification;
+var container = document.querySelector('#notification-container');
+var visible = false;
+var queue = [];
+
+function createNotification() {
+    notification = document.createElement('div');
+    var btn = document.createElement('button');
+    var title = document.createElement('div');
+    var msg = document.createElement('div');
+    btn.className = 'notification-close';
+    title.className = 'notification-title';
+    msg.className = 'notification-message';
+    btn.addEventListener('click', hideNotification, false);
+    notification.addEventListener('animationend', hideNotification, false);
+    notification.addEventListener('webkitAnimationEnd', hideNotification, false);
+    notification.appendChild(btn);
+    notification.appendChild(title);
+    notification.appendChild(msg);
+}
+
+function updateNotification(type, title, message) {
+    notification.className = 'notification notification-' + type;
+    notification.querySelector('.notification-title').innerHTML = title;
+    notification.querySelector('.notification-message').innerHTML = message;
+}
+
+function showNotification(type, title, message) {
+    if (visible) {
+        queue.push([type, title, message]);
+        return;
+    }
+    if (!notification) {
+        createNotification();
+    }
+    updateNotification(type, title, message);
+    container.appendChild(notification);
+    visible = true;
+}
+
+function hideNotification() {
+    if (visible) {
+        visible = false;
+        container.removeChild(notification);
+        if (queue.length) {
+            showNotification.apply(null, queue.shift());
+        }
+    } 
+}
+
+function alertphoto(elem){
+    if (document.cookie.indexOf('AuthTokenCookie=') != -1){
+        window.location.href='my photo editor/editor.html';
+        // elem.href="my photo editor/editor.html";
+    }
+    else{
+      setTimeout(showNotification.bind(null, 'error', 'Error!', 'You must log in first.'),500);
+    }
+}
+
+function alertfingo(){
+    if (document.cookie.indexOf('AuthTokenCookie=') != -1){
+        window.location.href='gaugan/gaugan.html';
+    }
+    else{
+      setTimeout(showNotification.bind(null, 'error', 'Error!', 'You must log in first.'),500);
+    }
+}
+
+function alertdraw(){
+    if (document.cookie.indexOf('AuthTokenCookie=') != -1){
+        window.location.href='AutoDraw2/drawing-app-js-master/index.html';
+    }
+    else{
+      setTimeout(showNotification.bind(null, 'error', 'Error!', 'You must log in first.'),500);
+    }
+}

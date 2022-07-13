@@ -242,7 +242,7 @@ function FILE_CLASS() {
 		"PNG - Portable Network Graphics",	//default
 		"JPG - JPG/JPEG Format",		//autodetect on photos where png useless?
 		//	"JSON - Full layers data",		//aka PSD
-		"GIF - Graphics Interchange Format",//animated GIF
+	 	// "GIF - Graphics Interchange Format",//animated GIF
 		//	"WEBP - Weppy File Format",		//chrome only
 		//	"BMP - Windows Bitmap",			//firefox only
 	];
@@ -284,7 +284,7 @@ function FILE_CLASS() {
 
 		//cancel jpeg quality
 	//	POP.add({ name: "quality", title: "Quality (jpeg):", value: 90, range: [1, 100], onchange: "FILE.save_dialog_onchange(this)" });
-		POP.add({name: "delay", title: "Gif delay (in ms):", value: 500});
+		// POP.add({name: "delay", title: "Gif delay (in ms):", value: 500});
 		POP.add({name: "layers", title: "Save layers:", values: ['All', 'Selected'], onchange: "FILE.save_dialog_onchange(this)"});
 
 		//cancel option of select file size

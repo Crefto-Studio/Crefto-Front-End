@@ -163,7 +163,7 @@ function popup() {
 					else {
 						//radio
 						html += '<td colspan="2">';
-						if (parameter.values.length > 2)
+						if (parameter.values.length > 1)
 							html += '<div class="group">';
 						var k = 0;
 						for (var j in parameter.values) {
@@ -183,11 +183,11 @@ function popup() {
 							
 							html += '<input type="radio" ' + onchange + ' ' + ch + ' name="' + parameter.name + '" id="pop_data_' + parameter.name + "_poptmp" + j + '" value="' + parameter.values[j] + '">';
 							html += '<label style="margin-right:20px;" class="trn" for="pop_data_' + parameter.name + "_poptmp" + j + '">' + title + '</label>';
-							if (parameter.values.length > 2)
+							if (parameter.values.length > 1)
 								html += '<br />';
 							k++;
 						}
-						if (parameter.values.length > 2)
+						if (parameter.values.length > 1)
 							html += '</div>';
 						html += '</td>';
 					}

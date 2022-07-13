@@ -161,6 +161,7 @@ canvas.addEventListener('mouseup', box)
 
 function box() {
     if (brushOn2) {
+        console.log("I ENTER NOWWWWW");
         var bounds = contextBoundingBox(context);
         context.save();
         context.lineWidth = "1";
@@ -232,28 +233,69 @@ function box() {
         
 
         
-        // const myJSON = JSON.stringify(res3);
-        var url = 'https://autodraw-service-1.lusl2hv0nq5h6.us-west-2.cs.amazonlightsail.com';
+        const myJSON = JSON.stringify(res3);
         let token = document.cookie;
         // console.log(token);
         token = token.split("=");
-        fetch(url, {
-            method: 'POST',
-            headers: new Headers({
-                'Content-Type': 'application/json; charset=utf-8'
-            }),
-            body:  JSON.stringify({
-                "token": token[1],
-                "data":res3,
-            }),
-        }).then(function (response) {
-            return response.json();
-        })
-            .then(function (jsonResponse) {
-            console.log(jsonResponse);
-            
-             })
-            ;
+        var test=JSON.stringify({
+            "token": token[1],
+            "data":res3,});
+            console.log(test);
+        var url = 'https://autodraw-service-1.lusl2hv0nq5h6.us-west-2.cs.amazonlightsail.com';
+       
+        setTimeout(() => {
+            fetch(url, {
+                method: 'POST',
+                headers: new Headers({
+                    'Content-Type': 'application/json; charset=utf-8',
+                }),
+                body:  JSON.stringify({
+                    "token": token[1],
+                    "data":res3,
+                }),
+            }).then(function (response) {
+                return response.json();
+            })
+                .then(function (jsonResponse) {
+                console.log(jsonResponse);
+    
+                var test=JSON.parse(jsonResponse);
+                console.log(test);
+    
+                var bar=document.getElementById("hide2");
+                var text="";
+                for(let i=0;i<10;i++){
+                  text+='<img id="mno" src="https://autodraw.s3.us-west-2.amazonaws.com/SVGICON/SVGICON/'+test[i].image+'" onclick="func(this)" width="50" height="50"/>';
+                }
+                bar.innerHTML+=text;
+                });
+        }, 8000);
+        
+        // fetch(url, {
+        //     method: 'POST',
+        //     headers: new Headers({
+        //         'Content-Type': 'application/json; charset=utf-8',
+        //     }),
+        //     body:  JSON.stringify({
+        //         "token": token[1],
+        //         "data":res3,
+        //     }),
+        // }).then(function (response) {
+        //     return response.json();
+        // })
+        //     .then(function (jsonResponse) {
+        //     console.log(jsonResponse);
+
+        //     var test=JSON.parse(jsonResponse);
+        //     console.log(test);
+
+        //     var bar=document.getElementById("hide2");
+        //     var text="";
+        //     for(let i=0;i<10;i++){
+        //       text+='<img id="mno" src="https://autodraw.s3.us-west-2.amazonaws.com/SVGICON/SVGICON/'+test[i].image+'" onclick="func(this)" width="50" height="50"/>';
+        //     }
+        //     bar.innerHTML+=text;
+        //     });
 
 
     }
@@ -581,7 +623,7 @@ document.onkeydown = KeyPress;
  */
 function downloadCanvas(link, canvasId, context_normal, filename) {
     context_normal.drawImage(canvas, 0, 0);
-    context_normal.drawImage(canvas2, 0, 0);
+    // context_normal.drawImage(canvas2, 0, 0);
 
     link.href = document.getElementById(canvasId).toDataURL();
     console.log(link.href);
@@ -758,16 +800,15 @@ function myfunction() {
 
 
 
-var img = document.getElementById('mno');
-img.addEventListener('click', func);
+// var img = document.getElementById('mno');
+// img.addEventListener('click', func);
 
 //put image on click
 function func(e) {
-    
     var bounds = contextBoundingBox(context);
     context.clearRect(bounds.x, bounds.y, (bounds.w) + 1, (bounds.h) + 1);
-    // context2.drawImage(img, bounds.x, bounds.y, bounds.w, bounds.h);
-    context2.fillRect(bounds.x, bounds.y, bounds.w, bounds.h);
+    context2.drawImage(e, bounds.x, bounds.y, bounds.w, bounds.h);
+    // context2.fillRect(bounds.x, bounds.y, bounds.w, bounds.h);
     storeSnapshot();
 
 }

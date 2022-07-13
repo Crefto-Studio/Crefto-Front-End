@@ -102,7 +102,17 @@ function toggle_bar(btn) {
 
 //logout
 function prof_out() {
-	fetch("http://www.api.crefto.studio/api/v1/users/logout")
+	let token = document.cookie;
+	token = token.split("=");
+	console.log("mmmmmm", token[1]);
+	var myHeaders = new Headers();
+	myHeaders.append("Authorization", `Bearer ${token[1]}`);
+	var requestOptions = {
+		method: 'GET',
+		headers: myHeaders,
+		redirect: 'follow'
+	  };
+	fetch("http://www.api.crefto.studio/api/v1/users/logout",requestOptions)
 
 		.then(response => response.json())
 

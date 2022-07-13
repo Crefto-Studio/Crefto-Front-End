@@ -679,6 +679,7 @@
             }
 
             generateSketch = async () => {
+                console.log("enterrrr");
                 const context = this.sketchpad.context;
                 const colorLayer = context.getImageData(0, 0, context.canvas.width, context.canvas.height).data;
                 
@@ -701,7 +702,8 @@
                     }
                 }
                 
-                 console.log(sketch)
+                 console.log("mno",sketch);
+                 
 
                 
                 
@@ -743,7 +745,7 @@
                         <div id="toolbar">
                             <div className="row">
                                 <input id="clear_btn" type="button" value="Clear" onClick={() => this.clearSketch()} />
-                                {console.log(this.state.url)}
+                                {/*console.log(this.state.url)*/}
                                 <a id="save_btn" href={this.state.url} download><input type="button" value="Save" onClick={() => this.downloadCanvas(this, 'Drawing.png')} /></a>
                                 <a id="save_btn2" href={this.state.url} download><input type="button" value="Saveout" onClick={() => this.downloadCanvasout(this, 'Drawing.png')} /></a>
                                 {/* button Event for Virtual painter*/}
@@ -834,7 +836,7 @@
                             <canvas id="model-canvas" height="512" width="512" ></canvas>
                             
                     </div>
-                    <div className="btn-render" onClick={()=>{this.generateSketch;run_model()}}>Generate</div>
+                    <div className="btn-render" onClick={()=>{this.generateSketch();run_model()}}>Generate</div>
 
                     <div id="wrapper">
 			<div id="header" className="noselect">
