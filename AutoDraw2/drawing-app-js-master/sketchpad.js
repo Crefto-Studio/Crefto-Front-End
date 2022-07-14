@@ -234,6 +234,7 @@ function box() {
 
         
         const myJSON = JSON.stringify(res3);
+        console.log("width: ",bounds.w,"height: ",bounds.h,"data: ",myJSON);
         let token = document.cookie;
         // console.log(token);
         token = token.split("=");
@@ -829,12 +830,12 @@ function contextBoundingBox(context, alphaThreshold) {
                 if (x < minX) minX = x;
                 if (y > maxY) maxY = y;
                 if (y < minY) minY = y;
-
             }
         }
     }
     return { x: minX, y: minY, maxX: maxX, maxY: maxY, w: maxX - minX, h: maxY - minY };
 }
+
 
 function restore_colors(){
     setTimeout(function(){

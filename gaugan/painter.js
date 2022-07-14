@@ -16,7 +16,7 @@ function openCvReady() {
       document.querySelector("#save_btn2").style.display="none";
       document.querySelector("#virtual").style.display="none";
       document.querySelector("#share").style.display="none";
-
+      document.querySelector(".btn-render").style.display="none";
       document.getElementById("model-canvas").style.display="none";
 
       document.querySelector("#Exit_Button").style.display="block"; 
@@ -25,6 +25,7 @@ function openCvReady() {
       document.querySelector("#virtual_painter_Canvas").style.display="flex"; 
       document.querySelector("#canvas_output1").style.display="none"; 
       document.querySelector("#canvas_output2").style.display="block";
+      document.querySelector("#canvas_output3").style.display="block";
          
      
       // add an event listener for the change event
@@ -243,17 +244,19 @@ function openCvReady() {
           if(contours.size() > 0)
           {
               // getting the contour of max area
-                  let area = 0;
-                  let max= 0;
-                  let cnt = 0;
+              let area = 0;
+              let max= 0;
+              let cnt = 0;
+              let current_cnt=0;
               for(var i=0;i<contours.size();i++)
               {
-                  cnt = contours.get(i);
-                  area = cv.contourArea(cnt, false);
-                  if(area >max)
-                  {
-                      max = area;
-                  }
+                    current_cnt = contours.get(i);
+                    area = cv.contourArea(current_cnt, false);
+                    if(area >max)
+                    {
+                        max = area;
+                        cnt = current_cnt;
+                    }
               }
   
               let M = cv.moments(cnt, false);
@@ -281,7 +284,6 @@ function openCvReady() {
                         delay_permission = true;
                         Draw_event= false;
                         toggle =false;
-                        radioButtons.value("");
                         // paint_window.delete();
                         // paint_window = new cv.Mat(video.height, video.width, cv.CV_8UC4, [255,255,255,255]);
                     }
@@ -397,6 +399,7 @@ function exit_now()
     document.querySelector("#share").style.display="block";
     document.querySelector("#stroke").style.display="block"; 
     document.querySelector("#virtual").style.display="block";
+    document.querySelector(".btn-render").style.display="block";
     // document.querySelector("p").style.display="none"; 
     document.querySelector("#Exit_Button").style.display="none"; 
     document.querySelector("#Modes").style.display="none";  
@@ -407,7 +410,6 @@ function exit_now()
 
 //mohamed amr
     //mohamed amr
-    
 //     let canvas = document.querySelector("#sketchpad");
 //     let ctx = canvas.getContext('2d');
 //     var data=ctx.getImageData(0, 0, canvas.width, canvas.height);
@@ -604,11 +606,10 @@ function trash(){
 		})
 }
 
-window.onload=function(){
-    var jsonResponse='[[[5,1],[0,1]],[[0,1],[0,1]],[[0,1],[0,1]]]';
-    var test=JSON.parse(jsonResponse);
-    console.log(test);
-    console.log(test[0][0][0]);
-    }
 
-
+// window.onload=function(){
+//     var jsonResponse='[[[5,1],[0,1]],[[0,1],[0,1]],[[0,1],[0,1]]]';
+//     var test=JSON.parse(jsonResponse);
+//     console.log(test);
+//     console.log(test[0][0][0]);
+//     }

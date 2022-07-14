@@ -50,19 +50,17 @@
             flex-direction: column;
             width: 100%;
         }
-       
-
-        
+           
         .container {
             display: flex;
             flex: 1;
             justify-content: center;
             align-items: center;
-            
-            background: #1abc9c;
+            background: #273f4a;
             color: #cccccc;
             font-family: 'Roboto', sans-serif;
         }
+
         #virtual_painter_Canvas{
             display: none;
             flex-direction: row-reverse;
@@ -84,6 +82,7 @@
             display: flex;
             position: relative;
             /* background: url(https://upload.wikimedia.org/wikipedia/commons/3/35/Neckertal_20150527-6384.jpg); */
+            background: #1c2d36;
         }
         .no-render {
             flex: 1;
@@ -105,6 +104,7 @@
             text-align: center;
             margin-bottom: 20px;
         }
+
         .generated-image {
             flex-grow: 1;
         }
@@ -131,7 +131,7 @@
         }
 
         #toolbar {
-            background: #303030;
+            background: #1c2d36;
             width: 220px;
             height: 512px;
             margin: 5px;
@@ -140,6 +140,7 @@
             flex-direction: column;
             overflow: hidden;
             font-size: 14px;
+            /* border: 1px solid var(--primary); */
         }
         #toolbar .row {
             margin-bottom: 5px;
@@ -177,18 +178,7 @@
         p{
             margin-bottom: 0px;
         }
-        /* #Exit_Button2{
-            background: none;
-            color: inherit;
-            border: none;
-            padding: 0;
-            font: inherit;
-            cursor: pointer;
-            outline: inherit;
-        } */
-        /* #hold,#toggle{
-            width: 20%;
-        } */
+  
         input[type="button"] ,#virtual,#Exit_Button,#config_btn,#ex_config,#share{
             padding: 7px;
             /* background: #676767; */
@@ -198,58 +188,12 @@
             font-size: 15px;
             margin: 5px 0;
             cursor: pointer;
+            background: var(--primary);
         }
-        #clear_btn{
-            background: #3498db;
+        input[type="button"]:hover ,#virtual:hover,#Exit_Button:hover,#config_btn:hover,#ex_config:hover,#share:hover{
+            background: var(--secondary);
         }
-        #save_btn input{
-            background: #ffd071;
-        }
-        #save_btn2 input{
-            background: #f0776c;
-        }
-        #virtual{
-            background: #1abc9c;
-        }
-        #share{
-            background: #3498db;
-        }
-        #Exit_Button{
-            background: #ffd071;
-        }
-        #config_btn{
-            background: #f0776c;
-        }
-        #ex_config{
-            background: #1abc9c;
-        }
-
-
-        #clear_btn:hover{
-            background: #1C699C;
-        }
-        #save_btn input:hover{
-            background: #B87A00;
-        }
-        #save_btn2 input:hover{
-            background: #FF311F;
-        }
-        #virtual:hover{
-            background: #149077;
-        }
-        #share:hover{
-            background: #1C699C;
-        }
-        #Exit_Button:hover{
-            background: #B87A00;
-        }
-        #config_btn:hover{
-            background: #FF311F;
-        }
-        #ex_config:hover{
-            background: #149077;
-        }
-
+      
           .color:hover {
                 border: #ffffff 3px solid;
             }
@@ -281,47 +225,46 @@
     top:0px;
     display: none;
     flex-direction: row;
+    background-color: #273f4a;
+    color: #fff;
 }
 #color1,
 #color2,
 #color3,
-#color4 {
+#color4,#color5,#color6 {
   display: inline-block;
-  background-color: white;
+ 
   height: 80px;
 }
 
 #color1 {
-  border-bottom: 12px solid #3498db;
+  border-bottom: 12px solid var(--primary);
   width: 16.67%;
 }
 
 #color2 {
-  border-bottom: 12px solid #ffd071;
+  border-bottom: 12px solid #7F00FF;
   width: 16.67%;
 }
 
 
 #color3 {
-  border-bottom: 12px solid #f0776c;
+  border-bottom: 12px solid #BF00FE;
   width: 16.67%;
 }
 
-
-
-
 #color4 {
-  border-bottom: 12px solid #1abc9c;
+  border-bottom: 12px solid #D677DF;
   width: 16.67%;
 }
 
 #color5{
-    border-bottom: 12px solid #3498db;
+    border-bottom: 12px solid #E896EB;
   width: 16.67%;
 }
 
 #color6{
-    border-bottom: 12px solid #ffd071;
+    border-bottom: 12px solid var(--primary);
   width:16.67%;
 }
 .radios{
@@ -402,9 +345,6 @@
 	border: none;
   }
 
- 
-  
-  
   #footer {
 	margin-top: 1em;
   }
@@ -420,8 +360,33 @@
   #footer-right button:last-child {
 	margin-right: 0px!important;
 	padding-right: 0px!important;
-  
   }
+
+  input[type="range"]{
+	-webkit-appearance:none;
+	/* border-radius: 20px;
+	border: 1px solid #fff; */
+	background:none;
+	/* background:var(--secondary);
+	height: 3px; */
+}
+ 
+input[type="range"]::-moz-range-progress {
+	background-color: var(--secondary) !important; 
+  }
+
+  input[type="range"]::-moz-range-track {  
+	background-color: var(--primary) !important;
+  }
+
+  /* IE*/
+  input[type="range"]::-ms-fill-lower {
+	background-color: var(--secondary) !important; 
+  } 
+
+  input[type="range"]::-ms-fill-upper {  
+	background-color: var(--primary) !important;
+  }  
   
   /* Buttons */
   
@@ -502,7 +467,6 @@
   .inputfile + label:hover {
 	  color: rgba(255, 255, 255, 0.7);
 	cursor: pointer;
-  
   }
   
   .fa-paperclip {
@@ -559,7 +523,6 @@
 	width:100%;
 	padding-top: 0.5em;
 	padding-bottom: 0.5em;
-  
   }
   
   #pageFooter a{
