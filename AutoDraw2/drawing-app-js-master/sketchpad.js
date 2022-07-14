@@ -45,10 +45,10 @@ function init() {
     // setBrush();
     addSwatches();
     storeSnapshot();
-
 }
 
-//store
+
+//store states
 function storeSnapshot() {
     cStep++;
     if (cStep < cPushArray.length) {
@@ -60,6 +60,7 @@ function storeSnapshot() {
     cPushArray2.push(canvas2.toDataURL());
     cPushArray3.push(canvas_normal.toDataURL());
 }
+
 
 //Puts a circle down wherever the user clicks
 var putPoint = (e) => {
@@ -78,9 +79,7 @@ var putPoint = (e) => {
         context.lineTo(x, y);
         context.stroke();
         context.beginPath();
-        }
-        
-        
+        }    
         if (eraserOn == true) {
             context_normal.globalCompositeOperation = "destination-out";
         } 
@@ -107,13 +106,10 @@ var putPoint = (e) => {
         }
     }
 }
+
+
 var engage = (e) => {
     canvas.addEventListener('mousemove', putPoint);
-
-    // if (bgFillOn) {
-    //     context.fillStyle = bgFillColor;
-    //     context.fillRect(0, 0, canvas.width, canvas.height);
-    // }
     if(eraserOn ||brushOn){
         dragging = true;
         putPoint(e); 
@@ -127,7 +123,6 @@ var engage = (e) => {
         var y = document.getElementById('hide2');
         x.style.display = "block";
         y.style.display = "block";
-
     }
     if (!brushOn2) {
         var x = document.getElementById('hide1');
@@ -135,8 +130,8 @@ var engage = (e) => {
         x.style.display = "none";
         y.style.display = "none";
     }
-
 }
+
 
 var disengage = () => {
     dragging = false;
@@ -144,7 +139,6 @@ var disengage = () => {
     mousedown = false;
     context.beginPath();
     context_normal.beginPath();
-
     if (eraserOn == true) {
         context_normal.globalCompositeOperation = "source-over";
     }
@@ -159,6 +153,7 @@ canvas_normal.addEventListener('mouseup', engage);
 canvas.addEventListener('mouseup', box)
 
 
+// for extract data
 function box() {
     if (brushOn2) {
         console.log("I ENTER NOWWWWW");
@@ -168,47 +163,46 @@ function box() {
         context.strokeStyle = "rgba(0,0,0,0)";
         context.strokeRect(bounds.x, bounds.y, bounds.w, bounds.h);
         context.restore();
+
+        //get all data of area of drawing rgba array
         var datastream = context.getImageData(bounds.x, bounds.y, (bounds.w), (bounds.h));
         console.log("before:",datastream.data);
 
+        //convert to black and white
         var z = document.getElementsByClassName('swatch')[0];
+        //for colored pens
         if (!z.classList.contains('active')) {
-
             for (i = 0; i < datastream.data.length; i += 4) {
                 let count = datastream.data[i] + datastream.data[i + 1] + datastream.data[i + 2];
                 let colour = 255;
                 if (count == 0) colour = 0;
-
                 datastream.data[i] = colour;
                 datastream.data[i + 1] = colour;
                 datastream.data[i + 2] = colour;
                 datastream.data[i + 3] = 255;
             }
         }
-
-
-
         else {
             for (i = 0; i < datastream.data.length; i += 4) {
+                //for bg of canvas
                 if (datastream.data[i + 3] == 0) {
                     datastream.data[i] = datastream.data[i];
                     datastream.data[i + 1] = datastream.data[i + 1];
                     datastream.data[i + 2] = datastream.data[i + 2];
                     datastream.data[i + 3] = 255;
                 }
+                //for black pen
                 else {
                     datastream.data[i] =255- datastream.data[i];
                     datastream.data[i + 1] =255- datastream.data[i + 1];
                     datastream.data[i + 2] = 255-datastream.data[i + 2];
                     datastream.data[i + 3] = 255;
-
                 }
             }
         }
 
         console.log(datastream.data);
     //    context2.putImageData(datastream, 0, 0);
-
 
 
         //remove alpha
@@ -229,9 +223,6 @@ function box() {
         });
         console.log(res3);
         
-
-        
-
         
         const myJSON = JSON.stringify(res3);
         console.log("width: ",bounds.w,"height: ",bounds.h,"data: ",myJSON);
@@ -244,6 +235,7 @@ function box() {
             console.log(test);
         var url = 'https://autodraw-service-1.lusl2hv0nq5h6.us-west-2.cs.amazonlightsail.com';
         var bar=document.getElementById("hide2");
+        //send data to model
         setTimeout(() => {
             bar.innerHTML="";
             fetch(url, {
@@ -273,38 +265,12 @@ function box() {
                 });
         }, 8000);
         
-        // fetch(url, {
-        //     method: 'POST',
-        //     headers: new Headers({
-        //         'Content-Type': 'application/json; charset=utf-8',
-        //     }),
-        //     body:  JSON.stringify({
-        //         "token": token[1],
-        //         "data":res3,
-        //     }),
-        // }).then(function (response) {
-        //     return response.json();
-        // })
-        //     .then(function (jsonResponse) {
-        //     console.log(jsonResponse);
-
-        //     var test=JSON.parse(jsonResponse);
-        //     console.log(test);
-
-        //     var bar=document.getElementById("hide2");
-        //     var text="";
-        //     for(let i=0;i<10;i++){
-        //       text+='<img id="mno" src="https://autodraw.s3.us-west-2.amazonaws.com/SVGICON/SVGICON/'+test[i].image+'" onclick="func(this)" width="50" height="50"/>';
-        //     }
-        //     bar.innerHTML+=text;
-        //     });
-
-
     }
 }
 
 
 /*Tool Bar Script*/
+// size of draw
 var minRad = 0.5,
     maxRad = 100,
     defaultRad = 20,
@@ -338,15 +304,8 @@ incRad.addEventListener('click', () => {
     }
 });
 
-function prev(){
-    document.getElementById('button').scrollLeft -= 270;
-}
 
-function next()
-{
-    document.getElementById('button').scrollLeft += 270;
-}
-
+// colors to draw
 function addSwatches() {
     var text="";
     var colors = ['black', 'maroon', 'grey', 'red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet', 'brown', 'pink', 'teal','beige', 'aqua','purple'];
@@ -362,7 +321,6 @@ function addSwatches() {
         swatch.style.backgroundColor = colors[i];
         swatch.addEventListener('click', setSwatch);
         document.getElementById('colors').appendChild(swatch);
-        
     }
     text="";
     text +='<div onclick="plusSlides(4)" class="control-next-btn">';
@@ -377,15 +335,12 @@ function setColor(color) {
     context.strokeStyle = color;
     context_normal.fillStyle = color;
     context_normal.strokeStyle = color;
-//    bgFillColor = color;
     brushColor = color;
-
     var active = document.getElementsByClassName('active')[0];
     if (active) {
         active.className = 'swatch';
     }
 }
-
 
 function setSwatch(e) {
     //identify swatch being clicked
@@ -396,7 +351,6 @@ function setSwatch(e) {
         // Refactor this - remove class 'set' from all elements with drawTool class.
         var eraser = document.getElementById('eraser');
         eraser.classList.remove('set');
-
     }
 }
 
@@ -410,7 +364,6 @@ setSwatch({
 function deselectTool() {
     // Remove set class from other draw tools
     var drawTools = document.querySelectorAll(".drawTool");
-
     [].forEach.call(drawTools, function (el) {
         el.classList.remove('set');
     });
@@ -425,11 +378,9 @@ function setBrush() {
     document.getElementById('eraser').parentElement.parentElement.style.display="block";
     document.getElementById('mynav').style.height="32rem";
     eraserOn = false;
-  //  bgFillOn = false;
     brushOn = true;
     isDrawing = false;
     brushOn2 = false;
-
     /*Select current swatch */
     deselectTool();
     clicked = false;
@@ -439,26 +390,21 @@ function setBrush() {
         brushButton2.parentElement.style.backgroundColor="";
         eraser.parentElement.style.backgroundColor="";
         brushButton.parentElement.style.backgroundColor="#B87A00";
-        /*var active = document.getElementsByClassName('active')[0];
-        if (active) {
-            active.className = 'swatch';
-        }*/
     }
 }
-/* Brush */
+
+
+/* Brush2 */
 var brushButton2 = document.getElementById('brush2');
 brushButton2.addEventListener('click', setBrush2);
-
 
 function setBrush2() {
     document.getElementById('eraser').parentElement.parentElement.style.display="none";
    document.getElementById('mynav').style.height="28.5rem";
     eraserOn = false;
-   // bgFillOn = false;
     brushOn = false;
     isDrawing = false;
     brushOn2 = true;
-
     /*Select current swatch */
     deselectTool();
 
@@ -467,35 +413,9 @@ function setBrush2() {
         brushButton.parentElement.style.backgroundColor="";
         eraser.parentElement.style.backgroundColor="";
         brushButton2.parentElement.style.backgroundColor="#1C699C";
-        
-        /*var active = document.getElementsByClassName('active')[0];
-        if (active) {
-            active.className = 'swatch';
-        }*/
     }
 }
 
-// /* Background Fill */
-// var fillButton = document.getElementById('filldrip');
-// fillButton.addEventListener('click', setBackgroundFill);
-
-// function setBackgroundFill(e) {
-//     eraserOn = false;
-//     bgFillOn = true;
-//     isDrawing = false;
-//     deselectTool();
-
-//     //var bgFill = document.getElementById('filldrip');
-//     if (!fillButton.classList.contains('set')) {
-//         fillButton.className += ' set';
-//         var active = document.getElementsByClassName('active')[0];
-//         if (active) {
-//             //  active.className = 'swatch';
-//         }
-
-//     }
-//     // alert('Fill the background');
-// }
 
 /* Erase */
 var eraserButton = document.getElementById('eraser');
@@ -534,9 +454,9 @@ function clearCanvas(e) {
     context.clearRect(0, 0, canvas.width, canvas.height);
     context2.clearRect(0, 0, canvas2.width, canvas2.height);
     context_normal.clearRect(0, 0, canvas_normal.width, canvas_normal.height);
-    restore_colors();
-    
+    restore_colors();   
 }
+
 
 /* Undo */
 var undoButton = document.getElementById('undo')
@@ -584,6 +504,7 @@ function cUndo() {
     restore_colors();
 }
 
+
 /* Redo */
 var restoreButton = document.getElementById('restore');
 restoreButton.addEventListener('click', restoreCanvas);
@@ -616,13 +537,27 @@ function restoreCanvas(e) {
     restore_colors();
 }
 
+
+// shortcut for undo and redo
 document.onkeydown = KeyPress;
+
+/* Undo/Redo on KeyPress */
+function KeyPress(e) {
+    var evtobj = window.event ? event : e
+    if (evtobj.keyCode == 90 && evtobj.ctrlKey) {
+        cUndo();
+    } else if (evtobj.keyCode == 89 && evtobj.ctrlKey) {
+        restoreCanvas();
+    }
+}
 
 
 /* This is the function that will take care of image extracting and
  * setting proper filename for the download.
  * IMPORTANT: Call it from within a onclick event.
  */
+
+// save
 function downloadCanvas(link, canvasId, context_normal, filename) {
     context_normal.drawImage(canvas, 0, 0);
     context_normal.drawImage(canvas2, 0, 0);
@@ -642,8 +577,8 @@ document.getElementById('save').addEventListener('click', function () {
     eraser.parentElement.style.backgroundColor="";
     downloadCanvas(this, 'myCanvas_normal', context_normal, 'Drawing.png');
     restore_colors();
-
 }, false);
+
 
 //post
 function display_pop(){
@@ -653,9 +588,7 @@ function lock_pop(){
     document.getElementById('wrapper').style.display="none";
 }
 
-
-
-//for post btn
+//for post btn spinner
 function post_submit(e){
     e.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'
     setTimeout(function () {
@@ -670,35 +603,21 @@ function post_submit(e){
 function trash(){
   document.querySelector('#title').value = '';
   document.querySelector('#desc').value = '';
-//   quill.setText('');
-//   toaster('Trashed');
 }
 
-
-//convert inside canvas
+//convert inside canvas to img file
 function dataURLtoFile(dataurl, filename) {
-     // convert base64 to raw binary data held in a string
-    // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
     var byteString = atob(dataurl.split(',')[1]);
-
-    // separate out the mime component
     var mimeString = dataurl.split(',')[0].split(':')[1].split(';')[0];
-
-    // write the bytes of the string to an ArrayBuffer
     var ab = new ArrayBuffer(byteString.length);
     var ia = new Uint8Array(ab);
     for (var i = 0; i < byteString.length; i++) {
         ia[i] = byteString.charCodeAt(i);
     }
-
-    //New Code
     return new Blob([ab], {type: mimeString});
 }
 
-
-
-
-
+// for share api
 function post_prof(){
     document.getElementById('post_btn').innerHTML='<i class="fas fa-spinner fa-spin"></i>';
     var data = context2.getImageData(0, 0, canvas2.width, canvas2.height);
@@ -714,15 +633,12 @@ function post_prof(){
     url = document.getElementById('myCanvas2').toDataURL();
     context2.clearRect(0, 0, canvas2.width, canvas2.height); 
     context2.putImageData(data,0,0);  
-    
-
     console.log(url);
 
     var fileData = dataURLtoFile(url, "imageName.png");
     console.log("Here is JavaScript File Object", fileData);
 
     let token = document.cookie;
-    console.log(token);
 	token = token.split("=");
 
     var formdata = new FormData();
@@ -734,8 +650,6 @@ function post_prof(){
 	var myHeaders = new Headers();
 
 	myHeaders.append("Authorization", `Bearer ${token[1]}`);
-	console.log("222222222222222222");
-	console.log(token[1]);
 	var requestOptions = {
 		method: 'POST',
 		headers: myHeaders,
@@ -750,7 +664,6 @@ function post_prof(){
 		.then(json => {
 			console.log(json);
             if(json.status=="success"){
-			// alert("mabroook");
             document.getElementById('post_btn').innerHTML='Post';
             document.getElementById('fail_cond').style.color="#49D907";
             document.getElementById('fail_cond').innerHTML="Posted Successfully";
@@ -769,50 +682,21 @@ function post_prof(){
 }
 
 
-/* Undo/Redo on KeyPress */
-function KeyPress(e) {
-    var evtobj = window.event ? event : e
-    if (evtobj.keyCode == 90 && evtobj.ctrlKey) {
-        cUndo();
-    } else if (evtobj.keyCode == 89 && evtobj.ctrlKey) {
-        restoreCanvas();
-    }
-}
-
-
-//colors display
+//colors display slides
 function myfunction() {
-    // var x = document.getElementById("colors");
-    // if (x.style.display === "none") {
-    //     x.style.display = "flex";
-    //     x.style.flexDirection = "row";
-    //     x.style.alignContent = "center";
-    // }
-    // else {
-    //     x.style.display = "none";
-    // }
     var x = document.getElementById("tool-color");
     x.firstElementChild.firstElementChild.style.display="none";
     x.firstElementChild.firstElementChild.nextElementSibling.style.display="none";
     document.getElementById("large").style.display="flex";
-    
 }
 
-
-
-
-
-// var img = document.getElementById('mno');
-// img.addEventListener('click', func);
 
 //put image on click
 function func(e) {
     var bounds = contextBoundingBox(context);
     context.clearRect(bounds.x, bounds.y, (bounds.w) + 1, (bounds.h) + 1);
     context2.drawImage(e, bounds.x, bounds.y, bounds.w, bounds.h);
-    // context2.fillRect(bounds.x, bounds.y, bounds.w, bounds.h);
     storeSnapshot();
-
 }
 
 
@@ -837,6 +721,7 @@ function contextBoundingBox(context, alphaThreshold) {
 }
 
 
+//colrs of tools menu
 function restore_colors(){
     setTimeout(function(){
         if(brushButton.classList.contains('set')){
@@ -852,13 +737,11 @@ function restore_colors(){
 }
 
 
-
 //show colors
 function plusSlides(n) {
   showSlides(slideIndex += n);
   console.log("mmmmmmmmmmmmmmmmmmmmmmmm");
 }
-
 
 function showSlides(n) {
   let i;
@@ -873,6 +756,3 @@ function showSlides(n) {
   slides[slideIndex+1].style.display = "block"; 
   slides[slideIndex+2].style.display = "block"; 
 }
-
-
-

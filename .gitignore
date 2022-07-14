@@ -1,5 +1,0 @@
-#ignore vs code files 
-.vs 
-
-ignore compressed file notice
-*.zip

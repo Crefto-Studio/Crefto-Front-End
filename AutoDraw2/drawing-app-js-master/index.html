@@ -4,9 +4,7 @@
 
 <head>
 	<title>AutoDraw</title>
-	<!--<link rel = "icon" href ="https://cdn1.iconfinder.com/data/icons/filled-outline-hobbies-1/64/hobby-drawing-color-paint-brush-512.png" >-->
 	<link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhiXmjTV6P5Cddx4HV_IP1TlUj7pX1FQrxSvybj6RkHgl-F3XRY_nSqv5J9ltjuEZi-Ko&usqp=CAU">
-	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> -->
 	<link href="css/all.css" rel="stylesheet">
 	<link rel="stylesheet" href="css/styles.css">
 	<script src="CanvasStack.js"></script>
@@ -14,58 +12,37 @@
 </head>
 
 <body style="margin: 0;">
-	<!--https://www.youtube.com/watch?v=m4sioSqlXhQ-->
+
 	<div id="page">
 
+		<!-- navbar -->
 		<div id="toolbar" class="toolbar">
 			<div class="maii">
 				<div class="tooloption2" id="rad">
-					<div class="size color1 ">
-						
+					<div class="size color1 ">	
 					    <div id="decrad" class="radcontrol ">-</div>&nbsp;
 						<span id="radval" style="color: #fff" >10</span>&nbsp;
 						<div id="incrad" class="radcontrol">+</div>
-					    
 					</div>
+
 					<div class="color2">
 						<span class="mean"style="padding-left:30px; color:#fff" id="hide1">
 							Did you mean?&nbsp;
 						</span>
 					</div>
-					<div class="color3">
-						<span class="scrollmenu" id="hide2">
-							
-							<!-- <iframe src="https://autodraw.s3.us-west-2.amazonaws.com/SVGICON/SVGICON/edge_d098dedde4654add8b73d4d9d55afe68.svg"></iframe> -->
 
-							 
-							
-							<!-- <object type="application/octet-stream" data="https://autodraw.s3.us-west-2.amazonaws.com/SVGICON/SVGICON/edge_d098dedde4654add8b73d4d9d55afe68.svg"></object> -->
-							<!-- <img id="mno" src="https://autodraw.s3.us-west-2.amazonaws.com/SVGICON/SVGICON/edge_000538b04e03bfb94b749e9138626994.svg" onclick="func(this)" width="50" height="50">
-							<img id="mno"src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTksR3wOrRAv8zoTKO2GA7lOFshxxIBhvf2BHn8hRLzLJ8oe4FK9dotRSrX36oWdsq4NPE&usqp=CAU" onclick="func(this)" width="50" height="50">
-							<img id="mno"src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTksR3wOrRAv8zoTKO2GA7lOFshxxIBhvf2BHn8hRLzLJ8oe4FK9dotRSrX36oWdsq4NPE&usqp=CAU" width="50" height="50">
-							<img id="mno"src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTksR3wOrRAv8zoTKO2GA7lOFshxxIBhvf2BHn8hRLzLJ8oe4FK9dotRSrX36oWdsq4NPE&usqp=CAU" width="50" height="50">
-							<img id="mno"src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTksR3wOrRAv8zoTKO2GA7lOFshxxIBhvf2BHn8hRLzLJ8oe4FK9dotRSrX36oWdsq4NPE&usqp=CAU" width="50" height="50">
-							<img id="mno"src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTksR3wOrRAv8zoTKO2GA7lOFshxxIBhvf2BHn8hRLzLJ8oe4FK9dotRSrX36oWdsq4NPE&usqp=CAU" width="50" height="50">
-							<img id="mno"src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTksR3wOrRAv8zoTKO2GA7lOFshxxIBhvf2BHn8hRLzLJ8oe4FK9dotRSrX36oWdsq4NPE&usqp=CAU" width="50" height="50">
-							<img id="mno"src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTksR3wOrRAv8zoTKO2GA7lOFshxxIBhvf2BHn8hRLzLJ8oe4FK9dotRSrX36oWdsq4NPE&usqp=CAU" width="50" height="50">
-							<img id="mno"src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTksR3wOrRAv8zoTKO2GA7lOFshxxIBhvf2BHn8hRLzLJ8oe4FK9dotRSrX36oWdsq4NPE&usqp=CAU" width="50" height="50">
-							<img id="mno"src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTksR3wOrRAv8zoTKO2GA7lOFshxxIBhvf2BHn8hRLzLJ8oe4FK9dotRSrX36oWdsq4NPE&usqp=CAU" width="50" height="50"> -->
-						
-						
+					<div class="color3">
+						<span class="scrollmenu" id="hide2">		
+							<!-- <img id="mno" src="https://autodraw.s3.us-west-2.amazonaws.com/SVGICON/SVGICON/edge_000538b04e03bfb94b749e9138626994.svg" onclick="func(this)" width="50" height="50"> -->	
 						</span>
 					</div>
+
 				</div>
-				
-				
-				
             </div>
 			</div>
 
 
-
-
-			
-
+			<!-- side tools -->
 		<nav id="mynav">
 			<ul>
 			  <li><a href="#" class="tool_item"><div id="brush2" class="drawTool">
@@ -114,6 +91,7 @@
 			</ul>
 		  </nav>
 
+
 		  <!-- post pop menu -->
 		  <div id="wrapper">
 			<div id="header" class="noselect">
@@ -143,22 +121,14 @@
 		  </div>
 
 
-
-
-		
+<!-- canvas -->
 		<div id="canvasWrapper">
 			<canvas id="myCanvas2" width=1366 height=657></canvas>
 			<canvas id="myCanvas_normal" width=1366 height=657></canvas>
-			<!-- <canvas id="myCanvas_post" width=1366 height=657></canvas> -->
 			<canvas id="myCanvas" width=1366 height=657>
 				Sorry, your browser does not support HTML5 canvas
 			</canvas>
-
-
-
-
 		</div>
-
 
 	</div>
 
@@ -184,12 +154,10 @@
 			show('loading', false);
 		});
 	</script>
+
 	<script src="https://kit.fontawesome.com/fedea1496e.js" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="sketchpad.js"></script>
 	<script type="text/javascript" src="cutting.js"></script>
-
-
-
 
 
 </body>
@@ -197,7 +165,3 @@
 </html>
 
 <div id="loading"></div>
-
-
-<!--https://www.youtube.com/watch?v=mbf-7-7utUc-->
-<!--http://wineexplorer.brancottestate.com/attribute/varietal-->

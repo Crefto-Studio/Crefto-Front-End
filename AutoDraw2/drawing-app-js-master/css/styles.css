@@ -14,7 +14,7 @@ body{
 	
 	overflow-y: hidden;
 	overflow-x:hidden;
-	background-color:#111;
+	background-color:#273f4a;
 	font-family: "Jost",sans-serif !important;
 	
 }
@@ -110,7 +110,7 @@ img{
 }
 .tooloption2 {
   display: inline-block;
-  background-color: yellow;
+  background-color: #273f4a;
   display: flex;
   flex-direction: row;
 	width: 9.78%;
