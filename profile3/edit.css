@@ -1,10 +1,21 @@
+:root {
+    --primary: #6222CC;
+    --secondary: #FBA504;
+    --light: #F6F4F9;
+    --dark: #04000B;
+    --third:#273f4a;
+}
+
 body {
     margin: 0;
     padding-top: 40px;
     color: black;
-    background: #eaeaea;
+    background: var(--primary);
     position: relative;
     height: 100%;
+}
+.side{
+    background: linear-gradient(32deg, rgba(251,165,4,1) 0%, rgba(98,34,204,1) 100%); ;
 }
 .account-settings .user-profile {
     margin: 0 0 1rem 0;
@@ -13,6 +24,10 @@ body {
 }
 .account-settings .user-profile .user-avatar {
     margin: 0 0 1rem 0;
+}
+h6{
+    color: var(--secondary);
+    font-weight: bolder;
 }
 .account-settings .user-profile .user-avatar img {
     width: 100px;
@@ -35,8 +50,9 @@ body {
     text-align: center;
 }
 .account-settings .about h5 {
-    margin: 0 0 15px 0;
-    color: #007ae1;
+    margin: 5px 0 15px 0;
+    color: var(--secondary);
+    font-weight: bolder;
 }
 .account-settings .about p {
     font-size: 0.825rem;
@@ -55,12 +71,13 @@ body {
 }
 
 .card {
-    background: white;
+    /* background: white; */
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
     border: 0;
     margin-bottom: -15rem;
+    
 }
 
 #file_input{

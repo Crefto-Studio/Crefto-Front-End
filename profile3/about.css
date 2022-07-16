@@ -1,6 +1,17 @@
+
+:root {
+    --primary: #6222CC;
+    --secondary: #FBA504;
+    --light: #F6F4F9;
+    --dark: #04000B;
+	--third:#273f4a;
+}
+
 body{
-    background: #eaeaea;
+    /* background: #eaeaea; */
     margin-top:20px;
+    background: var(--third);
+    color: #fff;
 }
 .profile-info-list {
     padding: 0;
@@ -587,6 +598,9 @@ nav {
 
 
     /*photos part*/
+    /* #parent{
+       border: 1px solid var(--primary);
+    } */
 #photos .portfolio-container {
     margin-left: 5rem;
 }
@@ -1248,10 +1262,15 @@ i#photo_btn.bx.bx-menu::before{
 
 .comments-title {
     font-size: 16px;
-    color: #262626;
+    color: var(--primary);
     margin-bottom: 15px;
     font-family: 'Conv_helveticaneuecyr-bold';
     text-align: center;
+    cursor: pointer;
+    text-decoration: underline;
+}
+.comments-title:hover{
+    color: var(--secondary);
 }
 
 .be-img-comment {
@@ -1314,6 +1333,16 @@ i#photo_btn.bx.bx-menu::before{
     background: #f6f6f7;
     border: 1px solid #edeff2;
     padding: 15px 20px 20px 20px;
+}
+#del_com{
+    display: block;
+    float:right;
+    margin-top: -3rem;
+    margin-right: -1.5rem;
+    cursor: pointer;
+}
+#del_com:hover{
+    color: #000;
 }
 
 .form-group.fl_icon .icon {

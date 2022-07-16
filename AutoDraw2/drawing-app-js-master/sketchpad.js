@@ -740,7 +740,6 @@ function restore_colors(){
 //show colors
 function plusSlides(n) {
   showSlides(slideIndex += n);
-  console.log("mmmmmmmmmmmmmmmmmmmmmmmm");
 }
 
 function showSlides(n) {

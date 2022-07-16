@@ -1,6 +1,7 @@
 
 //get user api:display user info
 var userphoto;
+var userid;
 window.onload=info()
 function info() {
 	let token = document.cookie;
@@ -9,15 +10,14 @@ function info() {
 	fetch("http://www.api.crefto.studio/api/v1/users/me", {
 		headers: {
 			Authorization: `Bearer ${token[1]}`,
-			
 		}
 	})
-
 		.then(response => response.json())
-
 		.then(json => {
 			console.log(json)
+			
 			if (json.status == "success") {
+				userid=json.data.user._id;
 				userphoto=json.data.user.photo;
 				var arr = document.querySelectorAll(".user_name");
 				for (let item of arr) {
@@ -28,20 +28,19 @@ function info() {
 				document.getElementById('user_gender').innerHTML = json.data.user.gender;
 				document.getElementById('user_interest').innerHTML = json.data.user.interest;
 				document.getElementById('user_bio').innerHTML = json.data.user.bio;
-
 				document.getElementById('user_phone').innerHTML = json.data.user.phone;
 				document.getElementById('user_mail').innerHTML = json.data.user.email;
 				document.getElementById('user_add').innerHTML = json.data.user.address;
-
 				document.getElementById('user_face').innerHTML = json.data.user.facebook;
-
-
 			}
 			else {
 				alert(json.message);
             }
 		})
+
+		dis_posts();
 }
+
 
 //toggle between menus
 function display_photos() {
@@ -62,8 +61,6 @@ function display_posts() {
 	document.getElementById("posts").style.display = "block";
 	document.getElementById("about").style.display = "none";
 	document.getElementById("photos").style.display = "none";
-
-	dis_posts();
 }
 
 
@@ -74,6 +71,14 @@ function fbs_click(element) {
 	t = TheImg.getAttribute('alt');
 	window.open('http://www.facebook.com/sharer.php?u=' + encodeURIComponent(u) + '&t=' + encodeURIComponent(t), 'sharer', 'toolbar=0,status=0,width=626,height=436'); return false;
 }
+
+//share in whatsapp
+function whts_click(element){
+	var TheImg = element.parentElement.parentElement.firstElementChild;
+	let imageURL= TheImg.src;
+element.setAttribute('href', 'whatsapp://send?text='+encodeURIComponent(imageURL));
+}
+
 
 //side nav
 let arrow = document.querySelectorAll(".arrow");
@@ -100,6 +105,7 @@ function toggle_bar(btn) {
 		}
 }
 
+
 //logout
 function prof_out() {
 	let token = document.cookie;
@@ -113,9 +119,7 @@ function prof_out() {
 		redirect: 'follow'
 	  };
 	fetch("http://www.api.crefto.studio/api/v1/users/logout",requestOptions)
-
 		.then(response => response.json())
-
 		.then(json => {
 			console.log(json)
 			if (json.status == "success") {
@@ -125,11 +129,11 @@ function prof_out() {
 		})
 }
 
+
 //likes
 function like(element) {
 	//change color
 	var btn = element.firstElementChild;
-	//btn.style.color = "blue";
 	btn.classList.toggle("blue-like");
 
 	//api
@@ -146,13 +150,13 @@ function like(element) {
 		},
 		credentials: "same-origin",
 	})
-
 		.then(response => response.json())
-
 		.then(json => {
 			console.log(json);
+			btn.nextSibling.innerHTML=json.likes;
 		})
 }
+
 
 //my gallery
 function display_gallery() {
@@ -165,9 +169,7 @@ function display_gallery() {
 			Authorization: `Bearer ${token[1]}`
 		},
 	})
-
 		.then(response => response.json())
-
 		.then(json => {
 			console.log(json);
 			json.data.forEach(function (elem) {	
@@ -177,11 +179,12 @@ function display_gallery() {
 				text += "<img class=\"img-fluid w-100\" src=\"https://crefto.s3.eu-central-1.amazonaws.com/posts/" + elem.postImg+ "\">";
 				text += "<div class=\"portfolio-overlay\" id=\""+elem._id+"\">";
 				text += "<a class=\"btn btn-square btn-outline-light mx-1\" href=\"https://crefto.s3.eu-central-1.amazonaws.com/posts/"+elem.postImg+"\" data-lightbox=\"portfolio\"><i class=\"fa fa-eye\"></i></a>";
-				text += "<a class=\"btn btn-square btn-outline-light mx-1\" href=\"\" onclick=\"fbs_click(this)\"><i class=\"fa fa-link\"></i></a>";
+				text += "<a class=\"btn btn-square btn-outline-light mx-1\" href=\"\" onclick=\"fbs_click(this)\"><i class=\"fab fa-facebook-f\"></i></a>";
+				text += "<a class=\"btn btn-square btn-outline-light mx-1\" href=\"\" onclick=\"whts_click(this)\"><i class=\"fa fa-whatsapp\" aria-hidden=\"true\"></i></a>";
 				text += "<a class=\"btn btn-square btn-outline-light mx-1\" href=\"#\" onclick=\"del_post(this)\"><i class=\"far fa-trash-alt \"></i></a>";
 				text += "</div>";
 				text += "</div>";
-				text += "<div class=\"bg-light p-4\">";
+				text += "<div class=\"p-4\">";
 				text += "<p class=\"text-primary fw-medium mb-2\">"+elem.name+"</p>";
 				text += "</div>";
 				text += "</div>";
@@ -190,6 +193,7 @@ function display_gallery() {
 			document.getElementById("gallery").innerHTML = text;
 			})
 }
+
 
 //delete post
 function del_post(elem) {
@@ -215,30 +219,6 @@ fetch(url, requestOptions)
 	}
 })
   .catch(error => console.log('error', error));
-		// var post_id = elem.parentElement.id;
-		// var url = "http://www.api.crefto.studio/api/v1/posts/" + post_id;
-		// let token = document.cookie;
-		// token = token.split("=");
-		// fetch(url, {
-		// 	headers: {
-		// 		Authorization: `Bearer ${token[1]}`,
-		// 	},
-		// 	method: "DELETE",
-		// }).then(response => {
-		// 	document.getElementById('id01').style.display = 'block';
-		// 	return response.json()
-		// })
-		// 	.then(json => {
-		// 		console.log("mno",json);
-		// 		if (json.status == "fail") {
-		// 			document.getElementById("msg_del").innerHTML = json.message;
-		// 		}
-		// 		else {
-		// 			document.getElementById("msg_del").innerHTML = "sucessfully deleted";
-		// 			window.location.reload();
-		// 		}
-		// 	}
-		// 	)
 }
 
 
@@ -250,28 +230,24 @@ function dis_posts() {
 	var max;
 	var img;
 	var post_id;
+	var likesarr;
 
 	fetch("http://www.api.crefto.studio/api/v1/posts")
 		.then(response => response.json())
 		.then(json => {
 			console.log(json);
+
 			if (json.status == "success") {
-				//var arr = [];
-				
-				//arr[0] = json.data.posts[json.data.posts.length - 1];
-				//arr[1] = json.data.posts[json.data.posts.length - 2];
-				//arr[2] = json.data.posts[json.data.posts.length - 3];
-				
 				max = json.results;
-				//max = 3;
 
 				text += "<div class=\"timeline-body\">";
 				text += "<div class=\"timeline-header\">";
-				//arr[count] = json.data.posts[count];
+
 				json.data.posts[count].user._id;
 				desc = json.data.posts[count].description;
 				img = json.data.posts[count].postImg;
 				post_id = json.data.posts[count]._id;
+				likesarr = json.data.posts[count].likes;
 					
 					return fetch("http://www.api.crefto.studio/api/v1/users/" + json.data.posts[count].user._id);
 			}
@@ -279,7 +255,6 @@ function dis_posts() {
 		}).then(response => response.json())
 		.then(json => {
 			console.log(json);
-			console.log(json.data.user.name);
 			
 			text += "<span class=\"userimage\"><img src=\"https://crefto.s3.eu-central-1.amazonaws.com/users/" + json.data.user.photo  +"\"></span>";
 			text += "<span class=\"username\">" + json.data.user.name + "</span>";
@@ -288,12 +263,10 @@ function dis_posts() {
 			text += "<p>" + desc + "</p>";
 			text += "<p class=\"m-t-20\">";
 		    text += "<img src=\"https://crefto.s3.eu-central-1.amazonaws.com/posts/" + img + "\">";
-		
 			text += "</p>";
 			text += "</div>";
 			text += "<div class=\"timeline-footer\" id=\"" + post_id + "\">";
-		//	text += "<a href=\"javascript:;\" class=\"m-r-15 text-inverse-lighter\"><i class=\"fa fa-heart fa-fw fa-lg m-r-3\"></i>Fav </a>";
-			text += "<a href=\"javascript:;\" class=\"m-r-15 text-inverse-lighter\" onclick=\"like(this)\"><i class=\"fa fa-thumbs-up fa-fw fa-lg m-r-3\"></i> Like</a>";
+			text += "<a href=\"javascript:;\" class=\"m-r-15 text-inverse-lighter\" onclick=\"like(this)\" id=\"likefirst\"><i class=\"fa fa-thumbs-up fa-fw fa-lg m-r-3\"></i><span>"+likesarr.length+"</span>Like</a>";
 			text += "<a href=\"javascript:;\" class=\"m-r-15 text-inverse-lighter\" onclick=\"get_comment(this)\"><i class=\"fa fa-comments fa-fw fa-lg m-r-3\"></i> Comment</a>";
 			text += "</div>";
 			text += "<div class=\"timeline-comment\">";
@@ -312,7 +285,13 @@ function dis_posts() {
 			text += "</div>";
 			text += "</div>";
 			text += "</div>";
+
 			document.getElementById("wall").innerHTML += text;
+
+			if(likesarr.includes(userid)){
+				var xx=document.getElementById(post_id).firstElementChild.firstElementChild;
+				xx.classList.add("blue-like");
+			}
 			count++;
 			if (count < max) {
 				dis_posts();
@@ -324,10 +303,8 @@ function dis_posts() {
 }
 
 
-
 //create comment
-function make_comment(elem) {
-	
+function make_comment(elem) {	
 	var node_id = elem.parentElement.parentElement.parentElement.parentElement.parentElement.previousElementSibling.previousElementSibling.id;
 	var comment_box = elem.parentElement.previousElementSibling;
 	console.log(node_id);
@@ -345,19 +322,18 @@ function make_comment(elem) {
 			Authorization: `Bearer ${token[1]}`,
 		}
 	})
-
 		.then(response => response.json())
-
 		.then(json => {
-			console.log(json)
+			console.log(json);
+
 			if(json.status=="success"){
 				comment_box.value=" ";
                 var x=elem.parentElement.parentElement.parentElement.parentElement.parentElement.previousElementSibling.previousElementSibling.firstElementChild.nextSibling;
-				console.log(x);
 				get_comment(x);
 			}
 		})
 };
+
 
 //get comments
 function get_comment(elem) {
@@ -367,28 +343,24 @@ function get_comment(elem) {
 	var url = "http://www.api.crefto.studio/api/v1/posts/" + node_id + "/comments";
 
 	fetch(url)
-
 		.then(response => response.json())
-
 		.then(json => {
-			console.log(json)
+			console.log(json);
+
 			var place=document.getElementById(node_id);
-			//console.log(json.data.comments.comments);
+
 			if(json.results==0){
 				text+="<div class=\"container\">";
-				//text+="<div class=\"be-comment-block\"></div>";
-				text+="<h1 class=\"comments-title\">Comments ("+json.results+")</h1>";
+				text+="<h1 class=\"comments-title\">Comments (<span>"+json.results+"</span>)</h1>";
 				text+="</div>";
 				text+="</div>";
 			}
 			else{
 				text+="<div class=\"container\">";
-				//text+="<div class=\"be-comment-block\"></div>";
-				text+="<h1 class=\"comments-title\" onclick=\"hide_comment(this)\">Comments ("+json.results+")</h1>";
+				text+="<h1 class=\"comments-title\" onclick=\"hide_comment(this)\">Comments (<span>"+json.results+"</span>)</h1>";
 				text+='<div id="hideall">'
             for(let i=0;i<json.results;i++){
-				
-				text+="<div class=\"be-comment\">";
+				text+="<div class=\"be-comment\" id=\""+json.data.comments.comments[i]._id+"\">";
 				text+="<div class=\"be-img-comment\">";
 				text+="<a href=\"#\">";
 				var img_user=json.data.comments.comments[i].author.photo;
@@ -405,17 +377,19 @@ function get_comment(elem) {
 				text+="<p class=\"be-comment-text\">"+json.data.comments.comments[i].content;
 				text+="</p>";
 				text+="</div>";
+				if(json.data.comments.comments[i].author._id==userid){
+					text+="<a id=\"del_com\" onclick=\"del_com(this)\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></a>";
+				}
 				text+="</div>";
-				
             }
 			text+='</div>'
 			text+="</div>";
 			text+="</div>";
 		}
-
 			place.nextSibling.innerHTML=text;
 		})
 };
+
 
 //hide comments
 function hide_comment(elem){
@@ -425,4 +399,28 @@ function hide_comment(elem){
 	else{
 		elem.nextSibling.style.display="none";
 	}
+}
+
+
+//delete comments
+function del_com(elem){
+	let token = document.cookie;
+	token = token.split("=");
+
+	var com_id=elem.parentElement.id;
+	var post_id=elem.parentElement.parentElement.parentElement.parentElement.previousElementSibling.id;
+
+	var url="http://www.api.crefto.studio/api/v1/posts/"+post_id+"/"+com_id;
+	fetch(url, {
+		method: 'DELETE',
+		headers: {
+			Authorization: `Bearer ${token[1]}`,
+		}
+	})
+		.then(response => response.json())
+		.then(json => {
+			console.log(json);			
+		})
+		elem.parentElement.style.display="none";
+		elem.parentElement.parentElement.previousElementSibling.firstElementChild.innerHTML-=1;
 }

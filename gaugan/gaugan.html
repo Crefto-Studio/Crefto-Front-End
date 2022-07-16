@@ -228,6 +228,10 @@
     background-color: #273f4a;
     color: #fff;
 }
+.edit{
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
 #color1,
 #color2,
 #color3,
@@ -538,6 +542,10 @@ input[type="range"]::-moz-range-progress {
 	font-weight:300;
   }
 
+  img{
+    width: 50%;
+    height: 10%;
+  }
     </style>
     <script type="text/babel">
         // this.sketchpad.color = 'none';
@@ -559,7 +567,8 @@ input[type="range"]::-moz-range-progress {
             { color: "#fafafa", id: 158, label: "snow", labelColor: "black" },
         ];
         const colorwh = [
-            { color: "#ffffff", id: 147, label: "white" },
+            // { color: "#ffffff", id: 147, label: "white" },
+            { color: "#759edf", id: 156, label: "sky" },
         ];
         const hexToColorMap = colorMap.reduce((combined, color) => {
             combined[color.color] = color;
@@ -601,7 +610,7 @@ input[type="range"]::-moz-range-progress {
 
             clearSketch = () => {
                 this.sketchpad.clear();
-                this.setSketchColor(colorwh.find(c => c.label == "white").color);
+                this.setSketchColor(colorwh.find(c => c.label == "sky").color);
                 this.sketchpad.fill();
                 // fill uses setTimeout of 100, so we need a bigger timeout...
                 setTimeout(() => {
@@ -667,9 +676,29 @@ input[type="range"]::-moz-range-progress {
                 
                  console.log("mno",sketch);
                  
+                 let token = document.cookie;
+                 token = token.split("=");
 
-                
-                
+                 var url = 'http://35.84.178.76:5000/generate_image';
+                  fetch(url, {
+                      method: 'POST',
+                      headers: new Headers({
+                          'Content-Type': 'application/json; charset=utf-8',
+                      }),
+                      body:  JSON.stringify({
+                          // "token": token[1],
+                          "data":sketch
+                      }),
+                  }).then(function (response) {
+                      return response.text();
+                  })
+                      .then(function (jsonResponse) {
+                        console.log("##################3");
+                      console.log(jsonResponse);
+                      document.getElementById("ItemPreview").src = "data:image/png;base64," + jsonResponse;
+                      
+                     });
+    
             }
            
             render() {
@@ -677,33 +706,33 @@ input[type="range"]::-moz-range-progress {
                     <div id="nav">
                         <div id="navbar">
                         <div id="color1" className="col-xs-3">
-                            <div className="label">Lower Hue : {this.state.strokeWidth}px</div>
+                            <div className="label edit">Lower Hue : {this.state.strokeWidth}px</div>
                             <input type="range" id="lower_hue" defaultValue ="57" min="0" max ="180"/>
                         </div>
                         <div id="color2" className="col-xs-3">
-                            <div className="label">Lower Sat : {this.state.strokeWidth}px</div>
+                            <div className="label edit">Lower Sat : {this.state.strokeWidth}px</div>
                             <input type="range" id="lower_sat" defaultValue ="67" min="0" max ="255"/>
                         </div>
                         <div id="color3" className="col-xs-3">
-                            <div className="label">Lower Val : {this.state.strokeWidth}px</div>
+                            <div className="label edit">Lower Val : {this.state.strokeWidth}px</div>
                             <input type="range" id="lower_val" defaultValue ="0" min="0" max ="255"/>
                         </div>
                         <div id="color4" className="col-xs-3">
-                            <div className="label">Upper Hue : {this.state.strokeWidth}px</div>
+                            <div className="label edit">Upper Hue : {this.state.strokeWidth}px</div>
                             <input type="range" id="upper_hue" defaultValue ="100" min="0" max ="180"/>
                         </div>
                         <div id="color5" className="col-xs-3">
-                            <div className="label">Upper Sat : {this.state.strokeWidth}px</div>
+                            <div className="label edit">Upper Sat : {this.state.strokeWidth}px</div>
                             <input type="range" id="upper_sat" defaultValue ="255" min="0" max ="255"/>
                         </div>
                         <div id="color6" className="col-xs-3">
-                            <div className="label">Upper Val : {this.state.strokeWidth}px</div>
+                            <div className="label edit">Upper Val : {this.state.strokeWidth}px</div>
                             <input type="range" id="upper_val" defaultValue ="255" min="0" max ="255"/>
                             
                         </div>
                         
                     </div>
-
+                    <img id="ItemPreview" src="" />
                     <div className="container">
                         <div id="toolbar">
                             <div className="row">

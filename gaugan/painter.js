@@ -129,7 +129,7 @@ function openCvReady() {
       let src = new cv.Mat(video.height, video.width, cv.CV_8UC4);
       let hsv = new cv.Mat(video.height, video.width, cv.CV_8UC1);
       let mask = new cv.Mat(video.height, video.width, cv.CV_8UC1);
-      let paint_window = new cv.Mat(video.height, video.width, cv.CV_8UC4, [255,255,255,255]);
+      let paint_window = new cv.Mat(video.height, video.width, cv.CV_8UC4, [117,158,223,255]);
       let points = [];
       let line_points =[];
       let circle_points =[];
@@ -284,8 +284,8 @@ function openCvReady() {
                         delay_permission = true;
                         Draw_event= false;
                         toggle =false;
-                        // paint_window.delete();
-                        // paint_window = new cv.Mat(video.height, video.width, cv.CV_8UC4, [255,255,255,255]);
+                        paint_window.delete();
+                        paint_window = new cv.Mat(video.height, video.width, cv.CV_8UC4, [117,158,223,255]);
                     }
                     // case connected points
                     else if(mode == 'hold' || mode =='toggle')
@@ -315,7 +315,7 @@ function openCvReady() {
           }
   
       //----------------------------------------------------------- Drawing
-          console.log('POINTS : ',points);
+        //   console.log('POINTS : ',points);
           // Draw the connected points
           for(var i=1;i<points.length;i++)
           {
@@ -572,7 +572,6 @@ function trash(){
 	var myHeaders = new Headers();
 
 	myHeaders.append("Authorization", `Bearer ${token[1]}`);
-	console.log("222222222222222222");
 	console.log(token[1]);
 	var requestOptions = {
 		method: 'POST',
@@ -607,9 +606,25 @@ function trash(){
 }
 
 
-// window.onload=function(){
-//     var jsonResponse='[[[5,1],[0,1]],[[0,1],[0,1]],[[0,1],[0,1]]]';
-//     var test=JSON.parse(jsonResponse);
-//     console.log(test);
-//     console.log(test[0][0][0]);
-//     }
+window.onload=function(){
+    var jsonResponse='tensor([[[5,1],[0,1]],[[0,1],[0,1]],[[0,1],[0,1]]])';
+    var cut=jsonResponse.substring(7, jsonResponse.length);
+    var cut=cut.substring(0, cut.length-1);
+    console.log(cut);
+    var test=JSON.parse(cut);
+    console.log(test);
+    console.log(test[0][0][0]);
+
+
+ // const imageData = context.createImageData(context.canvas.width, context.canvas.height);
+                      // var i=0;
+                      // for(let a=0;a<512;a++){
+                      //     for(let b=0;b<512;b++){
+                      //         imageData.data[i + 0] = arr[0][a][b];  // R value
+                      //         imageData.data[i + 1] = arr[1][a][b];    // G value
+                      //         imageData.data[i + 2] = arr[2][a][b];  // B value
+                      //         imageData.data[i + 3] = 255;  // A value
+                      //         i+=4;
+                      //     }
+                      // }
+    }
