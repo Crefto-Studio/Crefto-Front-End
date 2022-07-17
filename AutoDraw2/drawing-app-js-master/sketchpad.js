@@ -226,9 +226,25 @@ function box() {
         
         const myJSON = JSON.stringify(res3);
         console.log("width: ",bounds.w,"height: ",bounds.h,"data: ",myJSON);
+        // let token = document.cookie;
+        // // console.log(token);
+        // token = token.split("=");
         let token = document.cookie;
-        // console.log(token);
-        token = token.split("=");
+	token = token.split(";");
+	//console.log("token:",token);
+	var c;
+	for (let elem of token) {	
+		c = elem.split("=");
+	}
+	//console.log(c);
+	var index;
+	for ( let i = 0; i < c.length; i++) {
+		if (c[i] == "AuthTokenCookie"||c[i] == " AuthTokenCookie") {
+			//console.log("mno", i);
+			index = i;
+        }
+	}
+	index = index + 1;
         var test=JSON.stringify({
             "token": token[1],
             "data":res3,});
@@ -244,7 +260,7 @@ function box() {
                     'Content-Type': 'application/json; charset=utf-8',
                 }),
                 body:  JSON.stringify({
-                    "token": token[1],
+                    "token": c[index],
                     "width":bounds.w,
                     "height":bounds.h,
                     "data":res3,
@@ -640,8 +656,24 @@ function post_prof(){
     var fileData = dataURLtoFile(url, "imageName.png");
     console.log("Here is JavaScript File Object", fileData);
 
+    // let token = document.cookie;
+	// token = token.split("=");
     let token = document.cookie;
-	token = token.split("=");
+	token = token.split(";");
+	//console.log("token:",token);
+	var c;
+	for (let elem of token) {	
+		c = elem.split("=");
+	}
+	//console.log(c);
+	var index;
+	for ( let i = 0; i < c.length; i++) {
+		if (c[i] == "AuthTokenCookie"||c[i] == " AuthTokenCookie") {
+			//console.log("mno", i);
+			index = i;
+        }
+	}
+	index = index + 1;
 
     var formdata = new FormData();
 	formdata.append('name', document.getElementById('title').value);
@@ -651,7 +683,7 @@ function post_prof(){
 
 	var myHeaders = new Headers();
 
-	myHeaders.append("Authorization", `Bearer ${token[1]}`);
+	myHeaders.append("Authorization", `Bearer ${c[index]}`);
 	var requestOptions = {
 		method: 'POST',
 		headers: myHeaders,

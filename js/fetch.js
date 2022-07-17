@@ -83,11 +83,28 @@ function loginapi() {
 
 //logout
 function logout() {
+	// let token = document.cookie;
+	// token = token.split("=");
+	// console.log("mmmmmm", token[1]);
 	let token = document.cookie;
-	token = token.split("=");
-	console.log("mmmmmm", token[1]);
+	token = token.split(";");
+	//console.log("token:",token);
+	var c;
+	for (let elem of token) {	
+		c = elem.split("=");
+	}
+	//console.log(c);
+	var index;
+	for ( let i = 0; i < c.length; i++) {
+		if (c[i] == "AuthTokenCookie"||c[i] == " AuthTokenCookie") {
+			//console.log("mno", i);
+			index = i;
+        }
+	}
+	index = index + 1;
+	
 	var myHeaders = new Headers();
-	myHeaders.append("Authorization", `Bearer ${token[1]}`);
+	myHeaders.append("Authorization", `Bearer ${c[index]}`);
 	var requestOptions = {
 		method: 'GET',
 		headers: myHeaders,
@@ -145,11 +162,27 @@ window.onload =toggle_text();
  function toggle_text() {	
 	if (document.cookie.indexOf('AuthTokenCookie=') != -1) {
 		//var user_id = localStorage.getItem('user_id');
+		// let token = document.cookie;
+		// token = token.split("=");
 		let token = document.cookie;
-		token = token.split("=");
+	token = token.split(";");
+	//console.log("token:",token);
+	var c;
+	for (let elem of token) {	
+		c = elem.split("=");
+	}
+	//console.log(c);
+	var index;
+	for ( let i = 0; i < c.length; i++) {
+		if (c[i] == "AuthTokenCookie"||c[i] == " AuthTokenCookie") {
+			//console.log("mno", i);
+			index = i;
+        }
+	}
+	index = index + 1;
 		fetch("http://www.api.crefto.studio/api/v1/users/me", {
 			headers: {
-				Authorization: `Bearer ${token[1]}`
+				Authorization: `Bearer ${c[index]}`
 			}
 		})
 
@@ -232,8 +265,24 @@ function rate_func(){
 		rate_value = "dislike";
 	}
 	
+	// let token = document.cookie;
+	// token = token.split("=");
 	let token = document.cookie;
-	token = token.split("=");
+	token = token.split(";");
+	//console.log("token:",token);
+	var c;
+	for (let elem of token) {	
+		c = elem.split("=");
+	}
+	//console.log(c);
+	var index;
+	for ( let i = 0; i < c.length; i++) {
+		if (c[i] == "AuthTokenCookie"||c[i] == " AuthTokenCookie") {
+			//console.log("mno", i);
+			index = i;
+        }
+	}
+	index = index + 1;
 
 	fetch("http://www.api.crefto.studio/api/v1/users/sats", {
 	   method: "POST",
@@ -243,7 +292,7 @@ function rate_func(){
 	   }),
 	   headers: {
 		   "Content-type": "application/json; charset=UTF-8",	
-		   Authorization: `Bearer ${token[1]}`	
+		   Authorization: `Bearer ${c[index]}`	
 	   }
    })
 

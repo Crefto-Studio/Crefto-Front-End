@@ -559,9 +559,25 @@ function trash(){
     var fileData = dataURLtoFile(url, "imageName.png");
     console.log("Here is JavaScript File Object", fileData);
 
+    // let token = document.cookie;
+    // console.log(token);
+	// token = token.split("=");
     let token = document.cookie;
-    console.log(token);
-	token = token.split("=");
+	token = token.split(";");
+	//console.log("token:",token);
+	var c;
+	for (let elem of token) {	
+		c = elem.split("=");
+	}
+	//console.log(c);
+	var index;
+	for ( let i = 0; i < c.length; i++) {
+		if (c[i] == "AuthTokenCookie"||c[i] == " AuthTokenCookie") {
+			//console.log("mno", i);
+			index = i;
+        }
+	}
+	index = index + 1;
 
     var formdata = new FormData();
 	formdata.append('name', document.getElementById('title').value);
@@ -571,7 +587,7 @@ function trash(){
 
 	var myHeaders = new Headers();
 
-	myHeaders.append("Authorization", `Bearer ${token[1]}`);
+	myHeaders.append("Authorization", `Bearer ${c[index]}`);
 	console.log(token[1]);
 	var requestOptions = {
 		method: 'POST',

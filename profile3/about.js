@@ -4,12 +4,28 @@ var userphoto;
 var userid;
 window.onload=info()
 function info() {
+	// let token = document.cookie;
+	// token = token.split("=");
 	let token = document.cookie;
-	token = token.split("=");
+	token = token.split(";");
+	//console.log("token:",token);
+	var c;
+	for (let elem of token) {	
+		c = elem.split("=");
+	}
+	//console.log(c);
+	var index;
+	for ( let i = 0; i < c.length; i++) {
+		if (c[i] == "AuthTokenCookie"||c[i] == " AuthTokenCookie") {
+			//console.log("mno", i);
+			index = i;
+        }
+	}
+	index = index + 1;
 
 	fetch("http://www.api.crefto.studio/api/v1/users/me", {
 		headers: {
-			Authorization: `Bearer ${token[1]}`,
+			Authorization: `Bearer ${c[index]}`,
 		}
 	})
 		.then(response => response.json())
@@ -108,11 +124,27 @@ function toggle_bar(btn) {
 
 //logout
 function prof_out() {
+	// let token = document.cookie;
+	// token = token.split("=");
+	// console.log("mmmmmm", token[1]);
 	let token = document.cookie;
-	token = token.split("=");
-	console.log("mmmmmm", token[1]);
+	token = token.split(";");
+	//console.log("token:",token);
+	var c;
+	for (let elem of token) {	
+		c = elem.split("=");
+	}
+	//console.log(c);
+	var index;
+	for ( let i = 0; i < c.length; i++) {
+		if (c[i] == "AuthTokenCookie"||c[i] == " AuthTokenCookie") {
+			//console.log("mno", i);
+			index = i;
+        }
+	}
+	index = index + 1;
 	var myHeaders = new Headers();
-	myHeaders.append("Authorization", `Bearer ${token[1]}`);
+	myHeaders.append("Authorization", `Bearer ${c[index]}`);
 	var requestOptions = {
 		method: 'GET',
 		headers: myHeaders,
@@ -137,8 +169,24 @@ function like(element) {
 	btn.classList.toggle("blue-like");
 
 	//api
+	// let token = document.cookie;
+	// token = token.split("=");
 	let token = document.cookie;
-	token = token.split("=");
+	token = token.split(";");
+	//console.log("token:",token);
+	var c;
+	for (let elem of token) {	
+		c = elem.split("=");
+	}
+	//console.log(c);
+	var index;
+	for ( let i = 0; i < c.length; i++) {
+		if (c[i] == "AuthTokenCookie"||c[i] == " AuthTokenCookie") {
+			//console.log("mno", i);
+			index = i;
+        }
+	}
+	index = index + 1;
 
 	var my_id = element.parentElement.id;
 
@@ -146,7 +194,7 @@ function like(element) {
 	fetch(url, {
 		method:"PUT",
 		headers: {
-			Authorization: `Bearer ${token[1]}`
+			Authorization: `Bearer ${c[index]}`
 		},
 		credentials: "same-origin",
 	})
@@ -161,12 +209,28 @@ function like(element) {
 //my gallery
 function display_gallery() {
 	var text="";
+	// let token = document.cookie;
+	// token = token.split("=");
 	let token = document.cookie;
-	token = token.split("=");
+	token = token.split(";");
+	//console.log("token:",token);
+	var c;
+	for (let elem of token) {	
+		c = elem.split("=");
+	}
+	//console.log(c);
+	var index;
+	for ( let i = 0; i < c.length; i++) {
+		if (c[i] == "AuthTokenCookie"||c[i] == " AuthTokenCookie") {
+			//console.log("mno", i);
+			index = i;
+        }
+	}
+	index = index + 1;
 
 	fetch("http://www.api.crefto.studio/api/v1/posts/getMyPosts", {
 		headers: {
-			Authorization: `Bearer ${token[1]}`
+			Authorization: `Bearer ${c[index]}`
 		},
 	})
 		.then(response => response.json())
@@ -199,11 +263,27 @@ function display_gallery() {
 function del_post(elem) {
 	var post_id = elem.parentElement.id;
 		var url = "http://www.api.crefto.studio/api/v1/posts/" + post_id;
+		// let token = document.cookie;
+		// token = token.split("=");
 		let token = document.cookie;
-		token = token.split("=");
+	token = token.split(";");
+	//console.log("token:",token);
+	var c;
+	for (let elem of token) {	
+		c = elem.split("=");
+	}
+	//console.log(c);
+	var index;
+	for ( let i = 0; i < c.length; i++) {
+		if (c[i] == "AuthTokenCookie"||c[i] == " AuthTokenCookie") {
+			//console.log("mno", i);
+			index = i;
+        }
+	}
+	index = index + 1;
 
 	var myHeaders = new Headers();
-myHeaders.append("Authorization", `Bearer ${token[1]}`);
+myHeaders.append("Authorization", `Bearer ${c[index]}`);
 
 var requestOptions = {
   method: 'DELETE',
@@ -309,8 +389,24 @@ function make_comment(elem) {
 	var comment_box = elem.parentElement.previousElementSibling;
 	console.log(node_id);
 	var url = "http://www.api.crefto.studio/api/v1/posts/" + node_id + "/comments";
+	// let token = document.cookie;
+	// token = token.split("=");
 	let token = document.cookie;
-	token = token.split("=");
+	token = token.split(";");
+	//console.log("token:",token);
+	var c;
+	for (let elem of token) {	
+		c = elem.split("=");
+	}
+	//console.log(c);
+	var index;
+	for ( let i = 0; i < c.length; i++) {
+		if (c[i] == "AuthTokenCookie"||c[i] == " AuthTokenCookie") {
+			//console.log("mno", i);
+			index = i;
+        }
+	}
+	index = index + 1;
 	
 	fetch(url, {
 		method: "POST",
@@ -319,7 +415,7 @@ function make_comment(elem) {
 		}),
 		headers: {
 			"Content-type": "application/json; charset=UTF-8",
-			Authorization: `Bearer ${token[1]}`,
+			Authorization: `Bearer ${c[index]}`,
 		}
 	})
 		.then(response => response.json())
@@ -404,8 +500,24 @@ function hide_comment(elem){
 
 //delete comments
 function del_com(elem){
+	// let token = document.cookie;
+	// token = token.split("=");
 	let token = document.cookie;
-	token = token.split("=");
+	token = token.split(";");
+	//console.log("token:",token);
+	var c;
+	for (let elem of token) {	
+		c = elem.split("=");
+	}
+	//console.log(c);
+	var index;
+	for ( let i = 0; i < c.length; i++) {
+		if (c[i] == "AuthTokenCookie"||c[i] == " AuthTokenCookie") {
+			//console.log("mno", i);
+			index = i;
+        }
+	}
+	index = index + 1;
 
 	var com_id=elem.parentElement.id;
 	var post_id=elem.parentElement.parentElement.parentElement.parentElement.previousElementSibling.id;
@@ -414,7 +526,7 @@ function del_com(elem){
 	fetch(url, {
 		method: 'DELETE',
 		headers: {
-			Authorization: `Bearer ${token[1]}`,
+			Authorization: `Bearer ${c[index]}`,
 		}
 	})
 		.then(response => response.json())

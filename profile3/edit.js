@@ -66,11 +66,27 @@ document.getElementById('user_street').addEventListener('change', function () {
 });
 
 function post_info() {
+	// let token = document.cookie;
+	// token = token.split("=");
 	let token = document.cookie;
-	token = token.split("=");
+	token = token.split(";");
+	//console.log("token:",token);
+	var c;
+	for (let elem of token) {	
+		c = elem.split("=");
+	}
+	//console.log(c);
+	var index;
+	for ( let i = 0; i < c.length; i++) {
+		if (c[i] == "AuthTokenCookie"||c[i] == " AuthTokenCookie") {
+			//console.log("mno", i);
+			index = i;
+        }
+	}
+	index = index + 1;
 	var myHeaders = new Headers();
 		
-	myHeaders.append("Authorization", `Bearer ${token[1]}`);
+	myHeaders.append("Authorization", `Bearer ${c[index]}`);
 
 	var requestOptions = {
 		method: 'PATCH',
@@ -107,12 +123,28 @@ function post_info() {
 //show info 
 window.onload = info();
 function info() {
+	// let token = document.cookie;
+	// token = token.split("=");
 	let token = document.cookie;
-	token = token.split("=");
+	token = token.split(";");
+	//console.log("token:",token);
+	var c;
+	for (let elem of token) {	
+		c = elem.split("=");
+	}
+	//console.log(c);
+	var index;
+	for ( let i = 0; i < c.length; i++) {
+		if (c[i] == "AuthTokenCookie"||c[i] == " AuthTokenCookie") {
+			//console.log("mno", i);
+			index = i;
+        }
+	}
+	index = index + 1;
 	
 	fetch("http://www.api.crefto.studio/api/v1/users/me", {
 		headers: {
-			Authorization: `Bearer ${token[1]}`
+			Authorization: `Bearer ${c[index]}`
 		}
 	})
 		.then(response => response.json())
@@ -161,15 +193,31 @@ document.getElementById("change_pass").addEventListener('click', function () {
 //change pass api
 function change_pass() {
 	var formpass = new FormData();
+	// let token = document.cookie;
+	// token = token.split("=");
 	let token = document.cookie;
-	token = token.split("=");
+	token = token.split(";");
+	//console.log("token:",token);
+	var c;
+	for (let elem of token) {	
+		c = elem.split("=");
+	}
+	//console.log(c);
+	var index;
+	for ( let i = 0; i < c.length; i++) {
+		if (c[i] == "AuthTokenCookie"||c[i] == " AuthTokenCookie") {
+			//console.log("mno", i);
+			index = i;
+        }
+	}
+	index = index + 1;
 
 	fetch("http://www.api.crefto.studio/api/v1/users/updateMyPassword", {
 
 		method: "PATCH",
 		headers: {
 			"Content-type": "application/json; charset=UTF-8",
-			Authorization: `Bearer ${token[1]}`,
+			Authorization: `Bearer ${c[index]}`,
 		},
 
 		body: JSON.stringify({
