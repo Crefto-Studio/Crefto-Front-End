@@ -233,7 +233,7 @@ function box() {
             "token": token[1],
             "data":res3,});
             console.log(test);
-        var url = 'https://autodraw-service-1.lusl2hv0nq5h6.us-west-2.cs.amazonlightsail.com';
+        var url = 'http://35.88.33.49:5000';
         var bar=document.getElementById("hide2");
         //send data to model
         setTimeout(() => {
@@ -245,6 +245,8 @@ function box() {
                 }),
                 body:  JSON.stringify({
                     "token": token[1],
+                    "width":bounds.w,
+                    "height":bounds.h,
                     "data":res3,
                 }),
             }).then(function (response) {
@@ -261,7 +263,7 @@ function box() {
                 for(let i=0;i<10;i++){
                   text+='<img id="mno" src="https://autodraw.s3.us-west-2.amazonaws.com/SVGICON/SVGICON/'+test[i].image+'" onclick="func(this)" width="50" height="50"/>';
                 }
-                bar.innerHTML+=text;
+                bar.innerHTML=text;
                 });
         }, 8000);
         

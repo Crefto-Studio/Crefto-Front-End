@@ -1183,8 +1183,12 @@ nav {
 
     .home-section .home-content .bx-menu,
     .home-section .home-content .text {
-        color: #11101d;
+        color: var(--primary);
         font-size: 35px;
+    }
+    .home-section .home-content .bx-menu:hover,
+    .home-section .home-content .text:hover{
+        color: var(--secondary);
     }
 
     .home-section .home-content .bx-menu {

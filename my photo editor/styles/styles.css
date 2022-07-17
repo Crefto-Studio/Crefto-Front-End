@@ -26,7 +26,7 @@ body{
 	margin: 0px;
 	padding: 0px;
 	padding-top: 30px;
-	background-color:#273f4a;;
+	background-color:#273f4a;
 	font-weight: normal;
 	overflow: hidden;
 }
@@ -497,6 +497,7 @@ label{
 		background-color: #273f4a;
 		-webkit-transition: 0.2s;
 		margin-top: 1rem;
+		border: 1px solid var(--primary);
 	}
 
 	#sidebar_left.active {
@@ -589,6 +590,7 @@ label{
 		display: flex;
 		flex-direction: row;
 		align-content: center;
+		height: 400px;
 	}
 
 		#menu_left_container #fir_col {
@@ -625,7 +627,7 @@ label{
 			/*margin: 0px 1px 1px 0px;*/
 			overflow: hidden;
 			display: block;
-			margin-top: 20px;
+			margin-top: 10px;
 			padding-top: -5px !important;
 		}
 
@@ -760,7 +762,7 @@ label{
 
 	.attribute-area {
 		border: 1px solid #393939;
-		background-color: #989898;
+		background-color: var(--primary);
 		margin: 5px 5px 5px 5px;
 		text-align: center;
 		padding: 5px 0px 5px 0px;
@@ -768,6 +770,9 @@ label{
 		/* disable select */
 		-webkit-user-select: none;
 		-moz-user-select: none;
+	}
+	.attribute-area:hover{
+		background-color: var(--secondary);
 	}
 
 	.mouse_info_title {
@@ -885,10 +890,12 @@ label{
 	} */
 
 	.block {
-		border: 1px solid #393939;
+		border: 1px solid var(--primary);
 		padding: 5px;
 		margin-top: 5px;
-		background-color: #818181;
+		background-color: #273f4a;
+		color: #fff;
+
 	}
 
 	.error {

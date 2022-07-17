@@ -690,12 +690,29 @@ input[type="range"]::-moz-range-progress {
                           "data":sketch
                       }),
                   }).then(function (response) {
-                      return response.text();
+                      return response.blob();
                   })
-                      .then(function (jsonResponse) {
+                      .then(function (blob) {
                         console.log("##################3");
-                      console.log(jsonResponse);
-                      document.getElementById("ItemPreview").src = "data:image/png;base64," + jsonResponse;
+                      console.log(blob);
+
+
+                      // let obj={};
+                      // obj=jsonResponse;
+                     var g= URL.createObjectURL(blob);
+                      // document.getElementById("ItemPreview").src =g;
+                      
+                      document.getElementById("model-canvas").style.display="flex";
+                      document.getElementById("rendered").style.display="none";
+                      let can = document.getElementById("model-canvas");
+                      let ctxx = can.getContext('2d');
+                      var m = new Image();
+                      m.onload = function(){
+                        ctxx.drawImage(m, 0, 0)
+                      }
+                      m.src = URL.createObjectURL(blob);
+                      // var elem=document.getElementById("ItemPreview");
+                      // ctxx.drawImage(elem, 0, 0,can.weight,can.height)
                       
                      });
     
@@ -732,7 +749,7 @@ input[type="range"]::-moz-range-progress {
                         </div>
                         
                     </div>
-                    <img id="ItemPreview" src="" />
+                  
                     <div className="container">
                         <div id="toolbar">
                             <div className="row">
@@ -828,7 +845,7 @@ input[type="range"]::-moz-range-progress {
                             <canvas id="model-canvas" height="512" width="512" ></canvas>
                             
                     </div>
-                    <div className="btn-render" onClick={()=>{this.generateSketch();run_model()}}>Generate</div>
+                    <div className="btn-render" onClick={()=>{this.generateSketch();}}>Generate</div>
 
                     <div id="wrapper">
 			<div id="header" className="noselect">
