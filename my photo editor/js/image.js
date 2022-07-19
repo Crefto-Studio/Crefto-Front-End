@@ -24,6 +24,8 @@ function IMAGE_CLASS() {
 				layer.clearRect(0, 0, WIDTH, HEIGHT);
 				layer.putImageData(tmp, 0, 0);
 			}
+			
+			
 
 			//resize for cropping
 			EDIT.save_state();

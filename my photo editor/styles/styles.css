@@ -84,6 +84,9 @@ input[type="range"]{
 	/* background:var(--secondary);
 	height: 3px; */
 }
+
+
+
  
 input[type="range"]::-moz-range-progress {
 	background-color: var(--secondary) !important; 
